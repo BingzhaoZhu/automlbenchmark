@@ -5,6 +5,12 @@ test:
   max_runtime_seconds: 600
   cores: 4
 
+mytest:
+  folds: 5
+  max_runtime_seconds: 3600
+  cores: 8
+  min_vol_size_mb: 100000
+
 1h4c:
   folds: 10
   max_runtime_seconds: 3600

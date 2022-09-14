@@ -1,19 +1,17 @@
 # put this file in your ~/.config/automlbenchmark directory
 # to override default configs
 ---
-project_repository: https://github.com/openml/automlbenchmark
-
+project_repository: https://github.com/BingzhaoZhu/automlbenchmark
+max_parallel_jobs: 2000  # 2000 so we effectively don't have a limit on parallel EC2 instances
+benchmarks:
+  overhead_time_seconds: 72000  # 72000 so we don't randomly stop instances if they take a bit longer than specified
 aws:
-
-  iam:
-    temporary: false  # set to true if you want IAM entities (credentials used by ec2 instances) being recreated for each benchmark run.
-    credentials_propagation_waiting_time_secs: 360  # increase this waiting time if you encounter credentials issues on ec2 instances when using temporary IAM.
-
+  region: 'eu-west-1'  # us-east-1 or whatever region you plan to launch instances
   s3:
-    bucket: automl-benchmark-REPLACEME  # ALWAYS SET this bucket name as it needs to be unique in entire S3 domain.
-                                        # (40 chars max as the app reserves some chars for temporary buckets)
-                                        # if you prefer using temporary s3 buckets (see below), you can comment out this property.
-    temporary: false  # set to true if you want a new s3-bucket being temporarily created/deleted for each benchmark run.
-
+    bucket: bingzzhu-dev  # make the bucket in S3 first, specify a new one to isolate runs from other users (requires creation)
+    root_key: ec2/2022_09_14/  # subdirectory in bucket where results are saved, try to keep in sync with what you are testing
+                               # avoid re-using between multiple runs as it is easy to confuse which results are from what experiment
   ec2:
-    terminate_instances: always  # see resources/config.yaml for explanations: you may want to switch this value to `success` if you want to investigate on benchmark failures.
+    volume_type: gp2  # standard is very slow, prefer gp2
+  max_timeout_seconds: 72000  # just to avoid any strange timeouts
+  overhead_time_seconds: 28800  # just to avoid any strange timeouts
