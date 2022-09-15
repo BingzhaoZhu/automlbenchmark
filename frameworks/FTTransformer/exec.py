@@ -16,8 +16,8 @@ matplotlib.use('agg')  # no need for tk
 
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer, zip_path
-from model.FTTransformer import FTTransformer
-from model.DataLoader import get_torch_dataloader
+from ftt.FTTransformer import FTTransformer
+from ftt.DataLoader import get_torch_dataloader
 import numpy as np
 from scipy.special import softmax
 
