@@ -13,41 +13,59 @@ import matplotlib
 import pandas as pd
 matplotlib.use('agg')  # no need for tk
 
-from autogluon.tabular import TabularPredictor, TabularDataset
-from autogluon.core.utils.savers import save_pd, save_pkl
-import autogluon.core.metrics as metrics
-from autogluon.tabular.version import __version__
 
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer, zip_path
 from models.FTTransformer import FTTransformer
+from models.DataLoader import get_torch_dataloader
+import numpy as np
+from scipy.special import softmax
+
 
 log = logging.getLogger(__name__)
 
 
 def run(dataset, config):
-    log.info(f"\n**** FTTransformer [v{__version__}] ****\n")
+    log.info(f"\n**** FTTransformer ****\n")
 
     is_classification = config.type == 'classification'
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
 
+    dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification)
+    n_cat, n_con = dl_train.dataset.X1.shape[1], dl_train.dataset.X2.shape[1]
 
-
+    cat_dims = info["cat_dims"]
+    num_classes = len(np.unique(dl_train.dataset.y)) if is_classification else 1
 
     log.info("Running FTTransformer with a maximum time of {}s.".format(config.max_runtime_seconds))
-    ftt = FTTransformer(**training_params)
+
+
+    ftt = FTTransformer(
+        cat_dims=cat_dims,
+        n_con=n_con,
+        num_classes=num_classes,
+        is_classification=is_classification,
+        device="cpu",
+        **training_params)
+
 
     with Timer() as training:
-        # ftt.fit(loader_train, epoch=1)
-        print(ftt.device)
+        ftt.fit(dl_train, epoch=20)
+    print(ftt.device)
 
     with Timer() as predict:
-        predictions = None #ftt.predict(loader_test)
-    probabilities = None #rf.predict_proba(X_test) if is_classification else None
+        yhat, y_test = ftt.predict(dl_test)
+
+    l_enc = info["label_encoder"]
+    predictions = np.argmax(yhat, axis=1) if is_classification else yhat
+    predictions = l_enc.inverse_transform(predictions)
+    y_test = l_enc.inverse_transform(y_test)
+    probabilities = softmax(yhat, axis=1) if is_classification else None
 
     return result(output_file=config.output_predictions_file,
                   predictions=predictions,
                   probabilities=probabilities,
+                  truth=y_test,
                   target_is_encoded=False,
                   models_count=1,
                   training_duration=training.duration,
