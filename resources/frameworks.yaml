@@ -28,6 +28,37 @@ AutoGluon:
 #  params:
 #    _save_artifacts: ['leaderboard', 'models', 'info']
 
+RF_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      RF: {}
+
+
+GBM_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      GBM: {}
+
+
+CAT_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      CAT: {}
+
+
+XGB_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      XGB: {}
+
+FTTransformer:
+  version: "stable"
+
+
 AutoGluon_bestquality:
   extends: AutoGluon
   description: |
