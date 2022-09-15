@@ -50,7 +50,7 @@ def run(dataset, config):
 
 
     with Timer() as training:
-        ftt.fit(dl_train, epoch=20)
+        ftt.fit(dl_train, epoch=1)
     print(ftt.device)
 
     with Timer() as predict:
