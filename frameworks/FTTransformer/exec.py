@@ -1,3 +1,4 @@
+import copy
 import logging
 import os
 import shutil
@@ -29,6 +30,8 @@ def run(dataset, config):
     log.info(f"\n**** FTTransformer ****\n")
 
     is_classification = config.type == 'classification'
+    n_epoch = config.framework_params.get('_n_epoch', 1)
+    patience = config.framework_params.get('_patience', 5)
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
 
     dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification)
@@ -40,21 +43,34 @@ def run(dataset, config):
     log.info("Running FTTransformer with a maximum time of {}s.".format(config.max_runtime_seconds))
 
 
-    ftt = FTTransformer(
+    ftt_ = FTTransformer(
         cat_dims=cat_dims,
         n_con=n_con,
         num_classes=num_classes,
         is_classification=is_classification,
-        device="cpu",
+        device="cuda",
         **training_params)
 
 
     with Timer() as training:
-        ftt.fit(dl_train, epoch=50)
-    print(ftt.device)
+        trigger_times = 0
+        for epoch in range(1, n_epoch+1):
+            train_loss = ftt_.fit(dl_train, epoch=epoch)
+            valid_loss = ftt_.validate(dl_valid)
+            if valid_loss > best_loss:
+                trigger_times += 1
+                if trigger_times >= patience:
+                    print(f"Validation loss not improving. Training stopped at {epoch} epoch. Retrieving the best model.")
+                    break
+            else:
+                best_loss = valid_loss
+                trigger_times = 0
+                best_model = copy.deepcopy(ftt_)
+
+    ftt_ = best_model
 
     with Timer() as predict:
-        yhat, y_test = ftt.predict(dl_test)
+        yhat, y_test = ftt_.predict(dl_test)
 
     l_enc = info["label_encoder"]
     predictions = np.argmax(yhat, axis=1) if is_classification else yhat
