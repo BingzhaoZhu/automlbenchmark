@@ -3,7 +3,7 @@ from tqdm.auto import tqdm
 import torch
 from torch.optim import Adam
 import torch.nn as nn
-
+from .loss import NTXent
 
 class FTTransformer():
     def __init__(self, cat_dims=None,
@@ -24,6 +24,35 @@ class FTTransformer():
         ).to(device)
         self.optimizer = Adam(self.model.parameters(), lr=0.001)
         self.criterion = nn.CrossEntropyLoss() if is_classification else nn.MSELoss()
+        self.pretrain_criterion = NTXent(device=self.device)
+
+    def pretrain(self, pretrain_loader, epoch):
+        self.model.train()
+        epoch_loss = 0.0
+        batch = tqdm(pretrain_loader, desc=f"Epoch {epoch}", leave=False)
+
+        for anchor_cat, anchor_con, _ in batch:
+            anchor_cat, anchor_con = anchor_cat.to(self.device), anchor_con.to(self.device)
+
+            # reset gradients
+            self.optimizer.zero_grad()
+
+            # get embeddings
+            emb_anchor, emb_positive = self.model(anchor_cat, anchor_con)
+
+            # compute loss
+            loss = self.pretrain_criterion(emb_anchor, emb_positive)
+            loss.backward()
+
+            # update Models weights
+            self.optimizer.step()
+
+            # log progress
+            epoch_loss += anchor_cat.size(0) * loss.item()
+            batch.set_postfix({"loss": loss.item()})
+
+        return epoch_loss / len(pretrain_loader.dataset)
+
 
     def fit(self, train_loader, epoch):
         self.model.train()
