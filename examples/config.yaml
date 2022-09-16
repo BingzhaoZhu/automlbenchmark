@@ -15,11 +15,12 @@ aws:
     instance_type: #
       series: g5                         #
       map: # map between num cores required and ec2 instance type sizes
-        default: large
+        default: 3xlarge
         '1': small
         '2': large
         '4': xlarge
         '8': 2xlarge
+        '12': 3xlarge
         '16': 4xlarge
     volume_type: gp2  # standard is very slow, prefer gp2
 
