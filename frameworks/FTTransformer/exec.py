@@ -30,8 +30,9 @@ def run(dataset, config):
     log.info(f"\n**** FTTransformer ****\n")
 
     is_classification = config.type == 'classification'
-    n_epoch = config.framework_params.get('_n_epoch', 1)
+    n_epoch = config.framework_params.get('_n_epoch', 100)
     patience = config.framework_params.get('_patience', 5)
+    device = config.framework_params.get('_device', 'cpu')
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
 
     dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification)
@@ -48,19 +49,19 @@ def run(dataset, config):
         n_con=n_con,
         num_classes=num_classes,
         is_classification=is_classification,
-        device="cuda",
+        device=device,
         **training_params)
-
+    best_model = copy.deepcopy(ftt_)
 
     with Timer() as training:
-        trigger_times = 0
+        trigger_times, best_loss = 0, float('inf')
         for epoch in range(1, n_epoch+1):
             train_loss = ftt_.fit(dl_train, epoch=epoch)
             valid_loss = ftt_.validate(dl_valid)
             if valid_loss > best_loss:
                 trigger_times += 1
                 if trigger_times >= patience:
-                    print(f"Validation loss not improving. Training stopped at {epoch} epoch. Retrieving the best model.")
+                    print(f"Validation loss not improving, training stopped at {epoch} epoch, retrieving the best model.")
                     break
             else:
                 best_loss = valid_loss

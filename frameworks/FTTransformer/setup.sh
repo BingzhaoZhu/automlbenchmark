@@ -19,25 +19,22 @@ fi
 PIP install --upgrade pip
 PIP install --upgrade setuptools wheel
 
-PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
-
-
-
-#if [[ "$VERSION" == "stable" ]]; then
-#    PIP install --no-cache-dir -U "${PKG}"
-#    PIP install --no-cache-dir -U "${PKG}.tabular[skex]"
-#elif [[ "$VERSION" =~ ^[0-9] ]]; then
-#    PIP install --no-cache-dir -U "${PKG}==${VERSION}"
-#    PIP install --no-cache-dir -U "${PKG}.tabular[skex]==${VERSION}"
-#else
-#    TARGET_DIR="${HERE}/lib/${PKG}"
-#    rm -Rf ${TARGET_DIR}
-#    git clone --depth 1 --single-branch --branch ${VERSION} --recurse-submodules ${REPO} ${TARGET_DIR}
-#    cd ${TARGET_DIR}
-#    PY_EXEC_NO_ARGS="$(cut -d' ' -f1 <<<"$py_exec")"
-#    PY_EXEC_DIR=$(dirname "$PY_EXEC_NO_ARGS")
-#    env PATH="$PY_EXEC_DIR:$PATH" bash -c ./full_install.sh
-#    PIP install -e tabular/[skex]
-#fi
+if [[ "$VERSION" == "stable" ]]; then
+    PIP install --no-cache-dir -U torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
+    PIP install --no-cache-dir -U "${PKG}"
+    PIP install --no-cache-dir -U "${PKG}.tabular[skex]"
+elif [[ "$VERSION" =~ ^[0-9] ]]; then
+    PIP install --no-cache-dir -U "${PKG}==${VERSION}"
+    PIP install --no-cache-dir -U "${PKG}.tabular[skex]==${VERSION}"
+else
+    TARGET_DIR="${HERE}/lib/${PKG}"
+    rm -Rf ${TARGET_DIR}
+    git clone --depth 1 --single-branch --branch ${VERSION} --recurse-submodules ${REPO} ${TARGET_DIR}
+    cd ${TARGET_DIR}
+    PY_EXEC_NO_ARGS="$(cut -d' ' -f1 <<<"$py_exec")"
+    PY_EXEC_DIR=$(dirname "$PY_EXEC_NO_ARGS")
+    env PATH="$PY_EXEC_DIR:$PATH" bash -c ./full_install.sh
+    PIP install -e tabular/[skex]
+fi
 
 PY -c "from autogluon.tabular.version import __version__; print(__version__)" >> "${HERE}/.setup/installed"
