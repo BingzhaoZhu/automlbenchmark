@@ -12,6 +12,9 @@ aws:
     root_key: ec2/2022_09_14/  # subdirectory in bucket where results are saved, try to keep in sync with what you are testing
                                # avoid re-using between multiple runs as it is easy to confuse which results are from what experiment
   ec2:
+    eu-west-1:
+      ami: ami-007284655e0c5756e
+      description: Built with PyTorch conda environment, NVIDIA CUDA, cuDNN, NCCL, GPU Driver, Docker, NVIDIA-Docker and EFA support. For a fully managed experience, check: https://aws.amazon.com/sagemaker
     volume_type: gp2  # standard is very slow, prefer gp2
     instance_type:
       series: g5
