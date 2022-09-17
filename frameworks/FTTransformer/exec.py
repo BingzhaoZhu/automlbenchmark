@@ -31,6 +31,7 @@ def run(dataset, config):
 
     is_classification = config.type == 'classification'
     n_epoch = config.framework_params.get('_n_epoch', 100)
+    n_pretrain_epoch = config.framework_params.get('_n_pretrain_epoch', 0)
     patience = config.framework_params.get('_patience', 10)
     device = config.framework_params.get('_device', 'cuda')
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
@@ -54,7 +55,7 @@ def run(dataset, config):
         **training_params)
     best_model = copy.deepcopy(ftt_)
 
-    for epoch in range(1, 1 + 0):
+    for epoch in range(1, 1 + n_pretrain_epoch):
         ftt_.pretrain(dl_train_pretrain, epoch)
 
     with Timer() as training:
