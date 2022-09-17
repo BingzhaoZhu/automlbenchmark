@@ -8,6 +8,6 @@ cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 #python runbenchmark.py CAT_AG ag mytest -m aws -p 1500 -f 0
 #python runbenchmark.py XGB_AG ag mytest -m aws -p 1500 -f 0
 
-python runbenchmark.py FTTransformer_gpu adult mytest -m aws -p 150 -f 0
+python runbenchmark.py FTTransformer_gpu ag mytest -m aws -p 150 -f 0
 
 #python runbenchmark.py FTTransformer test mytest -f 0
