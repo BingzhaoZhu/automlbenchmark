@@ -55,8 +55,15 @@ XGB_AG:
     hyperparameters:
       XGB: {}
 
-FTTransformer:
+FTTransformer_cpu:
   version: "stable"
+  params:
+    _device: cpu
+
+FTTransformer_gpu:
+  version: "stable"
+  params:
+    _device: cuda
 
 
 AutoGluon_bestquality:
