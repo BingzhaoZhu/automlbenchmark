@@ -33,6 +33,7 @@ RF_AG:
   params:
     hyperparameters:
       RF: {}
+    holdout_frac: 0.125
 
 
 GBM_AG:
@@ -40,6 +41,7 @@ GBM_AG:
   params:
     hyperparameters:
       GBM: {}
+    holdout_frac: 0.125
 
 
 CAT_AG:
@@ -47,6 +49,7 @@ CAT_AG:
   params:
     hyperparameters:
       CAT: {}
+    holdout_frac: 0.125
 
 
 XGB_AG:
@@ -54,14 +57,21 @@ XGB_AG:
   params:
     hyperparameters:
       XGB: {}
+    holdout_frac: 0.125
 
-FTTransformer_cpu:
+
+FTTransformer:
   version: "stable"
   params:
     _device: cpu
 
+FTTransformer_cpu:
+  extends: FTTransformer
+  params:
+    _device: cpu
+
 FTTransformer_gpu:
-  version: "stable"
+  extends: FTTransformer
   params:
     _device: cuda
 
