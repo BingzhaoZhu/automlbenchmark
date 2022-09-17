@@ -127,7 +127,7 @@ class FTTransformer():
         return yhat_all, y_all
 
 
-    def corruption(self, anchor):
+    def corruption(self, anchor, corruption_rate=0.6):
         batch_size, m = anchor.size()
 
         random_idx = torch.randperm(batch_size)
@@ -138,8 +138,9 @@ class FTTransformer():
         # 3: replace x_1_ij by x_2_ij where mask_ij is true to build x_corrupted
 
         corruption_mask = torch.zeros_like(anchor, dtype=torch.bool)
+        corruption_len = int(corruption_rate * m)
         for i in range(batch_size):
-            corruption_idx = torch.randperm(m)[:2]
+            corruption_idx = torch.randperm(m)[:corruption_len]
             corruption_mask[i, corruption_idx] = True
 
         positive = torch.where(corruption_mask, random_sample, anchor)

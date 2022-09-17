@@ -35,7 +35,8 @@ def run(dataset, config):
     device = config.framework_params.get('_device', 'cuda')
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
 
-    dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification)
+    dl_train_pretrain, _, _, _ = get_torch_dataloader(dataset, is_classification, batch_size=256)
+    dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification, batch_size=64)
     n_cat, n_con = dl_train.dataset.X1.shape[1], dl_train.dataset.X2.shape[1]
 
     cat_dims = info["cat_dims"]
@@ -53,8 +54,8 @@ def run(dataset, config):
         **training_params)
     best_model = copy.deepcopy(ftt_)
 
-    for epoch in range(1, 1 + 50):
-        ftt_.pretrain(dl_train, epoch)
+    for epoch in range(1, 1 + 10):
+        ftt_.pretrain(dl_train_pretrain, epoch)
 
     with Timer() as training:
         trigger_times, best_loss = 0, float('inf')
