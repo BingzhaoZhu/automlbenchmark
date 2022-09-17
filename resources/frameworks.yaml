@@ -62,8 +62,7 @@ XGB_AG:
 
 FTTransformer:
   version: "stable"
-  params:
-    _device: cpu
+
 
 FTTransformer_cpu:
   extends: FTTransformer
