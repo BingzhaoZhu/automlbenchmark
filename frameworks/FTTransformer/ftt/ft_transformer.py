@@ -6,23 +6,24 @@ from .transformer import CLSToken, FT_Transformer, _TokenInitialization
 from .tokenizer import FusionTokenizer
 
 
-class PreTrainHead(nn.Module):
-    """The pre-training head of the `FTTransformer`."""
-
-    def __init__(
-            self,
-            *,
-            d_in: int,
-            bias: bool,
-            d_out: int,
-    ):
-        super().__init__()
-        self.linear = nn.Linear(d_in, d_out, bias)
-
-    def forward(self, x: Tensor) -> Tensor:
-        x = x[:, -1]
-        x = self.linear(x)
-        return x
+# class PreTrainHead(nn.Module):
+#     """The pre-training head of the `FTTransformer`."""
+#
+#     def __init__(
+#             self,
+#             *,
+#             d_in: int,
+#             bias: bool,
+#             d_out: int,
+#     ):
+#         super().__init__()
+#         self.linear = nn.Linear(d_in, d_out, bias)
+#         self.nn.ReLU(inplace=True)
+#
+#     def forward(self, x: Tensor) -> Tensor:
+#         x = x[:, -1]
+#         x = self.linear(x)
+#         return x
 
 class FTTransformer_(nn.Module):
     """
@@ -179,10 +180,12 @@ class FTTransformer_(nn.Module):
             d_out=out_features,
         )
 
-        self.prehead = PreTrainHead(
+        self.prehead = FT_Transformer.Head(
             d_in=d_token,
             d_out=d_token,
             bias=True,
+            activation=head_activation,
+            normalization=head_normalization if prenormalization else "Identity",
         )
 
         self.head = FT_Transformer.Head(
@@ -214,6 +217,8 @@ class FTTransformer_(nn.Module):
         -------
             A dictionary with logits and features.
         """
+        is_pretrai = self.train_status == "pretrain"
+
 
         features = self.tokenizer(anchor_cat, anchor_con)
         features = self.cls_token(features)
@@ -235,6 +240,7 @@ class FTTransformer_(nn.Module):
         return embedding #,  embedding_pos
 
     def set_train_status(self, train_status):
+        assert train_status in ["pretrain", "finetune"], "training status must be pretrain or finetune"
         self.train_status = train_status
         return
 
@@ -252,24 +258,6 @@ class FTTransformer_(nn.Module):
             name_to_id[n] = 0
 
         return name_to_id
-
-    def corruption(self, anchor):
-        batch_size, m = anchor.size()
-
-        random_idx = torch.randperm(batch_size)
-        random_sample = torch.tensor(anchor[random_idx], dtype=torch.float)
-
-        # 1: create a mask of size (batch size, m) where for each sample we set the
-        # jth column to True at random, such that corruption_len / m = corruption_rate
-        # 3: replace x_1_ij by x_2_ij where mask_ij is true to build x_corrupted
-
-        corruption_mask = torch.zeros_like(anchor, dtype=torch.bool)
-        for i in range(batch_size):
-            corruption_idx = torch.randperm(m)[:2]
-            corruption_mask[i, corruption_idx] = True
-
-        positive = torch.where(corruption_mask, random_sample, anchor)
-        return positive
 
     def get_embeddings(self, anchor_cat, anchor_con):
         features = self.tokenizer(anchor_cat, anchor_con)

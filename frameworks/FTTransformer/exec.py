@@ -53,6 +53,9 @@ def run(dataset, config):
         **training_params)
     best_model = copy.deepcopy(ftt_)
 
+    for epoch in range(1, 1 + 50):
+        ftt_.pretrain(dl_train, epoch)
+
     with Timer() as training:
         trigger_times, best_loss = 0, float('inf')
         for epoch in range(1, n_epoch+1):

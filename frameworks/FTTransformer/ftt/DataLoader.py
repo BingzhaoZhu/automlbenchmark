@@ -59,7 +59,7 @@ def pre_process(dataset, is_classification):
         y_train = l_enc.fit_transform(y_train[:, None])
         y_test = l_enc.transform(y_test[:, None])
 
-    X_train, X_valid, y_train, y_valid = train_test_split(X_train, y_train, test_size=0.125, random_state=0)
+    X_train, X_valid, y_train, y_valid = train_test_split(X_train, y_train, shuffle=True, test_size=0.125, random_state=0)
 
     train_mean = np.array(X_train[:, con_idxs], dtype=np.float32).mean(0)
     train_std = np.array(X_train[:, con_idxs], dtype=np.float32).std(0)

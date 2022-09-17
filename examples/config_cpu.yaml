@@ -6,25 +6,13 @@ max_parallel_jobs: 2000  # 2000 so we effectively don't have a limit on parallel
 benchmarks:
   overhead_time_seconds: 72000  # 72000 so we don't randomly stop instances if they take a bit longer than specified
 aws:
-  region: 'eu-west-1'  # us-east-1 or whatever region you plan to launch instances
+  region: 'us-east-1'  # us-east-1 or whatever region you plan to launch instances
   s3:
     bucket: automl-benchmark-bingzzhu  # make the bucket in S3 first, specify a new one to isolate runs from other users (requires creation)
     root_key: ec2/2022_09_14/  # subdirectory in bucket where results are saved, try to keep in sync with what you are testing
                                # avoid re-using between multiple runs as it is easy to confuse which results are from what experiment
   ec2:
-    eu-west-1:
-      ami: ami-007284655e0c5756e
-      description: Built with PyTorch conda environment, NVIDIA CUDA, cuDNN, NCCL, GPU Driver, Docker, NVIDIA-Docker and EFA support. For a fully managed experience, check: https://aws.amazon.com/sagemaker
     volume_type: gp2  # standard is very slow, prefer gp2
-    instance_type:
-      series: g5
-      map:
-        default: 12xlarge
-        '1': small
-        '2': large
-        '4': xlarge
-        '8': 12xlarge
-        '16': 4xlarge
 
   max_timeout_seconds: 72000  # just to avoid any strange timeouts
   overhead_time_seconds: 28800  # just to avoid any strange timeouts
