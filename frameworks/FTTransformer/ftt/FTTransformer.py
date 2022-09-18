@@ -10,15 +10,18 @@ class FTTransformer():
                  n_con=None,
                  num_classes=None,
                  is_classification=None,
+                 d_token=128,
+                 n_blocks=8,
+                 ffn_d_hidden=128,
                  device="cuda"):
         self.device = device
         self.model = FTTransformer_(
             prefix="FTTransformer",
             num_categories=cat_dims,
             in_features=n_con,
-            d_token=32,
-            n_blocks=8,
-            ffn_d_hidden=128,
+            d_token=d_token,
+            n_blocks=n_blocks,
+            ffn_d_hidden=ffn_d_hidden,
             train_status="finetune",
             num_classes=num_classes,
         ).to(device)

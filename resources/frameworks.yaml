@@ -69,10 +69,32 @@ FTTransformer_cpu:
   params:
     _device: cpu
 
-FTTransformer_gpu:
+FTTransformer_gpu_pretrain1:
   extends: FTTransformer
   params:
     _device: cuda
+    _n_pretrain_epoch: 30
+    _n_epoch: 100
+    _patience: 100
+
+FTTransformer_gpu_pretrain2:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 100
+    _patience: -1
+
+FTTransformer_gpu_pretrain3:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 30
+    _n_epoch: 100
+    _patience: 10
+    n_blocks: 3
+    d_token: 192
+    ffn_d_hidden: 192
 
 
 AutoGluon_bestquality:

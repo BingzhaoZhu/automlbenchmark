@@ -63,7 +63,7 @@ def run(dataset, config):
         for epoch in range(1, n_epoch+1):
             train_loss = ftt_.fit(dl_train, epoch=epoch)
             valid_loss = ftt_.validate(dl_valid)
-            if valid_loss > best_loss:
+            if valid_loss > best_loss and patience != -1:
                 trigger_times += 1
                 if trigger_times >= patience:
                     print(f"Validation loss not improving, training stopped at {epoch} epoch, retrieving the best model.")
