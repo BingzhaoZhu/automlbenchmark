@@ -28,7 +28,7 @@ class FTTransformer():
         self.optimizer = Adam(self.model.parameters(), lr=0.001)
         self.criterion = nn.CrossEntropyLoss() if is_classification else nn.MSELoss()
         self.pretrain_criterion = NTXent(device=self.device)
-        self.random_samples = None
+        self.random_samples_con, self.random_samples_cat = None, None
 
     def pretrain(self, pretrain_loader, epoch):
         self.model.train()
@@ -37,7 +37,7 @@ class FTTransformer():
         batch = tqdm(pretrain_loader, desc=f"Pretrain Epoch {epoch}", leave=False)
 
         for ori_cat, ori_con, _ in batch:
-            cor_cat, cor_con = self.corruption(ori_cat).type(torch.int64), self.corruption(ori_con)
+            cor_cat, cor_con = self.corruption(ori_cat, 'cat').type(torch.int64), self.corruption(ori_con, 'con')
             ori_cat, ori_con = ori_cat.to(self.device), ori_con.to(self.device)
             cor_cat, cor_con = cor_cat.to(self.device), cor_con.to(self.device)
 
@@ -131,11 +131,16 @@ class FTTransformer():
         return yhat_all, y_all
 
 
-    def corruption(self, anchor, corruption_rate=0.6):
+    def corruption(self, anchor, type, corruption_rate=0.6):
         batch_size, m = anchor.size()
 
-        indices = torch.argsort(torch.rand(*anchor.shape), dim=0)
-        random_sample = anchor[indices, torch.arange(m).unsqueeze(0)]
+        last_batch = self.random_samples_con if type == 'con' else self.random_samples_cat
+        if last_batch and last_batch.size(1) == batch_size:
+            random_sample = last_batch
+        else:
+            random_sample = anchor
+        indices = torch.argsort(torch.rand(*random_sample.shape), dim=0)
+        random_sample = random_sample[indices, torch.arange(m).unsqueeze(0)]
 
         # 1: create a mask of size (batch size, m) where for each sample we set the
         # jth column to True at random, such that corruption_len / m = corruption_rate
@@ -149,7 +154,9 @@ class FTTransformer():
 
         positive = torch.where(corruption_mask, random_sample, anchor)
 
-        # random_idx = torch.randperm(batch_size)
-        # self.random_sample = torch.tensor(anchor[random_idx], dtype=torch.float)
+        if type == 'con':
+            self.random_samples_con = anchor
+        else:
+            self.random_samples_cat = anchor
 
         return positive

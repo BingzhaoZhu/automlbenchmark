@@ -3,15 +3,16 @@ import numpy as np
 from scipy.stats import rankdata
 import boto3
 
-locations = {"FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
-             "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220918T061555/",
-             "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
-             "FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
-             "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220917T055318/",
-             "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
-             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
-             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
-             "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
+locations = {
+            "FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
+            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T092050/",
+            "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
+            "FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
+            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T055221/",
+            "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
+            "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
+            "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
+            "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
              }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -73,8 +74,8 @@ if __name__ == "__main__":
     # for task in summary:
     #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
-    # models = ['FTTrans_pretrain', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTTrans_pretrain1', 'FTTrans_pretrain2', 'FTTrans_pretrain3']
+    models = ['FTTrans_pretrain1', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
+    # models = ['FTTrans', 'FTTrans_pretrain1']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))
