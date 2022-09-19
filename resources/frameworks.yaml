@@ -75,7 +75,7 @@ FTTransformer_gpu:
     _device: cuda
     _n_pretrain_epoch: 0
     _n_epoch: 50
-    _patience: 10
+    _patience: 3
     d_token: 32
     _batch_size: 64
     _pretrain_batch_size: 256
@@ -86,7 +86,7 @@ FTTransformer_gpu_pretrain1:
     _device: cuda
     _n_pretrain_epoch: 10
     _n_epoch: 50
-    _patience: 10
+    _patience: 3
     d_token: 32
     _batch_size: 64
     _pretrain_batch_size: 256
