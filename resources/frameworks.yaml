@@ -78,7 +78,7 @@ FTTransformer_gpu:
     _patience: 3
     d_token: 32
     _batch_size: 64
-    _pretrain_batch_size: 256
+    _pretrain_batch_size: 128
 
 FTTransformer_gpu_pretrain1:
   extends: FTTransformer
@@ -89,7 +89,7 @@ FTTransformer_gpu_pretrain1:
     _patience: 3
     d_token: 32
     _batch_size: 64
-    _pretrain_batch_size: 256
+    _pretrain_batch_size: 128
 
 FTTransformer_gpu_pretrain2:
   extends: FTTransformer
