@@ -217,8 +217,6 @@ class FTTransformer_(nn.Module):
         -------
             A dictionary with logits and features.
         """
-        is_pretrai = self.train_status == "pretrain"
-
 
         features = self.tokenizer(anchor_cat, anchor_con)
         features = self.cls_token(features)

@@ -5,10 +5,10 @@ import boto3
 
 locations = {
             "FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
-            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T092050/",
+            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T191933/",
             "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
             "FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
-            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T055221/",
+            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T165606/",
             "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
@@ -61,21 +61,26 @@ def rank_models(models, task="binary"):
         for idx, rank in enumerate(tmp):
             ranker[idx, rank] += 1
 
+    num_tasks = np.sum(ranker)/n
+    average_rank = ranker * np.arange(n)[None, :]
+    average_rank = np.sum(average_rank, axis=1)/num_tasks + 1
+    print(average_rank)
+
     return ranker
 
 
 if __name__ == "__main__":
-    # summary = {}
-    # for model in locations:
-    #     print(f"collecting results for {model}")
-    #     model_performance = collect_performance(model)
-    #     summary = separate(model, model_performance, summary)
-    #
-    # for task in summary:
-    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    summary = {}
+    for model in locations:
+        print(f"collecting results for {model}")
+        model_performance = collect_performance(model)
+        summary = separate(model, model_performance, summary)
+
+    for task in summary:
+        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     models = ['FTTrans_pretrain1', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
-    # models = ['FTTrans', 'FTTrans_pretrain1']
+    models = ['FTTrans_pretrain1', 'FTTrans']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))

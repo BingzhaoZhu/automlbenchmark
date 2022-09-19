@@ -135,7 +135,7 @@ class FTTransformer():
         batch_size, m = anchor.size()
 
         last_batch = self.random_samples_con if type == 'con' else self.random_samples_cat
-        if last_batch and last_batch.size(1) == batch_size:
+        if last_batch is not None and last_batch.size(1) == batch_size:
             random_sample = last_batch
         else:
             random_sample = anchor
