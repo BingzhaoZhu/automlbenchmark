@@ -10,7 +10,7 @@ rm -f ~/.config/automlbenchmark/config.yaml
 
 cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 python runbenchmark.py FTTransformer_gpu_pretrain1 ag mytest -m aws -p 150 -f 0
-python runbenchmark.py FTTransformer_gpu_pretrain2 ag mytest -m aws -p 150 -f 0
-python runbenchmark.py FTTransformer_gpu_pretrain3 ag mytest -m aws -p 150 -f 0
+#python runbenchmark.py FTTransformer_gpu_pretrain2 ag mytest -m aws -p 150 -f 0
+#python runbenchmark.py FTTransformer_gpu_pretrain3 ag mytest -m aws -p 150 -f 0
 
 #python runbenchmark.py FTTransformer test mytest -f 0
