@@ -10,9 +10,9 @@ class FTTransformer():
                  n_con=None,
                  num_classes=None,
                  is_classification=None,
-                 d_token=128,
-                 n_blocks=8,
-                 ffn_d_hidden=128,
+                 d_token=192,
+                 n_blocks=3,
+                 ffn_d_hidden=192,
                  device="cuda"):
         self.device = device
         self.model = FTTransformer_(

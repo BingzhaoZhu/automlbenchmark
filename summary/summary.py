@@ -5,7 +5,7 @@ import boto3
 
 locations = {
             "FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
-            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T191933/",
+            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T202945/",
             "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
             "FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
             "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T165606/",

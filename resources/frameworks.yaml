@@ -76,8 +76,8 @@ FTTransformer_gpu:
     _n_pretrain_epoch: 0
     _n_epoch: 50
     _patience: 3
-    d_token: 32
-    _batch_size: 64
+    d_token: 192
+    _batch_size: 128
     _pretrain_batch_size: 128
 
 FTTransformer_gpu_pretrain1:
@@ -87,8 +87,8 @@ FTTransformer_gpu_pretrain1:
     _n_pretrain_epoch: 10
     _n_epoch: 50
     _patience: 3
-    d_token: 32
-    _batch_size: 64
+    d_token: 192
+    _batch_size: 128
     _pretrain_batch_size: 128
 
 FTTransformer_gpu_pretrain2:
