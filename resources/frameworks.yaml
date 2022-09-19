@@ -69,6 +69,17 @@ FTTransformer_cpu:
   params:
     _device: cpu
 
+FTTransformer_gpu:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 10
+    d_token: 32
+    _batch_size: 64
+    _pretrain_batch_size: 256
+
 FTTransformer_gpu_pretrain1:
   extends: FTTransformer
   params:
@@ -76,7 +87,9 @@ FTTransformer_gpu_pretrain1:
     _n_pretrain_epoch: 10
     _n_epoch: 50
     _patience: 10
-    _d_token: 32
+    d_token: 32
+    _batch_size: 64
+    _pretrain_batch_size: 256
 
 FTTransformer_gpu_pretrain2:
   extends: FTTransformer

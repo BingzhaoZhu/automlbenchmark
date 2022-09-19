@@ -74,7 +74,7 @@ if __name__ == "__main__":
     #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     # models = ['FTTrans_pretrain', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTTrans_pretrain', 'FTTrans_pretrain1', 'FTTrans_pretrain2', 'FTTrans_pretrain3', 'FTTrans']
+    models = ['FTTrans_pretrain1', 'FTTrans_pretrain2', 'FTTrans_pretrain3']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))

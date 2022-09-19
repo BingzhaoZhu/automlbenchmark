@@ -28,6 +28,7 @@ class FTTransformer():
         self.optimizer = Adam(self.model.parameters(), lr=0.001)
         self.criterion = nn.CrossEntropyLoss() if is_classification else nn.MSELoss()
         self.pretrain_criterion = NTXent(device=self.device)
+        self.random_samples = None
 
     def pretrain(self, pretrain_loader, epoch):
         self.model.train()
@@ -133,8 +134,8 @@ class FTTransformer():
     def corruption(self, anchor, corruption_rate=0.6):
         batch_size, m = anchor.size()
 
-        random_idx = torch.randperm(batch_size)
-        random_sample = torch.tensor(anchor[random_idx], dtype=torch.float)
+        indices = torch.argsort(torch.rand(*anchor.shape), dim=0)
+        random_sample = anchor[indices, torch.arange(m).unsqueeze(0)]
 
         # 1: create a mask of size (batch size, m) where for each sample we set the
         # jth column to True at random, such that corruption_len / m = corruption_rate
@@ -147,4 +148,8 @@ class FTTransformer():
             corruption_mask[i, corruption_idx] = True
 
         positive = torch.where(corruption_mask, random_sample, anchor)
+
+        # random_idx = torch.randperm(batch_size)
+        # self.random_sample = torch.tensor(anchor[random_idx], dtype=torch.float)
+
         return positive

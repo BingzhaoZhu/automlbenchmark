@@ -34,10 +34,12 @@ def run(dataset, config):
     n_pretrain_epoch = config.framework_params.get('_n_pretrain_epoch', 0)
     patience = config.framework_params.get('_patience', 10)
     device = config.framework_params.get('_device', 'cuda')
+    batch_size = config.framework_params.get('_batch_size', 64)
+    pretrain_batch_size = config.framework_params.get('_pretrain_batch_size', 256)
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
 
-    dl_train_pretrain, _, _, _ = get_torch_dataloader(dataset, is_classification, batch_size=256)
-    dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification, batch_size=64)
+    dl_train_pretrain, _, _, _ = get_torch_dataloader(dataset, is_classification, batch_size=pretrain_batch_size)
+    dl_train, dl_valid, dl_test, info = get_torch_dataloader(dataset, is_classification, batch_size=batch_size)
     n_cat, n_con = dl_train.dataset.X1.shape[1], dl_train.dataset.X2.shape[1]
 
     cat_dims = info["cat_dims"]
