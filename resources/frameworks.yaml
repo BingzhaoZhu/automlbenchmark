@@ -76,6 +76,13 @@ FASTAI_AG:
     holdout_frac: 0.125
 
 
+FTT_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      FT_TRANSFORMER: {}
+    holdout_frac: 0.125
+
 FTTransformer:
   version: "stable"
 
