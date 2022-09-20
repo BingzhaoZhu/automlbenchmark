@@ -13,7 +13,10 @@ locations = {
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-             }
+            # "FTT": "ftt_ag.ag.mytest.aws.20220920T195331/",
+            "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
+            "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+}
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
 
@@ -80,8 +83,8 @@ if __name__ == "__main__":
     for task in summary:
         pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
-    models = ['FTTrans_pretrain1', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
-    # models = ['FTTrans_pretrain1', 'FTTrans']
+    AG = ['FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
+    models = ['FTTrans', 'FASTAI', 'NN']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))

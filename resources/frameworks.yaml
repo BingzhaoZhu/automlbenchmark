@@ -78,6 +78,7 @@ FASTAI_AG:
 
 FTT_AG:
   extends: AutoGluon
+  # version: 'latest'
   params:
     hyperparameters:
       FT_TRANSFORMER: {}
@@ -119,25 +120,6 @@ FTTransformer_gpu_pretrain1:
     n_blocks: 1
     _batch_size: 64
     _pretrain_batch_size: 64
-
-FTTransformer_gpu_pretrain2:
-  extends: FTTransformer
-  params:
-    _device: cuda
-    _n_pretrain_epoch: 0
-    _n_epoch: 100
-    _patience: -1
-
-FTTransformer_gpu_pretrain3:
-  extends: FTTransformer
-  params:
-    _device: cuda
-    _n_pretrain_epoch: 30
-    _n_epoch: 100
-    _patience: 10
-    n_blocks: 3
-    d_token: 192
-    ffn_d_hidden: 192
 
 
 AutoGluon_bestquality:
