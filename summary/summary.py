@@ -4,11 +4,11 @@ from scipy.stats import rankdata
 import boto3
 
 locations = {
-            "FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
-            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220919T202945/",
-            "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
-            "FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
-            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T165606/",
+            #"FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
+            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220920T015840/",
+            #"FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
+            #"FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
+            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T233700/",
             "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
@@ -31,8 +31,9 @@ def collect_performance(model):
 
 def separate(model, df, previous):
     group = {k: v for k, v in df.groupby('type')}
+    task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "acc"}
     for task in group:
-        metric = "rmse" if task == "regression" else "acc"
+        metric = task_metric[task]
         group[task] = group[task][["task", metric]]
         group[task].rename(columns={metric: model}, inplace=True)
         # group[task].fillna(-1, inplace=True)
@@ -80,7 +81,7 @@ if __name__ == "__main__":
         pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     models = ['FTTrans_pretrain1', 'FTTrans', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTTrans_pretrain1', 'FTTrans']
+    # models = ['FTTrans_pretrain1', 'FTTrans']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))

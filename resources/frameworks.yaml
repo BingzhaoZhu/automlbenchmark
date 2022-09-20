@@ -60,6 +60,22 @@ XGB_AG:
     holdout_frac: 0.125
 
 
+NN_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      NN_TORCH: {}
+    holdout_frac: 0.125
+
+
+FASTAI_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      FASTAI: {}
+    holdout_frac: 0.125
+
+
 FTTransformer:
   version: "stable"
 
@@ -77,8 +93,9 @@ FTTransformer_gpu:
     _n_epoch: 50
     _patience: 3
     d_token: 192
-    _batch_size: 128
-    _pretrain_batch_size: 128
+    n_blocks: 1
+    _batch_size: 64
+    _pretrain_batch_size: 64
 
 FTTransformer_gpu_pretrain1:
   extends: FTTransformer
@@ -88,8 +105,9 @@ FTTransformer_gpu_pretrain1:
     _n_epoch: 50
     _patience: 3
     d_token: 192
-    _batch_size: 128
-    _pretrain_batch_size: 128
+    n_blocks: 1
+    _batch_size: 64
+    _pretrain_batch_size: 64
 
 FTTransformer_gpu_pretrain2:
   extends: FTTransformer
