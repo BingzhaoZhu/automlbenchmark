@@ -104,7 +104,7 @@ FTTransformer_gpu:
     _n_epoch: 50
     _patience: 3
     d_token: 192
-    n_blocks: 5
+    n_blocks: 1
     _batch_size: 64
     _pretrain_batch_size: 64
 
@@ -116,7 +116,7 @@ FTTransformer_gpu_pretrain1:
     _n_epoch: 50
     _patience: 3
     d_token: 192
-    n_blocks: 5
+    n_blocks: 1
     _batch_size: 64
     _pretrain_batch_size: 64
 
