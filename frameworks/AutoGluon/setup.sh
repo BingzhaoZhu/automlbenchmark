@@ -3,9 +3,7 @@ HERE=$(dirname "$0")
 VERSION=${1:-"stable"}
 REPO=${2:-"https://github.com/awslabs/autogluon.git"}
 PKG=${3:-"autogluon"}
-if [[ "$VERSION" == "latest" ]]; then
-    VERSION="master"
-fi
+
 
 # creating local venv
 . ${HERE}/../shared/setup.sh ${HERE} true
@@ -19,6 +17,13 @@ fi
 PIP install --upgrade pip
 PIP install --upgrade setuptools wheel
 
+if [[ "$VERSION" == "latest_gpu" ]]; then
+    PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
+    VERSION="master"
+elif [[ "$VERSION" == "latest" ]]; then
+    VERSION="master"
+fi
+
 if [[ "$VERSION" == "stable" ]]; then
     PIP install --no-cache-dir -U "${PKG}"
     PIP install --no-cache-dir -U "${PKG}.tabular[skex]"
@@ -26,7 +31,6 @@ elif [[ "$VERSION" =~ ^[0-9] ]]; then
     PIP install --no-cache-dir -U "${PKG}==${VERSION}"
     PIP install --no-cache-dir -U "${PKG}.tabular[skex]==${VERSION}"
 else
-    PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
     TARGET_DIR="${HERE}/lib/${PKG}"
     rm -Rf ${TARGET_DIR}
     git clone --depth 1 --single-branch --branch ${VERSION} --recurse-submodules ${REPO} ${TARGET_DIR}

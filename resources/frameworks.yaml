@@ -78,6 +78,7 @@ FASTAI_AG:
 
 FTT_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       FT_TRANSFORMER: {}
