@@ -66,6 +66,7 @@ def run(dataset, config):
         y_train, y_test = y_train.astype('float32'), y_test.astype('float32')
         l_enc = StandardScaler()
         y_train = l_enc.fit_transform(y_train[:, None])
+    pred_dim = len(l_enc.classes_) if config.type_ == "multiclass" else 1
 
 
     log.info("Running WideDeep with a maximum time of {}s.".format(config.max_runtime_seconds))
@@ -77,21 +78,23 @@ def run(dataset, config):
         n_blocks=3,
         n_heads=8,
     )
-    contrastive_denoising_trainer = ContrastiveDenoisingTrainer(
-        model=ft_transformer,
-        preprocessor=tab_preprocessor,
-    )
-    contrastive_denoising_trainer.pretrain(X_train, n_epochs=n_pretrain_epoch, batch_size=256)
-    contrastive_denoising_trainer.save(
-        path="pretrained", model_filename="contrastive_denoising_model.pt"
-    )
-    contrastive_denoising_model = torch.load(
-        "pretrained/contrastive_denoising_model.pt"
-    )
-    pred_dim = len(l_enc.classes_) if config.type_ == "multiclass" else 1
 
-    pretrained_model = contrastive_denoising_model.model
-    model = WideDeep(deeptabular=pretrained_model, pred_dim=pred_dim)
+    if n_pretrain_epoch > 0:
+        contrastive_denoising_trainer = ContrastiveDenoisingTrainer(
+            model=ft_transformer,
+            preprocessor=tab_preprocessor,
+        )
+        contrastive_denoising_trainer.pretrain(X_train, n_epochs=n_pretrain_epoch, batch_size=256)
+        contrastive_denoising_trainer.save(
+            path="pretrained", model_filename="contrastive_denoising_model.pt"
+        )
+        contrastive_denoising_model = torch.load(
+            "pretrained/contrastive_denoising_model.pt"
+        )
+        pretrained_model = contrastive_denoising_model.model
+        model = WideDeep(deeptabular=pretrained_model, pred_dim=pred_dim)
+    else:
+        model = WideDeep(deeptabular=ft_transformer, pred_dim=pred_dim)
     trainer = Trainer(model=model, objective=config.type_)
 
     with Timer() as training:

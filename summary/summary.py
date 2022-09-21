@@ -13,7 +13,7 @@ locations = {
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            # "FTT": "ftt_ag.ag.mytest.aws.20220920T195331/",
+            "FTT": "ftt_ag.ag.mytest.aws.20220921T033716/",
             "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 }
@@ -74,17 +74,17 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
-
-    AG = ['FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTTrans', 'FASTAI', 'NN']
+    AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
+    models = AG #['FTTrans', 'FTT']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))
