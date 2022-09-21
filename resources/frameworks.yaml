@@ -88,6 +88,11 @@ FTT_AG:
 WideDeep:
   version: "stable"
 
+WideDeep_pretrain:
+  extend: WideDeep
+  params:
+    _n_pretrain_epoch: 10
+
 
 FTTransformer:
   version: "stable"

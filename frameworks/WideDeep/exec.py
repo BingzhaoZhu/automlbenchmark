@@ -38,6 +38,8 @@ def run(dataset, config):
 
     is_classification = config.type == 'classification'
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
+    n_epoch = config.framework_params.get('_n_epoch', 20)
+    n_pretrain_epoch = config.framework_params.get('_n_pretrain_epoch', 0)
 
     train_path, test_path = dataset.train.path, dataset.test.path
     target_col = dataset.target.name
@@ -79,7 +81,7 @@ def run(dataset, config):
         model=ft_transformer,
         preprocessor=tab_preprocessor,
     )
-    contrastive_denoising_trainer.pretrain(X_train, n_epochs=5, batch_size=256)
+    contrastive_denoising_trainer.pretrain(X_train, n_epochs=n_pretrain_epoch, batch_size=256)
     contrastive_denoising_trainer.save(
         path="pretrained", model_filename="contrastive_denoising_model.pt"
     )
@@ -93,7 +95,7 @@ def run(dataset, config):
     trainer = Trainer(model=model, objective=config.type_)
 
     with Timer() as training:
-        trainer.fit(X_tab=X_train, target=y_train, n_epochs=5, batch_size=256)
+        trainer.fit(X_tab=X_train, target=y_train, n_epochs=n_epoch, batch_size=256)
 
     # get a test metric
     X_test = tab_preprocessor.transform(X_test)
