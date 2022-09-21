@@ -89,7 +89,7 @@ WideDeep:
   version: "stable"
 
 WideDeep_pretrain:
-  extend: WideDeep
+  extends: WideDeep
   params:
     _n_pretrain_epoch: 10
 
