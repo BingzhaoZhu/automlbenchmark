@@ -97,7 +97,7 @@ FTTransformer_cpu:
   params:
     _device: cpu
 
-FTTransformer_gpu:
+FTTransformer_gpu_1:
   extends: FTTransformer
   params:
     _device: cuda
@@ -109,7 +109,31 @@ FTTransformer_gpu:
     _batch_size: 64
     _pretrain_batch_size: 64
 
-FTTransformer_gpu_pretrain1:
+FTTransformer_gpu_3:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 3
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_5:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 5
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_pretrain_1:
   extends: FTTransformer
   params:
     _device: cuda
@@ -121,6 +145,29 @@ FTTransformer_gpu_pretrain1:
     _batch_size: 64
     _pretrain_batch_size: 64
 
+FTTransformer_gpu_pretrain_3:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 10
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 3
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_pretrain_5:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 10
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 5
+    _batch_size: 64
+    _pretrain_batch_size: 64
 
 AutoGluon_bestquality:
   extends: AutoGluon
