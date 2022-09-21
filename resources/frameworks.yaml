@@ -19,7 +19,7 @@ __dummy_framework_with_defaults:
 #########################
 
 AutoGluon:
-  version: "stable"
+  version: "latest"
   description: |
     AutoGluon-Tabular: Unlike existing AutoML frameworks that primarily focus on model/hyperparameter selection,
     AutoGluon-Tabular succeeds by ensembling multiple models and stacking them in multiple layers.
@@ -78,7 +78,6 @@ FASTAI_AG:
 
 FTT_AG:
   extends: AutoGluon
-  # version: 'latest'
   params:
     hyperparameters:
       FT_TRANSFORMER: {}
