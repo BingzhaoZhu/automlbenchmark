@@ -4,11 +4,12 @@ from scipy.stats import rankdata
 import boto3
 
 locations = {
-            #"FTTrans_pretrain": "fttransformer_gpu.ag.mytest.aws.20220917T020912/",
-            "FTTrans_pretrain1": "fttransformer_gpu_pretrain1.ag.mytest.aws.20220920T015840/",
-            #"FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
-            #"FTTrans_pretrain3": "fttransformer_gpu_pretrain3.ag.mytest.aws.20220918T130358/",
-            "FTTrans": "fttransformer_gpu.ag.mytest.aws.20220919T233700/",
+            "FTTrans_pretrain": "fttransformer_gpu_pretrain_3.ag.mytest.aws.20220921T144652/",
+            # "FTTrans_pretrain1": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
+            # "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
+            "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
+            "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
+            "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
             "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
@@ -84,7 +85,7 @@ if __name__ == "__main__":
     #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = AG #['FTTrans', 'FTT']
+    models = ['WideDeep_pretrain', 'FTTrans_pretrain', 'WideDeep', 'FTTrans']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))
