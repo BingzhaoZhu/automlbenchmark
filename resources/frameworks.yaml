@@ -81,9 +81,19 @@ FTT_AG:
   version: "latest_gpu"
   params:
     hyperparameters:
-      FT_TRANSFORMER: {}
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
     holdout_frac: 0.125
 
+FTT_AG_pretrain:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        model.fusion_transformer.pretrain: true
+    holdout_frac: 0.125
 
 WideDeep:
   version: "stable"
