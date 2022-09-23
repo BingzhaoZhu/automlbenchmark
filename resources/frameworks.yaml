@@ -92,7 +92,7 @@ FTT_AG_pretrain:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
-        model.fusion_transformer.pretrain: true
+        pretrainer: true
     holdout_frac: 0.125
 
 WideDeep:
