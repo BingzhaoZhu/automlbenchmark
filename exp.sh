@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 rm -f ~/.config/automlbenchmark/config.yaml
-
 cp ./examples/config_cpu.yaml ~/.config/automlbenchmark/config.yaml
 #python runbenchmark.py GBM_AG ag mytest -m aws -p 1500 -f 0
 #python runbenchmark.py RF_AG ag mytest -m aws -p 1500 -f 0
