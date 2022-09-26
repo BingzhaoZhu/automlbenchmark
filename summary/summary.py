@@ -12,8 +12,8 @@ locations = {
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
-            "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T033915/",
+            "FTT": "cat_ag.ag.mytest.aws.20220926T055336/",
+            "FTT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220926T064104/",
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 }
