@@ -8,12 +8,13 @@ locations = {
             # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
+            "CAT": "cat_ag.ag.mytest.aws.20220926T055336/",
+            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220926T200918/",
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            "FTT": "cat_ag.ag.mytest.aws.20220926T055336/",
-            "FTT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220926T064104/",
+            # "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
+            # "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T175014/",
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 }
@@ -84,7 +85,7 @@ if __name__ == "__main__":
         pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = ["FTT", 'FTT_pretrain']
+    models = ["CAT_pretrain", 'CAT'] #["FTT_pretrain", 'FTT']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))
