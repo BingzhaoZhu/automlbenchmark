@@ -9,7 +9,7 @@ locations = {
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
             "CAT": "cat_ag.ag.mytest.aws.20220926T055336/",
-            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220926T200918/",
+            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220926T215237/",
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
@@ -28,8 +28,11 @@ def collect_performance(model):
     results = s3_client.list_objects(Bucket=bucket, Prefix=prefix, Delimiter='/')
     path_to_result = "output/results.csv"
     for obj in results.get('CommonPrefixes'):
-        obj = s3_client.get_object(Bucket='automl-benchmark-bingzzhu', Key=obj.get('Prefix')+path_to_result)
-        df.append(pd.read_csv(obj["Body"]))
+        try:
+            obj = s3_client.get_object(Bucket='automl-benchmark-bingzzhu', Key=obj.get('Prefix')+path_to_result)
+            df.append(pd.read_csv(obj["Body"]))
+        except:
+            continue
     return pd.concat(df, axis=0)
 
 
