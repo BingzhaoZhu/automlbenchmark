@@ -4,18 +4,18 @@ from scipy.stats import rankdata
 import boto3
 
 locations = {
-            "FTTrans_pretrain": "fttransformer_gpu_pretrain_3.ag.mytest.aws.20220921T144652/",
-            "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
-            "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
-            "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
-            "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
-            "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
-            "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            "FTT": "ftt_ag.ag.mytest.aws.20220923T231840/",
-            "FTT_pretrain": "ftt_ag.ag.mytest.aws.20220922T020448/",
-            "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
-            "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+            # "FTTrans_pretrain": "fttransformer_gpu_pretrain_3.ag.mytest.aws.20220921T144652/",
+            # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
+            # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
+            # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
+            # "CAT": "cat_ag.ag.mytest.aws.20220917T190721/",
+            # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
+            # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
+            # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
+            "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
+            "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T033915/",
+            # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
+            # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'

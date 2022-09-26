@@ -43,7 +43,6 @@ GBM_AG:
       GBM: {}
     holdout_frac: 0.125
 
-
 CAT_AG:
   extends: AutoGluon
   params:
@@ -51,6 +50,13 @@ CAT_AG:
       CAT: {}
     holdout_frac: 0.125
 
+CAT_AG_pretrain:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      CAT:
+        pretrainer: true
+    holdout_frac: 0.125
 
 XGB_AG:
   extends: AutoGluon
@@ -84,7 +90,6 @@ FTT_AG:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
         optimization.patience: 3
-        optimization.top_k: 1
     holdout_frac: 0.125
 
 FTT_AG_pretrain:
@@ -95,7 +100,6 @@ FTT_AG_pretrain:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
         optimization.patience: 3
-        optimization.top_k: 1
         pretrainer: true
     holdout_frac: 0.125
 
