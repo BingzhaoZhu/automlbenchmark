@@ -5,8 +5,6 @@ import boto3
 
 locations = {
             "FTTrans_pretrain": "fttransformer_gpu_pretrain_3.ag.mytest.aws.20220921T144652/",
-            # "FTTrans_pretrain1": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "FTTrans_pretrain2": "fttransformer_gpu_pretrain2.ag.mytest.aws.20220918T094000/",
             "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
@@ -14,7 +12,8 @@ locations = {
             "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            "FTT": "ftt_ag.ag.mytest.aws.20220922T020448/",
+            "FTT": "ftt_ag.ag.mytest.aws.20220923T231840/",
+            "FTT_pretrain": "ftt_ag.ag.mytest.aws.20220922T020448/",
             "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 }
@@ -75,17 +74,17 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    # summary = {}
-    # for model in locations:
-    #     print(f"collecting results for {model}...")
-    #     model_performance = collect_performance(model)
-    #     summary = separate(model, model_performance, summary)
-    #
-    # for task in summary:
-    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    summary = {}
+    for model in locations:
+        print(f"collecting results for {model}...")
+        model_performance = collect_performance(model)
+        summary = separate(model, model_performance, summary)
+
+    for task in summary:
+        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = ["FTT", 'FTTrans', 'FTTrans_pretrain', 'WideDeep', 'WideDeep_pretrain']
+    models = ["FTT", 'FTT_pretrain']
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))

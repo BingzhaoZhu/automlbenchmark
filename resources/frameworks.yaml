@@ -83,6 +83,8 @@ FTT_AG:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        optimization.top_k: 1
     holdout_frac: 0.125
 
 FTT_AG_pretrain:
@@ -92,6 +94,8 @@ FTT_AG_pretrain:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        optimization.top_k: 1
         pretrainer: true
     holdout_frac: 0.125
 
