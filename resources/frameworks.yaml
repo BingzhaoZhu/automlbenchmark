@@ -47,7 +47,8 @@ CAT_AG:
   extends: AutoGluon
   params:
     hyperparameters:
-      CAT: {}
+      CAT:
+        ag.early_stop: 3
     holdout_frac: 0.125
 
 CAT_AG_pretrain:
@@ -55,6 +56,7 @@ CAT_AG_pretrain:
   params:
     hyperparameters:
       CAT:
+        ag.early_stop: 3
         pretrainer: true
     holdout_frac: 0.125
 
