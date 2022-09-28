@@ -92,7 +92,7 @@ FTT_AG:
         optimization.patience: 3
     holdout_frac: 0.125
 
-FTT_AG_pretrain:
+FTT_AG_pretrain_identical:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -101,6 +101,86 @@ FTT_AG_pretrain:
         env.per_gpu_batch_size: 64
         optimization.patience: 3
         pretrainer: true
+        pretrainer.augmentation_type: "identical"
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_randperm_03:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.3,
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_randperm_06:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.6,
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_randperm_09:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.9,
+    holdout_frac: 0.125
+
+
+FTT_AG_pretrain_randblk_03:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_block"
+        pretrainer.corruption_rate: 0.3,
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_randblk_06:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_block"
+        pretrainer.corruption_rate: 0.6,
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_randblk_09:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        optimization.patience: 3
+        pretrainer: true
+        pretrainer.augmentation_type: "random_block"
+        pretrainer.corruption_rate: 0.9,
     holdout_frac: 0.125
 
 WideDeep:

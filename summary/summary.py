@@ -9,7 +9,7 @@ locations = {
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
             "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
-            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T182101/",
+            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
