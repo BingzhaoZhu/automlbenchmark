@@ -8,15 +8,24 @@ locations = {
             # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
-            "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
+            # "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
+            # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
             # "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
-            # "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T175014/",
+            "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T175014/",
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+
+            "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
+            "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T024024/",
+            # "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randblk_03.ag.mytest.aws.20220928T085738/",
+            # "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randblk_06.ag.mytest.aws.20220928T111253/",
+            # "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20220928T122427/",
+            # "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20220928T051654/",
+            # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20220928T063359/",
+            # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20220928T074532/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -88,7 +97,7 @@ if __name__ == "__main__":
         pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = ["CAT_pretrain", 'CAT'] #["FTT_pretrain", 'FTT']
+    models = ['FTT', "FTT_pretrain_identical", "FTT_pretrain"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))

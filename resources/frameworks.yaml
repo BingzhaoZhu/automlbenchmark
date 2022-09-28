@@ -88,7 +88,7 @@ FTT_AG:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
     holdout_frac: 0.125
 
@@ -98,7 +98,7 @@ FTT_AG_pretrain_identical:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "identical"
@@ -110,11 +110,11 @@ FTT_AG_pretrain_randperm_03:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.3,
+        pretrainer.corruption_rate: 0.3
     holdout_frac: 0.125
 
 FTT_AG_pretrain_randperm_06:
@@ -123,11 +123,11 @@ FTT_AG_pretrain_randperm_06:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.6,
+        pretrainer.corruption_rate: 0.6
     holdout_frac: 0.125
 
 FTT_AG_pretrain_randperm_09:
@@ -136,11 +136,11 @@ FTT_AG_pretrain_randperm_09:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.9,
+        pretrainer.corruption_rate: 0.9
     holdout_frac: 0.125
 
 
@@ -150,11 +150,11 @@ FTT_AG_pretrain_randblk_03:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
-        pretrainer.corruption_rate: 0.3,
+        pretrainer.corruption_rate: 0.3
     holdout_frac: 0.125
 
 FTT_AG_pretrain_randblk_06:
@@ -163,11 +163,11 @@ FTT_AG_pretrain_randblk_06:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
-        pretrainer.corruption_rate: 0.6,
+        pretrainer.corruption_rate: 0.6
     holdout_frac: 0.125
 
 FTT_AG_pretrain_randblk_09:
@@ -176,11 +176,11 @@ FTT_AG_pretrain_randblk_09:
   params:
     hyperparameters:
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 64
+        env.per_gpu_batch_size: 128
         optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
-        pretrainer.corruption_rate: 0.9,
+        pretrainer.corruption_rate: 0.9
     holdout_frac: 0.125
 
 WideDeep:
