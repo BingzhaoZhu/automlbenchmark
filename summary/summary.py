@@ -97,7 +97,7 @@ if __name__ == "__main__":
     #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTT', "FTT_pretrain_randblk_06"]
+    models = ['FTT', "FTT_pretrain_randperm_06"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
