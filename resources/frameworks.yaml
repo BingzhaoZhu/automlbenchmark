@@ -92,6 +92,17 @@ FTT_AG:
         optimization.patience: 3
     holdout_frac: 0.125
 
+FTT_AG_row_attention:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.patience: 3
+        model.fusion_transformer.row_attention: true
+    holdout_frac: 0.125
+
 FTT_AG_pretrain_identical:
   extends: AutoGluon
   version: "latest_gpu"

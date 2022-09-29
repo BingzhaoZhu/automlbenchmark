@@ -14,18 +14,18 @@ locations = {
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
             # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
             # "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
-            "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T175014/",
+            # "FTT_pretrain": "ftt_ag_pretrain.ag.mytest.aws.20220926T175014/",
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
-            "FTT": "ftt_ag.ag.mytest.aws.20220926T014050/",
-            "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T024024/",
-            # "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randblk_03.ag.mytest.aws.20220928T085738/",
-            # "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randblk_06.ag.mytest.aws.20220928T111253/",
-            # "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20220928T122427/",
-            # "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20220928T051654/",
-            # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20220928T063359/",
-            # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20220928T074532/",
+            "FTT": "ftt_ag.ag.mytest.aws.20220928T174430/",
+            "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",
+            "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randblk_03.ag.mytest.aws.20220929T051257/",
+            "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randblk_06.ag.mytest.aws.20220929T073809/",
+            "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20220929T100155/",
+            "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20220928T222953/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20220929T002749/",
+            "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20220929T025052/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -87,17 +87,17 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     AG = ['FASTAI', 'NN', 'FTT', "CAT", "LGBM", "RF", "XGB"]
-    models = ['FTT', "FTT_pretrain_identical", "FTT_pretrain"]
+    models = ['FTT', "FTT_pretrain_randblk_06"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
