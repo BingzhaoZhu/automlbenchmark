@@ -52,14 +52,6 @@ def run(dataset, config):
 
     models_dir = tempfile.mkdtemp() + os.sep  # passed to AG
 
-    # hyperparameters = {}
-    # hyperparameters['FT_TRANSFORMER'] = {"env.num_gpus": 1,
-    #                                      "env.per_gpu_batch_size": 128,
-    #                                      "env.eval_batch_size_ratio": 1,
-    #                                      "model.fusion_transformer.row_attention": True,
-    #                                      "optimization.patience": 3,
-    #                                      }
-
     with Timer() as training:
         predictor = TabularPredictor(
             label=label,
