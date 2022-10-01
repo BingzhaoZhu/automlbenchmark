@@ -65,16 +65,17 @@ def run(dataset, config):
         )
 
     test_data = TabularDataset(test_path)
+    train_data = TabularDataset(train_path)
     # Persist model in memory that is going to be predicting to get correct inference latency
     predictor.persist_models('best')
 
     if is_classification:
         with Timer() as predict:
-            probabilities = predictor.predict_proba(test_data, as_multiclass=True)
+            probabilities = predictor.predict_proba(test_data, as_multiclass=True, support_data=train_data.drop(label, axis=1))
         predictions = probabilities.idxmax(axis=1).to_numpy()
     else:
         with Timer() as predict:
-            predictions = predictor.predict(test_data, as_pandas=False)
+            predictions = predictor.predict(test_data, as_pandas=False, support_data=train_data.drop(label, axis=1))
         probabilities = None
 
     prob_labels = probabilities.columns.values.astype(str).tolist() if probabilities is not None else None
