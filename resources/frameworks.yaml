@@ -101,7 +101,7 @@ FTT_AG_row_attention:
         env.per_gpu_batch_size: 128
         env.eval_batch_size_ratio: 1
         optimization.patience: 3
-        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.row_attention: False
 #        model.fusion_transformer.n_blocks: 3
 #        model.fusion_transformer.hidden_size: 32
 #        model.fusion_transformer.ffn_d_hidden: 32
