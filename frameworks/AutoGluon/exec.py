@@ -78,10 +78,11 @@ def run(dataset, config):
             for _ in range(10):
                 proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) # , support_data=train_data.drop(label, axis=1))
                 probabilities.append(proba_per_round)
+                print(proba_per_round)
             probabilities = pd.concat(probabilities)
             probabilities = probabilities.groupby(probabilities.index).median()
-            probabilities = probabilities.reindex_like(proba_per_round)
             print(probabilities)
+            probabilities = probabilities.reindex_like(proba_per_round)
         predictions = proba_per_round.idxmax(axis=1).to_numpy()
     else:
         with Timer() as predict:
