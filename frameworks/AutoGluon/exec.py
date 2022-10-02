@@ -55,6 +55,11 @@ def run(dataset, config):
 
     models_dir = tempfile.mkdtemp() + os.sep  # passed to AG
 
+    train_data = TabularDataset(train_path)
+    if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
+        if train_data.shape[0] < 1000:
+            training_params["hyperparameters"]["FT_TRANSFORMER"]["model.fusion_transformer.row_attention"] = False
+
     with Timer() as training:
         predictor = TabularPredictor(
             label=label,
@@ -68,7 +73,6 @@ def run(dataset, config):
         )
 
     test_data = TabularDataset(test_path)
-    train_data = TabularDataset(train_path)
     # Persist model in memory that is going to be predicting to get correct inference latency
     predictor.persist_models('best')
 
