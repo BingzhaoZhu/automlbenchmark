@@ -28,7 +28,7 @@ locations = {
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20220929T025052/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20220928T174430/",
-            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221002T081942/",
+            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221002T065738/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -49,17 +49,20 @@ def collect_performance(model):
 
 
 def separate(model, df, previous):
+    stat = pd.read_csv("./dataset_stat.csv")
+    df.rename(columns={"task": "name"}, inplace=True)
+    df = stat.merge(df, on='name', how='right')
     group = {k: v for k, v in df.groupby('type')}
     task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "acc"}
     for task in group:
         metric = task_metric[task]
-        group[task] = group[task][["task", metric]]
+        group[task] = group[task][["name", "num_features", "num_instances", metric]]
         group[task].rename(columns={metric: model}, inplace=True)
         # group[task].fillna(-1, inplace=True)
         if task not in previous:
             previous[task] = group[task]
         else:
-            previous[task] = previous[task].merge(group[task][['task', model]], on='task', how='right')
+            previous[task] = previous[task].merge(group[task][['name', model]], on='name', how='right')
     return previous
 
 
@@ -67,11 +70,14 @@ def rank_models(models, task="binary"):
     n = len(models)
     ranker = np.zeros((n, n))
     summary = pd.read_csv("./" + task + ".csv")
-    summary = summary[models]
+    summary = summary[["name", "num_features", "num_instances"]+models]
     for _, row in summary.iterrows():
         tmp = []
 
         if row.isna().any():
+            continue
+
+        if row["num_instances"] > 10000:
             continue
 
         for m in models:

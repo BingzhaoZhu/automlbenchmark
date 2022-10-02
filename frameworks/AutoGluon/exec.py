@@ -56,9 +56,9 @@ def run(dataset, config):
     models_dir = tempfile.mkdtemp() + os.sep  # passed to AG
 
     train_data = TabularDataset(train_path)
-    if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
-        if train_data.shape[0] < 10000:
-            training_params["hyperparameters"]["FT_TRANSFORMER"]["model.fusion_transformer.row_attention"] = False
+    # if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
+    #     if train_data.shape[0] < 10000:
+    #         training_params["hyperparameters"]["FT_TRANSFORMER"]["model.fusion_transformer.row_attention"] = False
 
     with Timer() as training:
         predictor = TabularPredictor(
@@ -80,7 +80,7 @@ def run(dataset, config):
         with Timer() as predict:
             probabilities = []
             for _ in range(10):
-                proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) # , support_data=train_data.drop(label, axis=1))
+                proba_per_round = predictor.predict_proba(test_data, as_multiclass=True, support_data=train_data.drop(label, axis=1))
                 probabilities.append(proba_per_round)
             probabilities = pd.concat(probabilities)
             probabilities = probabilities.groupby(probabilities.index).median()
@@ -90,7 +90,7 @@ def run(dataset, config):
         with Timer() as predict:
             predictions = []
             for _ in range(10):
-                pred_per_round = predictor.predict(test_data, as_pandas=False) #, support_data=train_data.drop(label, axis=1))
+                pred_per_round = predictor.predict(test_data, as_pandas=False, support_data=train_data.drop(label, axis=1))
                 predictions.append(pred_per_round)
             predictions = np.median(predictions, axis=0)
         probabilities = None
