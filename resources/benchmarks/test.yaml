@@ -28,7 +28,7 @@
 - name: __defaults__
   folds: 2
   cores: 2
-  max_runtime_seconds: 60
+  max_runtime_seconds: 600
 
 - name: kc2
   openml_task_id: 3913

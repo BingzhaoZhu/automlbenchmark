@@ -4,6 +4,9 @@ import shutil
 import warnings
 import sys
 import tempfile
+
+import numpy as np
+
 warnings.simplefilter("ignore")
 
 if sys.platform == 'darwin':
@@ -71,11 +74,20 @@ def run(dataset, config):
 
     if is_classification:
         with Timer() as predict:
-            probabilities = predictor.predict_proba(test_data, as_multiclass=True, support_data=train_data.drop(label, axis=1))
+            probabilities = []
+            for _ in range(10):
+                proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) # , support_data=train_data.drop(label, axis=1))
+                probabilities.append(proba_per_round)
+            probabilities = pd.concat(probabilities)
+            probabilities = probabilities.groupby(probabilities.index).median()
         predictions = probabilities.idxmax(axis=1).to_numpy()
     else:
         with Timer() as predict:
-            predictions = predictor.predict(test_data, as_pandas=False, support_data=train_data.drop(label, axis=1))
+            predictions = []
+            for _ in range(10):
+                pred_per_round = predictor.predict(test_data, as_pandas=False) #, support_data=train_data.drop(label, axis=1))
+                predictions.append(pred_per_round)
+            predictions = np.median(predictions, axis=0)
         probabilities = None
 
     prob_labels = probabilities.columns.values.astype(str).tolist() if probabilities is not None else None

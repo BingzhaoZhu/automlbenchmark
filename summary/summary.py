@@ -28,7 +28,7 @@ locations = {
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20220929T025052/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20220928T174430/",
-            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221001T215645/",
+            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221001T234728/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
