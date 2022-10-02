@@ -57,7 +57,7 @@ def run(dataset, config):
 
     train_data = TabularDataset(train_path)
     if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
-        if train_data.shape[0] < 1000:
+        if train_data.shape[0] < 10000:
             training_params["hyperparameters"]["FT_TRANSFORMER"]["model.fusion_transformer.row_attention"] = False
 
     with Timer() as training:
