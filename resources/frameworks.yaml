@@ -123,7 +123,7 @@ FTT_AG_pretrain_identical:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "identical"
     holdout_frac: 0.125
@@ -135,7 +135,7 @@ FTT_AG_pretrain_randperm_03:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
         pretrainer.corruption_rate: 0.3
@@ -148,7 +148,7 @@ FTT_AG_pretrain_randperm_06:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
         pretrainer.corruption_rate: 0.6
@@ -161,7 +161,7 @@ FTT_AG_pretrain_randperm_09:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
         pretrainer.corruption_rate: 0.9
@@ -175,7 +175,7 @@ FTT_AG_pretrain_randblk_03:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
         pretrainer.corruption_rate: 0.3
@@ -188,7 +188,7 @@ FTT_AG_pretrain_randblk_06:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
         pretrainer.corruption_rate: 0.6
@@ -201,7 +201,7 @@ FTT_AG_pretrain_randblk_09:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        optimization.patience: 3
+        # optimization.patience: 3
         pretrainer: true
         pretrainer.augmentation_type: "random_block"
         pretrainer.corruption_rate: 0.9
