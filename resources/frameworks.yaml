@@ -102,6 +102,9 @@ FTT_AG_row_attention:
         env.eval_batch_size_ratio: 1
         optimization.patience: 3
         model.fusion_transformer.row_attention: True
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.9
 #        model.fusion_transformer.n_blocks: 3
 #        model.fusion_transformer.hidden_size: 32
 #        model.fusion_transformer.ffn_d_hidden: 32
