@@ -18,7 +18,7 @@ PIP install --upgrade pip
 PIP install --upgrade setuptools wheel
 
 if [[ "$VERSION" == "latest_gpu" ]]; then
-    PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
+    # PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
     VERSION="pretrain"
 elif [[ "$VERSION" == "latest" ]]; then
     VERSION="pretrain"
