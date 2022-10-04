@@ -82,6 +82,18 @@ FASTAI_AG:
     holdout_frac: 0.125
 
 
+HTT_AG:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        model.names: ["categorical_transformer", "numerical_transformer", "fusion_hierarchical_transformer"],
+        # optimization.patience: 3
+    holdout_frac: 0.125
+
+
 FTT_AG:
   extends: AutoGluon
   version: "latest_gpu"
