@@ -89,7 +89,7 @@ HTT_AG:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
-        model.names: ["categorical_transformer", "numerical_transformer", "fusion_hierarchical_transformer"],
+        model.names: ["categorical_transformer", "numerical_transformer", "fusion_hierarchical_transformer"]
         # optimization.patience: 3
     holdout_frac: 0.125
 

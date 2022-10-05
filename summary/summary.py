@@ -26,7 +26,7 @@ locations = {
             "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221004T014300/",
 
             # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            # "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -94,20 +94,20 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     models = ['FASTAI', 'NN', 'FTT', 'FTT_pretrain_randperm_09', "CAT", "LGBM", "RF", "XGB"]
     # models = ["FTT_pretrain_identical",
     #           "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
     #           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
-    models = ["FTT", "FTT_pretrain_randperm_06"]
+    models = ["FTT", "FTT_row_attention"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
