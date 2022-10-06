@@ -91,6 +91,7 @@ HTT_AG:
         env.per_gpu_batch_size: 128
         model.names: ["categorical_transformer", "numerical_transformer", "fusion_hierarchical_transformer"]
         model.fusion_hierarchical_transformer.tokens_per_level: 6400000
+        model.fusion_hierarchical_transformer.num_sweeps: 1
         # optimization.patience: 3
     holdout_frac: 0.125
 
