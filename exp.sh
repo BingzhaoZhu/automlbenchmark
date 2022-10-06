@@ -28,4 +28,4 @@ python runbenchmark.py FTT_AG_pretrain_randperm_06 ag mytest -m aws -p 104 -f 0
 
 #python runbenchmark.py FTT_AG_row_attention ag mytest -m aws -p 104 -f 0
 
-python runbenchmark.py HTT_AG ag mytest -m aws -p 104 -f 0
+#python runbenchmark.py HTT_AG ag mytest -m aws -p 104 -f 0

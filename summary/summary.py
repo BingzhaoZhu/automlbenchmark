@@ -17,13 +17,13 @@ locations = {
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            "HTT": "htt_ag.ag.mytest.aws.20221005T170353/",
+            # "HTT": "htt_ag.ag.mytest.aws.20221005T170353/",
             # "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",
-            # "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randblk_03.ag.mytest.aws.20221005T095223/",
-            # "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randblk_06.ag.mytest.aws.20221005T121656/",
+            "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221005T072915/",
+            "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221003T231923/",
             # "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20221005T144032/",
-            # "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221005T072915/",
-            # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221003T231923/",
+            "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221006T000916/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221006T023141/",
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221004T014300/",
 
             # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
@@ -108,7 +108,10 @@ if __name__ == "__main__":
     models = ["FTT", "FTT_pretrain_identical",
               "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
               "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
-    models = ["FTT", "HTT"]
+    # models = ["FTT", "HTT"]
+    models = ["FTT",
+              "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06",
+              "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
