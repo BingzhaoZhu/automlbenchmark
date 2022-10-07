@@ -11,5 +11,8 @@
 #- name: amazon-commerce-reviews
 #  openml_task_id: 10090
 
-- name: micro-mass
-  openml_task_id: 359953
+#- name: micro-mass
+#  openml_task_id: 359953
+
+- name: arcene
+  openml_task_id: 190412
