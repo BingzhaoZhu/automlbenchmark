@@ -8,28 +8,28 @@ locations = {
             # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
-            # # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
-            # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
-            # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
-            # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
-            # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+            "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
+            # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
+            "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
+            "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
+            "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
+            "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
+            "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            "FastFTT": "fastftt_ag.ag.mytest.aws.20221007T021831/",
+            "FastFTT": "fastftt_ag.ag.mytest.aws.20221007T051655/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",
             # "FTT_pretrain_randblk_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221005T072915/",
             # "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221003T231923/",
             # "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20221005T144032/",
-            # "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221006T052447/",
+            "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221006T052447/",
             # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221006T084611/",
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221004T014300/",
 
             # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            # "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -106,12 +106,12 @@ if __name__ == "__main__":
     for task in summary:
         pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
-    models = ['FASTAI', 'NN', 'FTT', 'FTT_pretrain_randperm_09', "CAT", "LGBM", "RF", "XGB"]
-    models = ["FTT", "FTT_pretrain_identical",
-              "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
-              "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
-    models = ["FTT", "HTT"]
-    models = ["FTT", "FastFTT"]
+    models = ['FASTAI', 'NN', 'FTT', 'FastFTT','FTT_row_attention', "FTT_pretrain_randperm_03", "CAT", "LGBM", "RF", "XGB"]
+    # models = ["FTT", "FTT_pretrain_identical",
+    #           "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
+    #           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
+    # models = ["FTT", "HTT"]
+    # models = ["FTT", "FastFTT"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
