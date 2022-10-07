@@ -114,7 +114,7 @@ FastFTT_AG:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         model.fusion_transformer.additive_attention: true
-        optimization.patience: 1
+        # optimization.patience: 1
     holdout_frac: 0.125
 
 FTT_AG_row_attention:
