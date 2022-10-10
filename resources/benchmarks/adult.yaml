@@ -14,5 +14,5 @@
 #- name: micro-mass
 #  openml_task_id: 359953
 
-- name: arcene
-  openml_task_id: 190412
+- name: eucalyptus
+  openml_task_id: 359954
