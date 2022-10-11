@@ -17,7 +17,7 @@ locations = {
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            "FastFTT": "fastftt_ag.ag.mytest.aws.20221010T210953/",
+            "FastFTT": "fastftt_ag.ag.mytest.aws.20221010T231053/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",
@@ -29,7 +29,7 @@ locations = {
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221004T014300/",
 
             # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+            # "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
