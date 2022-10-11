@@ -102,6 +102,7 @@ FTT_AG:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
+        env.num_workers: 0
         # optimization.patience: 3
     holdout_frac: 0.125
 
@@ -112,6 +113,7 @@ FastFTT_AG:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
+        env.num_workers: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
@@ -124,6 +126,7 @@ FTT_AG_64:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
+        env.num_workers: 0
     holdout_frac: 0.125
 
 FTT_AG_32:
@@ -133,6 +136,7 @@ FTT_AG_32:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 32
+        env.num_workers: 0
     holdout_frac: 0.125
 
 FastFTT_AG_64:
@@ -142,6 +146,7 @@ FastFTT_AG_64:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
+        env.num_workers: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
@@ -155,18 +160,6 @@ FastFTT_AG_32:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 32
         env.num_workers: 0
-        model.fusion_transformer.additive_attention: true
-        model.fusion_transformer.share_qv_weights: false
-        # optimization.patience: 1
-    holdout_frac: 0.125
-
-FastFTT_AG_16:
-  extends: AutoGluon
-  version: "latest_gpu"
-  params:
-    hyperparameters:
-      FT_TRANSFORMER:
-        env.per_gpu_batch_size: 16
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
