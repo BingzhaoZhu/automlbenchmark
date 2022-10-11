@@ -8,7 +8,7 @@ locations = {
             # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
+            "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
             # # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
             # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
             # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
@@ -16,8 +16,10 @@ locations = {
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
-            "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            "FastFTT": "fastftt_ag.ag.mytest.aws.20221010T231053/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221011T031621/",
+            "FastFTT": "fastftt_ag.ag.mytest.aws.20221011T102450/",
+            "FTT_batchsize_32": "ftt_ag_32.ag.mytest.aws.20221011T080250/",
+            "FastFTT_batchsize_32":"fastftt_ag_32.ag.mytest.aws.20221011T053930/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",
@@ -30,6 +32,7 @@ locations = {
 
             # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
             # "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+
 }
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -52,7 +55,7 @@ def collect_performance(model):
 def separate(model, df, previous):
     stat = pd.read_csv("./dataset_stat.csv")
     df.rename(columns={"task": "name"}, inplace=True)
-    df = stat.merge(df, on='name', how='right')
+    df = stat.merge(df[df.columns], on='name', how='outer')
     group = {k: v for k, v in df.groupby('type')}
     task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "acc"}
     for task in group:
@@ -63,7 +66,7 @@ def separate(model, df, previous):
         if task not in previous:
             previous[task] = group[task]
         else:
-            previous[task] = previous[task].merge(group[task][['name', model]], on='name', how='right')
+            previous[task] = previous[task].merge(group[task][['name', model]], on='name', how='outer')
     return previous
 
 
@@ -111,7 +114,7 @@ if __name__ == "__main__":
     #           "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
     #           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
     # models = ["FTT", "HTT"]
-    models = ["FTT", "FastFTT"]
+    models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))

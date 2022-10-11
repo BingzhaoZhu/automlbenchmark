@@ -17,5 +17,11 @@
 #- name: eucalyptus
 #  openml_task_id: 359954
 
-- name: arcene
-  openml_task_id: 190412
+#- name: amazon-commerce-reviews
+#  openml_task_id: 10090
+
+- name: cnae-9
+  openml_task_id: 359957
+
+#- name: arcene
+#  openml_task_id: 190412

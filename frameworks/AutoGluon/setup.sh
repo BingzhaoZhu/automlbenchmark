@@ -4,7 +4,6 @@ VERSION=${1:-"stable"}
 REPO=${2:-"https://github.com/BingzhaoZhu/autogluon.git"}
 PKG=${3:-"autogluon"}
 
-
 # creating local venv
 . ${HERE}/../shared/setup.sh ${HERE} true
 
