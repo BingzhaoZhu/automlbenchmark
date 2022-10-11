@@ -154,6 +154,7 @@ FastFTT_AG_32:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 32
+        env.num_workers: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
