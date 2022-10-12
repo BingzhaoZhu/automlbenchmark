@@ -14,8 +14,8 @@
 #- name: eucalyptus
 #  openml_task_id: 359954
 
-- name: amazon-commerce-reviews
-  openml_task_id: 10090
+#- name: amazon-commerce-reviews
+#  openml_task_id: 10090
 
 #- name: cnae-9
 #  openml_task_id: 359957
@@ -28,3 +28,6 @@
 
 #- name: Mercedes_Benz_Greener_Manufacturing
 #  openml_task_id: 233215
+
+- name: car
+  openml_task_id: 359960

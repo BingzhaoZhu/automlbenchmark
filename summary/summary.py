@@ -17,9 +17,9 @@ locations = {
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221011T031621/",
-            "FastFTT": "fastftt_ag.ag.mytest.aws.20221011T102450/",
+            "FastFTT": "fastftt_ag.ag.mytest.aws.20221012T060457/",
             "FTT_batchsize_32": "ftt_ag_32.ag.mytest.aws.20221011T080250/",
-            "FastFTT_batchsize_32":"fastftt_ag_32.ag.mytest.aws.20221011T053930/",
+            "FastFTT_batchsize_32":"fastftt_ag_32.ag.mytest.aws.20221012T041432/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_pretrain_identical.ag.mytest.aws.20220928T200551/",

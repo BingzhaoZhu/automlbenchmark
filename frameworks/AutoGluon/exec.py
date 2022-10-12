@@ -26,8 +26,8 @@ from frameworks.shared.utils import Timer, zip_path
 
 # this is needed to avoid issues with multiprocessing
 # https://github.com/pytorch/pytorch/issues/11201
-import torch.multiprocessing
-torch.multiprocessing.set_sharing_strategy('file_system')
+# import torch.multiprocessing
+# torch.multiprocessing.set_sharing_strategy('file_system')
 
 log = logging.getLogger(__name__)
 
