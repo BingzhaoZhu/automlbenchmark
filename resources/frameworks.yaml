@@ -114,6 +114,7 @@ FastFTT_AG:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
+        env.num_workers_evaluation: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
@@ -147,6 +148,7 @@ FastFTT_AG_64:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 64
         env.num_workers: 0
+        env.num_workers_evaluation: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
@@ -160,6 +162,7 @@ FastFTT_AG_32:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 32
         env.num_workers: 0
+        env.num_workers_evaluation: 0
         model.fusion_transformer.additive_attention: true
         model.fusion_transformer.share_qv_weights: false
         # optimization.patience: 1
