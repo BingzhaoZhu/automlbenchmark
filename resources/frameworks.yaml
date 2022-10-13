@@ -235,7 +235,7 @@ FTT_AG_pretrain_randperm_06:
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "pretrain"
+        pretrainer.loss_mixup: "pretrain22"
         pretrainer.max_epochs: 0
     holdout_frac: 0.125
 
