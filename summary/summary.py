@@ -27,7 +27,7 @@ locations = {
             # "FTT_pretrain_randblk_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221003T231923/",
             # "FTT_pretrain_randblk_09": "ftt_ag_pretrain_randblk_09.ag.mytest.aws.20221005T144032/",
             # "FTT_pretrain_randperm_03": "ftt_ag_pretrain_randperm_03.ag.mytest.aws.20221006T052447/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221015T194204/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221016T230934/",
             # "FTT_pretrain_randperm_09": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221004T014300/",
 
             "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
