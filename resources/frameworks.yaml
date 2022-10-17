@@ -252,9 +252,10 @@ FTT_AG_pretrain_randperm_09:
         env.num_workers_evaluation: 0
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.6
+        pretrainer.corruption_rate: 0.8
         pretrainer.loss_mixup: "pretrain"
-        pretrainer.start_loss_coefficient: 0.5
+        pretrainer.start_loss_coefficient: 1
+        pretrainer.end_loss_coefficient: 0
     holdout_frac: 0.125
 
 
