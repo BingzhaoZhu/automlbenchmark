@@ -295,6 +295,24 @@ FTT_AG_pretrain_recon_09:
         pretrainer.pretrain_epochs: 3
     holdout_frac: 0.125
 
+FTT_AG_pretrain_both:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.loss_mixup: "both"
+        pretrainer.start_loss_coefficient: 1
+        pretrainer.end_loss_coefficient: 0.05
+        pretrainer.pretrain_epochs: 3
+    holdout_frac: 0.125
+
 WideDeep:
   version: "stable"
 
