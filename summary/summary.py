@@ -22,8 +22,8 @@ locations = {
             # "FastFTT_batchsize_32": "fastftt_ag_32.ag.mytest.aws.20221012T181213/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
-            "FTT_pretrain_identical": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T165944/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221018T002949/",
+            "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_both.ag.mytest.aws.20221018T073015/",
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
