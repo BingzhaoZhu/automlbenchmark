@@ -23,7 +23,7 @@ locations = {
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_both.ag.mytest.aws.20221018T073015/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_both.ag.mytest.aws.20221018T160329/",
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
