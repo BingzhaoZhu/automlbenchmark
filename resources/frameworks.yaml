@@ -259,8 +259,7 @@ FTT_AG_pretrain_randperm_09:
         pretrainer.pretrain_epochs: 3
     holdout_frac: 0.125
 
-
-FTT_AG_pretrain_randblk_03:
+FTT_AG_identical:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -270,25 +269,15 @@ FTT_AG_pretrain_randblk_03:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         pretrainer: true
-        pretrainer.augmentation_type: "random_block"
-        pretrainer.corruption_rate: 0.3
-    holdout_frac: 0.125
-
-FTT_AG_pretrain_randblk_06:
-  extends: AutoGluon
-  version: "latest_gpu"
-  params:
-    hyperparameters:
-      FT_TRANSFORMER:
-        env.per_gpu_batch_size: 128
-        env.num_workers: 0
-        env.num_workers_evaluation: 0
-        pretrainer: true
-        pretrainer.augmentation_type: "random_block"
+        pretrainer.augmentation_type: "random_perm"
         pretrainer.corruption_rate: 0.6
+        pretrainer.loss_mixup: "contrastive"
+        pretrainer.start_loss_coefficient: 0
+        pretrainer.end_loss_coefficient: 0
+        pretrainer.pretrain_epochs: 0
     holdout_frac: 0.125
 
-FTT_AG_pretrain_randblk_09:
+FTT_AG_pretrain_recon_09:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -298,8 +287,12 @@ FTT_AG_pretrain_randblk_09:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         pretrainer: true
-        pretrainer.augmentation_type: "random_block"
-        pretrainer.corruption_rate: 0.9
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.start_loss_coefficient: 1
+        pretrainer.end_loss_coefficient: 0.05
+        pretrainer.pretrain_epochs: 3
     holdout_frac: 0.125
 
 WideDeep:
