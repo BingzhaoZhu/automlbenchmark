@@ -175,6 +175,7 @@ FTT_AG_row_attention:
   extends: AutoGluon
   version: "latest_gpu"
   params:
+    _infer_rounds: 10
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128

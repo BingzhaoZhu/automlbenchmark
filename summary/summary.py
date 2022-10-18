@@ -23,12 +23,18 @@ locations = {
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_both.ag.mytest.aws.20221018T160329/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_recon.ag.mytest.aws.20221018T173707/",
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
-            # "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            # "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
+            "FTT_row_attention": "ftt_ag_row_attention.ag.mytest.aws.20221004T040737/",
+
+            # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
+            # "FTT_row_attention_last": "ftt_ag_row_attention.ag.mytest.aws.20221001T234728/",
+            # "FTT_row_attention_alter": "ftt_ag_row_attention.ag.mytest.aws.20221002T065738/",
+            # "FTT_row_attention_cls": "ftt_ag_row_attention.ag.mytest.aws.20221003T035720/",
+
 
 }
 
@@ -38,7 +44,8 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 #           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
-
+models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
+models = ["FTT", "FTT_row_attention"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'

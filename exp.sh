@@ -25,7 +25,7 @@ cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 #python runbenchmark.py FTT_AG_pretrain_identical ag mytest -m aws -p 104 -f 0
 python runbenchmark.py FTT_AG_identical ag mytest -m aws -p 104 -f 0
 #python runbenchmark.py FTT_AG_pretrain_randperm_06 ag mytest -m aws -p 104 -f 0
-python runbenchmark.py FTT_AG_pretrain_recon_09 ag mytest -m aws -p 104 -f 0
+python runbenchmark.py FTT_AG_pretrain_recon ag mytest -m aws -p 104 -f 0
 
 #python runbenchmark.py FTT_AG_pretrain_randblk_03 ag mytest -m aws -p 104 -f 0
 #python runbenchmark.py FTT_AG_pretrain_randblk_06 ag mytest -m aws -p 104 -f 0

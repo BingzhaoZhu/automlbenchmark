@@ -53,6 +53,7 @@ def run(dataset, config):
 
     is_classification = config.type == 'classification'
     training_params = {k: v for k, v in config.framework_params.items() if not k.startswith('_')}
+    infer_rounds = config.framework_params.get('_infer_rounds', 1)
 
     train_path, test_path = dataset.train.path, dataset.test.path
     label = dataset.target.name
@@ -84,7 +85,7 @@ def run(dataset, config):
     if is_classification:
         with Timer() as predict:
             probabilities = []
-            for _ in range(10):
+            for _ in range(infer_rounds):
                 proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) #, support_data=train_data.drop(label, axis=1))
                 probabilities.append(proba_per_round)
             probabilities = pd.concat(probabilities)

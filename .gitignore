@@ -27,6 +27,7 @@ results/
 scores/
 setup/
 _site/
+summary/
 *.lock
 *.log
 *.csv
