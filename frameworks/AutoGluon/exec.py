@@ -1,3 +1,4 @@
+import copy
 import logging
 import os
 import shutil
@@ -86,6 +87,7 @@ def run(dataset, config):
         with Timer() as predict:
             probabilities = []
             for _ in range(infer_rounds):
+                test_data = TabularDataset(test_path)
                 proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) #, support_data=train_data.drop(label, axis=1))
                 probabilities.append(proba_per_round)
             probabilities = pd.concat(probabilities)
@@ -96,6 +98,7 @@ def run(dataset, config):
         with Timer() as predict:
             predictions = []
             for _ in range(infer_rounds):
+                test_data = TabularDataset(test_path)
                 pred_per_round = predictor.predict(test_data, as_pandas=False) #, support_data=train_data.drop(label, axis=1))
                 predictions.append(pred_per_round)
             predictions = np.median(predictions, axis=0)
