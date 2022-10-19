@@ -16,20 +16,20 @@ locations = {
             # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
             # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
-            # "FTT": "ftt_ag.ag.mytest.aws.20221011T031621/",
+            # "FTT": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
             # "FastFTT": "fastftt_ag.ag.mytest.aws.20221012T060457/",
             # "FTT_batchsize_32": "ftt_ag_32.ag.mytest.aws.20221011T080250/",
             # "FastFTT_batchsize_32": "fastftt_ag_32.ag.mytest.aws.20221012T181213/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_both.ag.mytest.aws.20221018T235507/",
+            # "FTT_pretrain_randperm_06": "ftt_ag_pretrain_randperm_09.ag.mytest.aws.20221018T002949/",
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
-            "FTT": "ftt_ag.ag.mytest.aws.20221003T205638/",
-            # "FTT_row_attention_1": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T160751/",
-            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T175436/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221019T185839/",
+            "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
+            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T185807/",
             # "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
@@ -47,7 +47,7 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_10"] #, "FTT_row_attention_10", "FTT_row_attention_20"]
+models = ["FTT", "FTT_row_attention_1", "FTT_row_attention_10"] #, "FTT_row_attention_10", "FTT_row_attention_20"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
