@@ -28,8 +28,8 @@ locations = {
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221019T045831/",
-            "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T072728/",
-            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T072713/",
+            "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T132954/",
+            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T150500/",
             "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
@@ -47,7 +47,7 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_1", "FTT_row_attention_10", "FTT_row_attention_20"]
+models = ["FTT", "FTT_row_attention_1", "FTT_row_attention_10"] #, "FTT_row_attention_10", "FTT_row_attention_20"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'

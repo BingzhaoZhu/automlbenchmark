@@ -29,8 +29,8 @@ python runbenchmark.py FTT_AG_pretrain_cont ag mytest -m aws -p 104 -f 0
 python runbenchmark.py FTT_AG_pretrain_recon ag mytest -m aws -p 104 -f 0
 
 
-#python runbenchmark.py FTT_AG_row_attention_1 ag mytest -m aws -p 104 -f 0
-#python runbenchmark.py FTT_AG_row_attention_10 ag mytest -m aws -p 104 -f 0
+python runbenchmark.py FTT_AG_row_attention_1 ag mytest -m aws -p 104 -f 0
+python runbenchmark.py FTT_AG_row_attention_10 ag mytest -m aws -p 104 -f 0
 #python runbenchmark.py FTT_AG_row_attention_20 ag mytest -m aws -p 104 -f 0
 
 #python runbenchmark.py HTT_AG ag mytest -m aws -p 104 -f 0
