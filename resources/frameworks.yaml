@@ -242,11 +242,11 @@ FTT_AG_pretrain_cont:
         env.num_workers_evaluation: 0
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.8
+        pretrainer.corruption_rate: 0.6
         pretrainer.loss_mixup: "contrastive"
         pretrainer.start_loss_coefficient: 1
-        pretrainer.end_loss_coefficient: 0.0
-        pretrainer.pretrain_epochs: 0
+        pretrainer.end_loss_coefficient: 0.01
+        pretrainer.pretrain_epochs: 10
     holdout_frac: 0.125
 
 FTT_AG_pretrain_recon:
@@ -260,11 +260,11 @@ FTT_AG_pretrain_recon:
         env.num_workers_evaluation: 0
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.8
+        pretrainer.corruption_rate: 0.6
         pretrainer.loss_mixup: "reconstruction"
         pretrainer.start_loss_coefficient: 1
-        pretrainer.end_loss_coefficient: 0.0
-        pretrainer.pretrain_epochs: 0
+        pretrainer.end_loss_coefficient: 0.01
+        pretrainer.pretrain_epochs: 10
     holdout_frac: 0.125
 
 FTT_AG_pretrain_both:
@@ -278,11 +278,11 @@ FTT_AG_pretrain_both:
         env.num_workers_evaluation: 0
         pretrainer: true
         pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.8
+        pretrainer.corruption_rate: 0.6
         pretrainer.loss_mixup: "both"
         pretrainer.start_loss_coefficient: 1
-        pretrainer.end_loss_coefficient: 0.0
-        pretrainer.pretrain_epochs: 0
+        pretrainer.end_loss_coefficient: 0.01
+        pretrainer.pretrain_epochs: 10
     holdout_frac: 0.125
 
 WideDeep:
