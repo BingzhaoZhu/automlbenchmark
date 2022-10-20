@@ -29,7 +29,9 @@ locations = {
 
             "FTT": "ftt_ag.ag.mytest.aws.20221019T185839/",
             "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
-            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T185807/",
+            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
+            "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221020T020220/",
+            "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T020242/",
             # "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
@@ -47,7 +49,7 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_1", "FTT_row_attention_10"] #, "FTT_row_attention_10", "FTT_row_attention_20"]
+models = ["FTT", "FTT_row_attention_gt"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -72,7 +74,7 @@ def separate(model, df, previous):
     df.rename(columns={"task": "name"}, inplace=True)
     df = stat.merge(df[df.columns], on='name', how='outer')
     group = {k: v for k, v in df.groupby('type')}
-    task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "acc"}
+    task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "logloss"}
     for task in group:
         metric = task_metric[task]
         group[task] = group[task][["name", "num_features", "num_instances", metric]]
@@ -100,7 +102,7 @@ def rank_models(models, task="binary"):
             continue
 
         for m in models:
-            perf = row[m] if task == "regression" else -row[m]
+            perf = -row[m] if task == "binary" else row[m]
             tmp.append(perf)
         tmp = (rankdata(tmp)-1).astype(int)
         for idx, rank in enumerate(tmp):
