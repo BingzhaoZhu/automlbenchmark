@@ -27,7 +27,7 @@ locations = {
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
-            "FTT": "ftt_ag.ag.mytest.aws.20221019T185839/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221020T040943/",
             # "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
             "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T171110/",
             "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221020T171052/",
@@ -71,21 +71,21 @@ def collect_performance(model):
 
 
 def separate(model, df, previous):
-    df = df[df["fold"] == 0]
     stat = pd.read_csv("./dataset_stat.csv")
     df.rename(columns={"task": "name"}, inplace=True)
     df = stat.merge(df[df.columns], on='name', how='outer')
+    # df = df.merge(stat[stat.columns], on='name', how='outer')
     group = {k: v for k, v in df.groupby('type')}
     task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "logloss"}
     for task in group:
         metric = task_metric[task]
-        group[task] = group[task][["name", "num_features", "num_instances", metric]]
+        group[task] = group[task][["name", "num_features", "num_instances", "fold", metric]]
         group[task].rename(columns={metric: model}, inplace=True)
         # group[task].fillna(-1, inplace=True)
         if task not in previous:
             previous[task] = group[task]
         else:
-            previous[task] = previous[task].merge(group[task][['name', model]], on='name', how='outer')
+            previous[task] = previous[task].merge(group[task][['name', 'fold', model]], on=['name', 'fold'], how='outer')
     return previous
 
 
