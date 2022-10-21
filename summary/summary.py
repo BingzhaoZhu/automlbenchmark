@@ -27,11 +27,11 @@ locations = {
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
-            "FTT": "ftt_ag.ag.mytest.aws.20221020T040943/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
             # "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
-            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T171110/",
-            "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221020T171052/",
-            "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T171101/",
+            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T234919/",
+            "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221020T234957/",
+            "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
             # "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
@@ -49,7 +49,7 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_10"]
+models = ["FTT", "FTT_row_attention_10_gt"]
 # models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
 
 s3_client = boto3.client('s3')
@@ -71,6 +71,7 @@ def collect_performance(model):
 
 
 def separate(model, df, previous):
+    # df = df[df["fold"]==0]
     stat = pd.read_csv("./dataset_stat.csv")
     df.rename(columns={"task": "name"}, inplace=True)
     df = stat.merge(df[df.columns], on='name', how='outer')
