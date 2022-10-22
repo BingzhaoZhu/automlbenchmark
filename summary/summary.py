@@ -23,7 +23,7 @@ locations = {
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
             # "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T020151/",
+            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
@@ -49,7 +49,7 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_10", "FTT_pretrain_randperm_06"]
+models = ["FTT", "FTT_row_attention_10"]
 # models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
 
 s3_client = boto3.client('s3')
@@ -94,6 +94,7 @@ def rank_models(models, task="binary"):
     n = len(models)
     ranker = np.zeros((n, n))
     summary = pd.read_csv("./" + task + ".csv")
+    data_stat = pd.read_csv("./dataset_stat.csv")
     summary = summary[["name", "num_features", "num_instances"]+models]
     for _, row in summary.iterrows():
         tmp = []
@@ -101,7 +102,7 @@ def rank_models(models, task="binary"):
         if row.isna().any():
             continue
 
-        if row["num_instances"] < 0:
+        if data_stat.loc[data_stat['name'] == row["name"]].iloc[0]["num_instances"] < 0:
             continue
 
         for m in models:
@@ -120,14 +121,14 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
