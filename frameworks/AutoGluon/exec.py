@@ -79,14 +79,20 @@ def run(dataset, config):
         )
 
     test_data = TabularDataset(test_path)
+    train_data = TabularDataset(train_path)
     # Persist model in memory that is going to be predicting to get correct inference latency
     predictor.persist_models('best')
 
     if is_classification:
         with Timer() as predict:
             probabilities = []
-            for _ in range(infer_rounds):
-                proba_per_round = predictor.predict_proba(test_data, as_multiclass=True) #, support_data=train_data.drop(label, axis=1))
+            for _ in range(abs(infer_rounds)):
+                if infer_rounds > 0:
+                    proba_per_round = predictor.predict_proba(test_data, as_multiclass=True)
+                else:
+                    proba_per_round = predictor.predict_proba(test_data,
+                                                              as_multiclass=True,
+                                                              support_data=train_data.drop(label, axis=1))
                 probabilities.append(proba_per_round)
             probabilities = pd.concat(probabilities)
             probabilities = probabilities.groupby(probabilities.index).median()
@@ -95,8 +101,13 @@ def run(dataset, config):
     else:
         with Timer() as predict:
             predictions = []
-            for _ in range(infer_rounds):
-                pred_per_round = predictor.predict(test_data, as_pandas=False) #, support_data=train_data.drop(label, axis=1))
+            for _ in range(abs(infer_rounds)):
+                if infer_rounds > 0:
+                    pred_per_round = predictor.predict(test_data, as_pandas=False)
+                else:
+                    pred_per_round = predictor.predict(test_data,
+                                                       as_pandas=False,
+                                                       support_data=train_data.drop(label, axis=1))
                 predictions.append(pred_per_round)
             predictions = np.median(predictions, axis=0)
         probabilities = None

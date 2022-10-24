@@ -22,15 +22,19 @@ locations = {
             # "FastFTT_batchsize_32": "fastftt_ag_32.ag.mytest.aws.20221012T181213/",
             # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
 
-            # "FTT_pretrain_identical": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            "FTT_pretrain_randperm_06": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
+            # "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
+            # "FTT_pretrain_pretrain_fine": "ftt_ag_pretrain_cont.ag.mytest.aws.20221021T050134/",
+            # "FTT_pretrain_softpretrain_end0": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T020151/",
+            # "FTT_pretrain_softpretrain_end01": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
+            # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
+
 
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
             # "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
             "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
-            # "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221020T234957/",
+            "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T023821/",
             # "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
             # "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
 
@@ -49,8 +53,10 @@ models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_r
 models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_10"]
+models = ["FTT", "FTT_row_attention_10", "FTT_row_attention_10_gt"]
 # models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
+# models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
+# models = ["FTT", "FTT_pretrain_mix_loss"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -99,11 +105,14 @@ def rank_models(models, task="binary"):
     for _, row in summary.iterrows():
         tmp = []
 
-        if row.isna().any():
+        if row[models].isna().any():
             continue
 
-        if data_stat.loc[data_stat['name'] == row["name"]].iloc[0]["num_instances"] < 0:
-            continue
+        try:
+            if data_stat.loc[data_stat['name'] == row["name"]].iloc[0]["num_instances"] < 0:
+                continue
+        except:
+            pass
 
         for m in models:
             perf = -row[m] if task == "binary" else row[m]
@@ -121,14 +130,14 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    # summary = {}
-    # for model in locations:
-    #     print(f"collecting results for {model}...")
-    #     model_performance = collect_performance(model)
-    #     summary = separate(model, model_performance, summary)
-    #
-    # for task in summary:
-    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    summary = {}
+    for model in locations:
+        print(f"collecting results for {model}...")
+        model_performance = collect_performance(model)
+        summary = separate(model, model_performance, summary)
+
+    for task in summary:
+        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
