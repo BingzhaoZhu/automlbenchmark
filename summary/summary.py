@@ -8,13 +8,13 @@ locations = {
             # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
             # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
             # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
-            # # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
-            # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
-            # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
-            # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
-            # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+            "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
+            # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
+            "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
+            "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
+            "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
+            "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
+            "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
 
             # "FTT": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
             # "FastFTT": "fastftt_ag.ag.mytest.aws.20221012T060457/",
@@ -32,11 +32,11 @@ locations = {
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
-            # "FTT_row_attention_1": "ftt_ag_row_attention_1.ag.mytest.aws.20221019T204328/",
-            "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
+            "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
+            # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
             "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T023821/",
             # "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
-            # "FTT_row_attention_20": "ftt_ag_row_attention_20.ag.mytest.aws.20221019T075534/",
+            "FTT_row_attention_20_gt": "ftt_ag_row_attention_-1_gt.ag.mytest.aws.20221024T074900/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
             # "FTT_row_attention_last": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
@@ -46,14 +46,14 @@ locations = {
 
 }
 
-models = ['FASTAI', 'NN', 'FTT', 'FastFTT', 'FTT_row_attention', "FTT_pretrain_randperm_03", "CAT", "LGBM", "RF", "XGB"]
+models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
 # models = ["FTT", "FTT_pretrain_identical",
 #           "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
 #           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
-models = ["FTT", "FTT_pretrain_randperm_06"]
+# models = ["FTT", "FTT_pretrain_randperm_06"]
 # models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
 # models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_10", "FTT_row_attention_10_gt"]
+# models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_attention_20_gt"]
 # models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
 # models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
 # models = ["FTT", "FTT_pretrain_mix_loss"]
@@ -130,14 +130,14 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
