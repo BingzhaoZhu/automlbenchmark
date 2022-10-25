@@ -32,18 +32,17 @@ locations = {
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
-            "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
-            # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
-            "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T174142/",
-            # "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
-            "FTT_row_attention_20_gt": "ftt_ag_row_attention_-1_gt.ag.mytest.aws.20221024T074900/",
+            "FTT_nodecay": "ftt_ag.ag.mytest.aws.20221024T200551/",
+            # "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
+            # # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
+            # "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T174142/",
+            # # "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
+            # "FTT_row_attention_20_gt": "ftt_ag_row_attention_-1_gt.ag.mytest.aws.20221024T074900/",
 
             # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
             # "FTT_row_attention_last": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
             # "FTT_row_attention_alter": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T043406/",
             # "FTT_row_attention_cls": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
-
-
 }
 
 # models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
@@ -56,11 +55,10 @@ locations = {
 models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_attention_20_gt"]
 # models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
 # models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
-# models = ["FTT", "FTT_row_attention_20_gt"]
+models = ["FTT", "FTT_nodecay"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
-
 
 def collect_performance(model):
     df = []
