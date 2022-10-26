@@ -32,7 +32,7 @@ locations = {
             # "FTT_selfdistill_randperm_06": "ftt_ag_pretrain_randperm_06.ag.mytest.aws.20221013T023612/",
 
             "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
-            "FTT_nodecay": "ftt_ag_pretrain_cont.ag.mytest.aws.20221025T185628/",
+            "FTT_nodecay": "ftt_ag_pretrain_cont.ag.mytest.aws.20221025T202334/",
             # "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
             # # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
             # "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T174142/",
