@@ -28,60 +28,64 @@ AutoGluon:
 #  params:
 #    _save_artifacts: ['leaderboard', 'models', 'info']
 
+Defaults: &defaults
+  NN_TORCH: {}
+  GBM:
+    - extra_trees: true
+      ag_args:
+        name_suffix: 'XT'
+    - {}
+    - 'GBMLarge'
+  CAT: {}
+  XGB: {}
+  FASTAI: {}
+  RF:
+    - 'criterion': 'gini'
+      'ag_args':
+        'name_suffix': 'Gini'
+        'problem_types': ['binary', 'multiclass']
+    - 'criterion': 'entropy'
+      'ag_args':
+        'name_suffix': 'Entr'
+        'problem_types': [ 'binary', 'multiclass' ]
+    - 'criterion': 'squared_error'
+      'ag_args':
+        'name_suffix': 'MSE'
+        'problem_types': [ 'regression', 'quantile' ]
+  XT:
+    - 'criterion': 'gini'
+      'ag_args':
+        'name_suffix': 'Gini'
+        'problem_types': ['binary', 'multiclass']
+    - 'criterion': 'entropy'
+      'ag_args':
+        'name_suffix': 'Entr'
+        'problem_types': [ 'binary', 'multiclass' ]
+    - 'criterion': 'squared_error'
+      'ag_args':
+        'name_suffix': 'MSE'
+        'problem_types': [ 'regression', 'quantile' ]
+  KNN:
+    - 'weights': 'uniform'
+      'ag_args':
+        'name_suffix': 'Unif'
+    - 'weights': 'distance'
+      'ag_args':
+        'name_suffix': 'Dist'
+
 Ensemble_AG:
   extends: AutoGluon
   params:
     hyperparameters:
-      NN_TORCH: {}
-      GBM:
-        - extra_trees: true
-          ag_args:
-            name_suffix: 'XT'
-        - {}
-        - 'GBMLarge'
-      CAT: {}
-      XGB: {}
-      FASTAI: {}
-      RF:
-        - 'criterion': 'gini'
-          'ag_args':
-            'name_suffix': 'Gini'
-            'problem_types': ['binary', 'multiclass']
-        - 'criterion': 'entropy'
-          'ag_args':
-            'name_suffix': 'Entr'
-            'problem_types': [ 'binary', 'multiclass' ]
-        - 'criterion': 'squared_error'
-          'ag_args':
-            'name_suffix': 'MSE'
-            'problem_types': [ 'regression', 'quantile' ]
-      XT:
-        - 'criterion': 'gini'
-          'ag_args':
-            'name_suffix': 'Gini'
-            'problem_types': ['binary', 'multiclass']
-        - 'criterion': 'entropy'
-          'ag_args':
-            'name_suffix': 'Entr'
-            'problem_types': [ 'binary', 'multiclass' ]
-        - 'criterion': 'squared_error'
-          'ag_args':
-            'name_suffix': 'MSE'
-            'problem_types': [ 'regression', 'quantile' ]
-      KNN:
-        - 'weights': 'uniform'
-          'ag_args':
-            'name_suffix': 'Unif'
-        - 'weights': 'distance'
-          'ag_args':
-            'name_suffix': 'Dist'
+      <<: *defaults
     holdout_frac: 0.125
 
 Ensemble_AG_FTT:
-  extends: Ensemble_AG
+  extends: AutoGluon
   version: "latest_gpu"
   params:
     hyperparameters:
+      <<: *defaults
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
@@ -89,10 +93,11 @@ Ensemble_AG_FTT:
     holdout_frac: 0.125
 
 Ensemble_AG_FTT_rowatt:
-  extends: Ensemble_AG
+  extends: AutoGluon
   version: "latest_gpu"
   params:
     hyperparameters:
+      <<: *defaults
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.eval_batch_size_ratio: 1
@@ -103,10 +108,11 @@ Ensemble_AG_FTT_rowatt:
     holdout_frac: 0.125
 
 Ensemble_AG_FTT_pretrain:
-  extends: Ensemble_AG
+  extends: AutoGluon
   version: "latest_gpu"
   params:
     hyperparameters:
+      <<: *defaults
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
@@ -121,10 +127,11 @@ Ensemble_AG_FTT_pretrain:
     holdout_frac: 0.125
 
 Ensemble_AG_FTT_all:
-  extends: Ensemble_AG
+  extends: AutoGluon
   version: "latest_gpu"
   params:
     hyperparameters:
+      <<: *defaults
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
