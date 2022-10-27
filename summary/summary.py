@@ -29,7 +29,7 @@ locations = {
             # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
 
 
-            "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T021141/",
+            "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
             "FTT_recon": "ftt_ag_pretrain_recon.ag.mytest.aws.20221026T004154/",
             "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221027T035048/",
