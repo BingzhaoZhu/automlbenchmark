@@ -36,7 +36,7 @@ Ensemble_AG:
       GBM:
         - extra_trees: true
           ag_args:
-            - name_suffix: 'XT'
+            name_suffix: 'XT'
         - {}
         - 'GBMLarge'
       CAT: {}
