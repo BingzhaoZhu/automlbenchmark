@@ -29,11 +29,11 @@ locations = {
             # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
 
 
-            "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221026T152057/",
-            "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221026T152018/",
+            "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T021141/",
+            "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
             "FTT_recon": "ftt_ag_pretrain_recon.ag.mytest.aws.20221026T004154/",
-            "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221026T152126/",
-            "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
+            "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221027T035048/",
+            "FTT": "ftt_ag.ag.mytest.aws.20221025T020434/",
             # "FTT_nodecay": "ftt_ag_pretrain_dist.ag.mytest.aws.20221026T004113/",
             # "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
             # # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
@@ -111,7 +111,7 @@ def rank_models(models, task="binary"):
             continue
 
         try:
-            if data_stat.loc[data_stat['name'] == row["name"]].iloc[0]["num_instances"] > 50000:
+            if data_stat.loc[data_stat['name'] == row["name"]].iloc[0]["num_instances"] < 0:
                 continue
         except:
             pass
@@ -132,14 +132,14 @@ def rank_models(models, task="binary"):
 
 
 if __name__ == "__main__":
-    # summary = {}
-    # for model in locations:
-    #     print(f"collecting results for {model}...")
-    #     model_performance = collect_performance(model)
-    #     summary = separate(model, model_performance, summary)
-    #
-    # for task in summary:
-    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    summary = {}
+    for model in locations:
+        print(f"collecting results for {model}...")
+        model_performance = collect_performance(model)
+        summary = separate(model, model_performance, summary)
+
+    for task in summary:
+        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
