@@ -77,6 +77,69 @@ Ensemble_AG:
             'name_suffix': 'Dist'
     holdout_frac: 0.125
 
+Ensemble_AG_FTT:
+  extends: Ensemble_AG
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    holdout_frac: 0.125
+
+Ensemble_AG_FTT_rowatt:
+  extends: Ensemble_AG
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
+Ensemble_AG_FTT_pretrain:
+  extends: Ensemble_AG
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.start_loss_coefficient: 1
+        pretrainer.end_loss_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    holdout_frac: 0.125
+
+Ensemble_AG_FTT_all:
+  extends: Ensemble_AG
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "random_perm"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.start_loss_coefficient: 1
+        pretrainer.end_loss_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
 RF_AG:
   extends: AutoGluon
   params:
