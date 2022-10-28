@@ -28,12 +28,16 @@ locations = {
             # "FTT_pretrain_softpretrain_end01": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
             # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
 
+            "ensemble": "ensemble_ag.ag.mytest4h.aws.20221027T233620/",
+            "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
+            "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
+            "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
 
-            "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
-            "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
-            "FTT_recon": "ftt_ag_pretrain_recon.ag.mytest.aws.20221026T004154/",
-            "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221027T035048/",
-            "FTT": "ftt_ag.ag.mytest.aws.20221025T020434/",
+            # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
+            # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
+            # "FTT_recon": "ftt_ag_pretrain_recon.ag.mytest.aws.20221026T004154/",
+            # "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221027T035048/",
+            # "FTT": "ftt_ag.ag.mytest.aws.20221025T020434/",
             # "FTT_nodecay": "ftt_ag_pretrain_dist.ag.mytest.aws.20221026T004113/",
             # "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
             # # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
@@ -59,6 +63,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 # models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
+models = ["ensemble", "ensemble_FTT", "ensemble_FTT_row", "ensemble_FTT_pretrain"]
 
 
 s3_client = boto3.client('s3')
@@ -88,13 +93,13 @@ def separate(model, df, previous):
     task_metric = {"regression": "rmse", "binary": "auc", "multiclass": "logloss"}
     for task in group:
         metric = task_metric[task]
-        group[task] = group[task][["name", "num_features", "num_instances", "fold", metric]]
-        group[task].rename(columns={metric: model}, inplace=True)
+        group[task] = group[task][["name", "num_features", "num_instances", "fold", metric, "training_duration", "predict_duration"]]
+        group[task].rename(columns={metric: model, "training_duration": model+"_train_time", "predict_duration": model+"_test_time"}, inplace=True)
         # group[task].fillna(-1, inplace=True)
         if task not in previous:
             previous[task] = group[task]
         else:
-            previous[task] = previous[task].merge(group[task][['name', 'fold', model]], on=['name', 'fold'], how='outer')
+            previous[task] = previous[task].merge(group[task][['name', 'fold', model, model+"_train_time", model+"_test_time"]], on=['name', 'fold'], how='outer')
     return previous
 
 

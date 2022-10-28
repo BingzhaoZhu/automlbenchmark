@@ -133,18 +133,27 @@ Ensemble_AG_FTT_all:
     hyperparameters:
       <<: *defaults
       FT_TRANSFORMER:
-        env.per_gpu_batch_size: 128
-        env.num_workers: 0
-        env.num_workers_evaluation: 0
-        pretrainer: true
-        pretrainer.augmentation_type: "random_perm"
-        pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "reconstruction"
-        pretrainer.start_loss_coefficient: 1
-        pretrainer.end_loss_coefficient: 0.03
-        pretrainer.pretrain_epochs: 5
-        model.fusion_transformer.row_attention: True
-        model.fusion_transformer.global_token: True
+        - env.per_gpu_batch_size: 128
+          env.num_workers: 0
+          env.num_workers_evaluation: 0
+
+        - env.per_gpu_batch_size: 128
+          env.eval_batch_size_ratio: 1
+          env.num_workers: 0
+          env.num_workers_evaluation: 0
+          model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+          
+        - env.per_gpu_batch_size: 128
+          env.num_workers: 0
+          env.num_workers_evaluation: 0
+          pretrainer: true
+          pretrainer.augmentation_type: "random_perm"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.loss_mixup: "reconstruction"
+          pretrainer.start_loss_coefficient: 1
+          pretrainer.end_loss_coefficient: 0.03
+          pretrainer.pretrain_epochs: 5
     holdout_frac: 0.125
 
 RF_AG:
