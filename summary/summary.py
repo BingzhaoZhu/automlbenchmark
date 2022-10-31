@@ -30,6 +30,7 @@ locations = {
 
             "ensemble": "ensemble_ag.ag.mytest4h.aws.20221027T233620/",
             "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
+            "ensemble_FastFTT": "ensemble_ag_fastftt.ag.mytest4h.aws.20221031T044235/",
             "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
             "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
             "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221028T200949/",
@@ -64,7 +65,8 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 # models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
-models = ["ensemble", "ensemble_FTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
+models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
+models = ["ensemble", "ensemble_FTT"]
 
 
 s3_client = boto3.client('s3')
@@ -137,20 +139,58 @@ def rank_models(models, task="binary"):
     return ranker
 
 
-if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
+def model_speed(models, tasks, normalize_on=0):
+    train_time, test_time = [], []
+    for task in tasks:
+        summary = pd.read_csv("./" + task + ".csv")
+        for _, row in summary.iterrows():
+            tmp_train, tmp_test = [], []
 
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+            # models_ = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain",
+            #           "ensemble_ag_ftt_all"]
+            if row[models].isna().any():
+                continue
+
+            div_train, div_test = 1, 1
+            for idx, m in enumerate(models):
+                model_train_time = m + "_train_time"
+                model_test_time = m + "_test_time"
+                if idx == normalize_on:
+                    div_train = row[model_train_time]
+                    div_test = row[model_test_time]
+                tmp_train.append(row[model_train_time])
+                tmp_test.append(row[model_test_time])
+
+            train_time.append([i / div_train for i in tmp_train])
+            test_time.append([i / div_test for i in tmp_test])
+
+    train_time = np.array(train_time)
+    average_train_time = np.mean(train_time, axis=0)
+    print("train time: ", average_train_time)
+
+    test_time = np.array(test_time)
+    average_test_time = np.mean(test_time, axis=0)
+    print("test time: ", average_test_time)
+    return average_train_time, average_test_time
+
+if __name__ == "__main__":
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
     print("binary:", rank_models(models, "binary"))
     print("multiclass:", rank_models(models, "multiclass"))
+
+    model_speed(models, tasks=("regression", "binary", "multiclass"))
+
+
 
 
 
