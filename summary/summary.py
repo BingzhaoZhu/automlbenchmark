@@ -32,6 +32,7 @@ locations = {
             "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
             "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
             "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
+            "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221028T200949/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
@@ -63,7 +64,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 # models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
-models = ["ensemble", "ensemble_FTT", "ensemble_FTT_row", "ensemble_FTT_pretrain"]
+models = ["ensemble", "ensemble_FTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 
 
 s3_client = boto3.client('s3')

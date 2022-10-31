@@ -143,7 +143,7 @@ Ensemble_AG_FTT_all:
           env.num_workers_evaluation: 0
           model.fusion_transformer.row_attention: True
           model.fusion_transformer.global_token: True
-          
+
         - env.per_gpu_batch_size: 128
           env.num_workers: 0
           env.num_workers_evaluation: 0
