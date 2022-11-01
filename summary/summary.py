@@ -33,7 +33,7 @@ locations = {
             "ensemble_FastFTT": "ensemble_ag_fastftt.ag.mytest4h.aws.20221031T044235/",
             "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
             "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
-            "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221028T200949/",
+            "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
@@ -66,7 +66,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
-models = ["ensemble", "ensemble_FTT"]
+models = ["ensemble", "ensemble_ag_ftt_all"]
 
 
 s3_client = boto3.client('s3')
@@ -108,7 +108,8 @@ def separate(model, df, previous):
 
 def rank_models(models, task="binary"):
     n = len(models)
-    ranker = np.zeros((n, n))
+    ranker = np.zeros(n)
+    num_tasks = 0
     summary = pd.read_csv("./" + task + ".csv")
     data_stat = pd.read_csv("./dataset_stat.csv")
     summary = summary[["name", "num_features", "num_instances"]+models]
@@ -127,16 +128,15 @@ def rank_models(models, task="binary"):
         for m in models:
             perf = -row[m] if task == "binary" else row[m]
             tmp.append(perf)
-        tmp = (rankdata(tmp)-1).astype(int)
+        tmp = (rankdata(tmp, method='average'))
+        if tmp[0] == tmp[1]:
+            continue
+        num_tasks += 1
         for idx, rank in enumerate(tmp):
-            ranker[idx, rank] += 1
+            ranker[idx] += rank
 
-    num_tasks = np.sum(ranker)/n
-    average_rank = ranker * np.arange(n)[None, :]
-    average_rank = np.sum(average_rank, axis=1)/num_tasks + 1
-    print(average_rank)
-
-    return ranker
+    print("numer of tasks:", num_tasks)
+    return ranker/num_tasks
 
 
 def model_speed(models, tasks, normalize_on=0):
