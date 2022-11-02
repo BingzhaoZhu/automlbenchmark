@@ -78,7 +78,7 @@ Ensemble_AG:
   params:
     hyperparameters:
       <<: *defaults
-    holdout_frac: 0.125
+    presets: best_quality
 
 Ensemble_AG_FTT:
   extends: AutoGluon
@@ -90,7 +90,7 @@ Ensemble_AG_FTT:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
         env.num_workers_evaluation: 0
-    holdout_frac: 0.125
+    presets: best_quality
 
 Ensemble_AG_FastFTT:
   extends: AutoGluon
@@ -102,7 +102,7 @@ Ensemble_AG_FastFTT:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
         env.num_workers_evaluation: 0
-    holdout_frac: 0.125
+    presets: best_quality
 
 Ensemble_AG_FTT_rowatt:
   extends: AutoGluon
