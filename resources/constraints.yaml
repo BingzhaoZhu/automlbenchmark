@@ -13,7 +13,7 @@ mytest1h:
   min_vol_size_mb: 100000
 
 mytest4h:
-  folds: 5
+  folds: 10
   max_runtime_seconds: 14400
   cores: 8
   min_vol_size_mb: 100000
