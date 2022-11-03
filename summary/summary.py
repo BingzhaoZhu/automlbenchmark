@@ -28,12 +28,18 @@ locations = {
             # "FTT_pretrain_softpretrain_end01": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
             # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
 
-            "ensemble": "ensemble_ag.ag.mytest4h.aws.20221027T233620/",
-            "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
-            "ensemble_FastFTT": "ensemble_ag_fastftt.ag.mytest4h.aws.20221031T044235/",
-            "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
-            "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
-            "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
+            # "ensemble": "ensemble_ag.ag.mytest4h.aws.20221027T233620/",
+            # "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
+            # "ensemble_FastFTT": "ensemble_ag_fastftt.ag.mytest4h.aws.20221031T044235/",
+            # "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
+            # "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
+            # "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
+
+            "ensemble_mq": "ensemble_ag_mq.ag.mytest4h.aws.20221103T051808/",
+            "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
+            "ensemble_FTT_pretrain_bq": "ensemble_ag_ftt_pretrain_bq.ag.mytest4h.aws.20221103T051502/",
+            "ensemble_ag_ftt_all_mq": "ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221102T230900/",
+            "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest4h.aws.20221103T051524/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
@@ -66,7 +72,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
-models = ["ensemble", "ensemble_ag_ftt_all"]
+models = ["ensemble_mq", "ensemble_ag_ftt_all_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
 
 
 s3_client = boto3.client('s3')

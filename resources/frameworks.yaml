@@ -174,20 +174,20 @@ Ensemble_AG_FTT_all_bq:
         - env.per_gpu_batch_size: 128
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.8
+          pretrainer.corruption_rate: 0.6
           pretrainer.loss_mixup: "reconstruction"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
           pretrainer.pretrain_epochs: 5
 
-        - env.per_gpu_batch_size: 128
-          pretrainer: true
-          pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.8
-          pretrainer.loss_mixup: "self_distill"
-          pretrainer.start_pretrain_coefficient: 1
-          pretrainer.end_pretrain_coefficient: 0.03
-          pretrainer.pretrain_epochs: 5
+#        - env.per_gpu_batch_size: 128
+#          pretrainer: true
+#          pretrainer.augmentation_type: "permutation"
+#          pretrainer.corruption_rate: 0.6
+#          pretrainer.loss_mixup: "self_distill"
+#          pretrainer.start_pretrain_coefficient: 1
+#          pretrainer.end_pretrain_coefficient: 0.03
+#          pretrainer.pretrain_epochs: 5
     presets: best_quality
 
 Ensemble_AG_FTT_all_mq:
@@ -205,20 +205,20 @@ Ensemble_AG_FTT_all_mq:
         - env.per_gpu_batch_size: 128
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.8
+          pretrainer.corruption_rate: 0.6
           pretrainer.loss_mixup: "reconstruction"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
           pretrainer.pretrain_epochs: 5
 
-        - env.per_gpu_batch_size: 128
-          pretrainer: true
-          pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.8
-          pretrainer.loss_mixup: "self_distill"
-          pretrainer.start_pretrain_coefficient: 1
-          pretrainer.end_pretrain_coefficient: 0.03
-          pretrainer.pretrain_epochs: 5
+#        - env.per_gpu_batch_size: 128
+#          pretrainer: true
+#          pretrainer.augmentation_type: "permutation"
+#          pretrainer.corruption_rate: 0.6
+#          pretrainer.loss_mixup: "self_distill"
+#          pretrainer.start_pretrain_coefficient: 1
+#          pretrainer.end_pretrain_coefficient: 0.03
+#          pretrainer.pretrain_epochs: 5
 
 RF_AG:
   extends: AutoGluon
