@@ -38,7 +38,7 @@ locations = {
             "ensemble_mq": "ensemble_ag_mq.ag.mytest4h.aws.20221103T051808/",
             # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
             # "ensemble_FTT_pretrain_bq": "ensemble_ag_ftt_pretrain_bq.ag.mytest4h.aws.20221103T051502/",
-            "ensemble_ag_ftt_all_mq": "ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221103T160927/",
+            "ensemble_ag_ftt_all_mq": "ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T022824/",
             # "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest4h.aws.20221103T051524/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
