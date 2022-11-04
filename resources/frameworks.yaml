@@ -137,7 +137,7 @@ Ensemble_AG_FTT_pretrain_bq:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.8
-        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.objective: "reconstruction"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
@@ -154,7 +154,7 @@ Ensemble_AG_FTT_pretrain_mq:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.8
-        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.objective: "reconstruction"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
@@ -175,7 +175,7 @@ Ensemble_AG_FTT_all_bq:
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
           pretrainer.corruption_rate: 0.6
-          pretrainer.loss_mixup: "reconstruction"
+          pretrainer.objective: "reconstruction"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
           pretrainer.pretrain_epochs: 5
@@ -184,7 +184,7 @@ Ensemble_AG_FTT_all_bq:
 #          pretrainer: true
 #          pretrainer.augmentation_type: "permutation"
 #          pretrainer.corruption_rate: 0.6
-#          pretrainer.loss_mixup: "self_distill"
+#          pretrainer.objective: "self_distill"
 #          pretrainer.start_pretrain_coefficient: 1
 #          pretrainer.end_pretrain_coefficient: 0.03
 #          pretrainer.pretrain_epochs: 5
@@ -201,12 +201,13 @@ Ensemble_AG_FTT_all_mq:
 
         - env.per_gpu_batch_size: 128
           model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
 
         - env.per_gpu_batch_size: 128
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
           pretrainer.corruption_rate: 0.6
-          pretrainer.loss_mixup: "reconstruction"
+          pretrainer.objective: "reconstruction"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
           pretrainer.pretrain_epochs: 5
@@ -215,7 +216,7 @@ Ensemble_AG_FTT_all_mq:
 #          pretrainer: true
 #          pretrainer.augmentation_type: "permutation"
 #          pretrainer.corruption_rate: 0.6
-#          pretrainer.loss_mixup: "self_distill"
+#          pretrainer.objective: "self_distill"
 #          pretrainer.start_pretrain_coefficient: 1
 #          pretrainer.end_pretrain_coefficient: 0.03
 #          pretrainer.pretrain_epochs: 5
@@ -463,7 +464,7 @@ FTT_AG_identical:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "contrastive"
+        pretrainer.objective: "contrastive"
         pretrainer.start_pretrain_coefficient: 0
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
@@ -481,7 +482,7 @@ FTT_AG_pretrain_cont:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "contrastive"
+        pretrainer.objective: "contrastive"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
@@ -499,7 +500,7 @@ FTT_AG_pretrain_recon:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "reconstruction"
+        pretrainer.objective: "reconstruction"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
@@ -517,7 +518,7 @@ FTT_AG_pretrain_both:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "both"
+        pretrainer.objective: "both"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
@@ -535,7 +536,7 @@ FTT_AG_pretrain_dist:
         pretrainer: true
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
-        pretrainer.loss_mixup: "self_distill"
+        pretrainer.objective: "self_distill"
         pretrainer.start_pretrain_coefficient: 1
         pretrainer.end_pretrain_coefficient: 0.03
         pretrainer.pretrain_epochs: 5
