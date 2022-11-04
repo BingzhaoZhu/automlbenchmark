@@ -219,16 +219,6 @@ Ensemble_AG_FTT_all_mq:
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
           pretrainer.corruption_rate: 0.6
-          pretrainer.objective: "contrastive"
-          pretrainer.start_pretrain_coefficient: 1
-          pretrainer.end_pretrain_coefficient: 0.03
-          pretrainer.decay_pretrain_coefficient: 0.6
-          pretrainer.pretrain_epochs: 5
-
-        - env.per_gpu_batch_size: 128
-          pretrainer: true
-          pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.6
           pretrainer.objective: "self_distill"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
