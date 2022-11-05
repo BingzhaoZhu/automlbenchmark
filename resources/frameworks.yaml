@@ -170,24 +170,32 @@ Ensemble_AG_FTT_all_bq:
 
         - env.per_gpu_batch_size: 128
           model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+          model.fusion_transformer.row_attention_layer: "last"
+          optimization.row_attention_weight_decay: 0.1
+          env.test_ensemble_rounds: 10
 
         - env.per_gpu_batch_size: 128
           pretrainer: true
           pretrainer.augmentation_type: "permutation"
-          pretrainer.corruption_rate: 0.8
+          pretrainer.corruption_rate: 0.6
           pretrainer.objective: "reconstruction"
           pretrainer.start_pretrain_coefficient: 1
           pretrainer.end_pretrain_coefficient: 0.03
           pretrainer.pretrain_epochs: 5
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
 
-#        - env.per_gpu_batch_size: 128
-#          pretrainer: true
-#          pretrainer.augmentation_type: "permutation"
-#          pretrainer.corruption_rate: 0.6
-#          pretrainer.objective: "self_distill"
-#          pretrainer.start_pretrain_coefficient: 1
-#          pretrainer.end_pretrain_coefficient: 0.03
-#          pretrainer.pretrain_epochs: 5
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "self_distill"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.pretrain_epochs: 5
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
     presets: best_quality
 
 Ensemble_AG_FTT_all_mq:

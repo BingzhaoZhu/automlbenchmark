@@ -18,6 +18,12 @@ mytest4h:
   cores: 8
   min_vol_size_mb: 100000
 
+mytest24h:
+  folds: 10
+  max_runtime_seconds: 86400
+  cores: 8
+  min_vol_size_mb: 100000
+
 1h4c:
   folds: 10
   max_runtime_seconds: 3600
