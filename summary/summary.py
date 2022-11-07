@@ -35,10 +35,10 @@ locations = {
             # "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
             # "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
 
-            "ensemble_mq": "ensemble_ag_mq.ag.mytest4h.aws.20221103T051808/",
+            "ensemble_bq": "ensemble_ag_bq.ag.mytest24h.aws.20221105T052819/",
             # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
             # "ensemble_FTT_pretrain_bq": "ensemble_ag_ftt_pretrain_bq.ag.mytest4h.aws.20221103T051502/",
-            "ensemble_ag_ftt_all_mq": "ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221102T230900/", #"ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T174422/",
+            "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest24h.aws.20221105T061959/", #"ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T174422/",
             # "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest4h.aws.20221103T051524/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
@@ -72,7 +72,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
-models = ["ensemble_mq", "ensemble_ag_ftt_all_mq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
+models = ["ensemble_bq", "ensemble_ag_ftt_all_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
 
 
 s3_client = boto3.client('s3')

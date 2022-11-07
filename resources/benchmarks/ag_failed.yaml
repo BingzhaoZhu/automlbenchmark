@@ -1,0 +1,126 @@
+---
+# Combines openml/s/269 and openml/s/271
+# Locally stored instead of fetched from openml to avoid server errors
+
+- name: abalone
+  openml_task_id: 359944
+
+- name: churn
+  openml_task_id: 359968
+
+- name: Moneyball
+  openml_task_id: 167210
+
+- name: cmc
+  openml_task_id: 359959
+
+- name: OnlineNewsPopularity
+  openml_task_id: 359941
+
+- name: GesturePhaseSegmentationProcessed
+  openml_task_id: 359970
+
+- name: dna
+  openml_task_id: 359964
+
+- name: MIP-2016-regression
+  openml_task_id: 359947
+
+- name: Mercedes_Benz_Greener_Manufacturing
+  openml_task_id: 233215
+
+- name: house_sales
+  openml_task_id: 359949
+
+- name: Satellite
+  openml_task_id: 359975
+
+- name: bank-marketing
+  openml_task_id: 359982
+
+- name: christine
+  openml_task_id: 359973
+
+- name: PhishingWebsites
+  openml_task_id: 359971
+
+- name: ada
+  openml_task_id: 190411
+
+- name: elevators
+  openml_task_id: 359936
+
+- name: Buzzinsocialmedia_Twitter
+  openml_task_id: 233213
+
+- name: kr-vs-kp
+  openml_task_id: 359965
+
+- name: covertype
+  openml_task_id: 7593
+
+- name: black_friday
+  openml_task_id: 359937
+
+- name: madeline
+  openml_task_id: 190392
+
+- name: robert
+  openml_task_id: 359986
+
+- name: KDDCup09_appetency
+  openml_task_id: 3945
+
+- name: kick
+  openml_task_id: 359991
+
+- name: MiniBooNE
+  openml_task_id: 359990
+
+- name: phoneme
+  openml_task_id: 168350
+
+- name: segment
+  openml_task_id: 359963
+
+- name: ozone-level-8hr
+  openml_task_id: 190137
+
+- name: numerai28.6
+  openml_task_id: 167120
+
+- name: pc4
+  openml_task_id: 359958
+
+- name: us_crime
+  openml_task_id: 359945
+
+- name: quake
+  openml_task_id: 359930
+
+- name: topo_2_1
+  openml_task_id: 359939
+
+- name: space_ga
+  openml_task_id: 359933
+
+- name: wilt
+  openml_task_id: 146820
+
+- name: wine-quality-white
+  openml_task_id: 359974
+
+- name: yeast
+  openml_task_id: 2073
+
+- name: philippine
+  openml_task_id: 190410
+
+- name: shuttle
+  openml_task_id: 359987
+
+- name: porto-seguro
+  openml_task_id: 360113
+
+- name: okcupid-stem
+  openml_task_id: 359993
