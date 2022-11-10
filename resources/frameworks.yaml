@@ -96,14 +96,47 @@ Ensemble_AG_FTT_bq:
         env.per_gpu_batch_size: 128
     presets: best_quality
 
-Ensemble_AG_FTT_mq:
+Ensemble_AG_AccurateFTT_bq:
   extends: AutoGluon
-  version: "latest_gpu"
+  version: "latest_master"
   params:
     hyperparameters:
       <<: *defaults
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: False
+        model.fusion_transformer.share_qv_weights: False
+    presets: best_quality
+
+Ensemble_AG_AutoFTT_bq:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: "auto"
+        model.fusion_transformer.share_qv_weights: "auto"
+    presets: best_quality
+
+Ensemble_AG_FastFTT_bq:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: True
+        model.fusion_transformer.share_qv_weights: True
+    presets: best_quality
 
 Ensemble_AG_FTT_rowatt_bq:
   extends: AutoGluon
@@ -190,8 +223,8 @@ Ensemble_AG_FTT_all_bq:
           pretrainer.augmentation_type: "permutation"
           pretrainer.corruption_rate: 0.6
           pretrainer.objective: "self_distill"
-          pretrainer.start_pretrain_coefficient: 1
-          pretrainer.end_pretrain_coefficient: 1
+          pretrainer.start_pretrain_coefficient: 0.3
+          pretrainer.end_pretrain_coefficient: 0.3
           pretrainer.pretrain_epochs: 0
           pretrainer.decay_pretrain_coefficient: 0.6
           pretrainer.temperature: 1

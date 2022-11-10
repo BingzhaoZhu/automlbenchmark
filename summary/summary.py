@@ -36,10 +36,11 @@ locations = {
             # "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
 
             "ensemble_bq": "ensemble_ag_bq.ag.mytest24h.aws.20221105T052819/",
+            "ensemble_bq_m6i": "ensemble_ag_bq.ag.mytest24h.aws.20221109T020748/",
             # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
             # "ensemble_FTT_pretrain_bq": "ensemble_ag_ftt_pretrain_bq.ag.mytest4h.aws.20221103T051502/",
             "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest24h.aws.20221105T061959/", #"ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T174422/",
-            # "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest4h.aws.20221103T051524/",
+            "ensemble_ag_ftt_all_bq_m6i": "ensemble_ag_ftt_all_bq_cpu.ag.mytest24h.aws.20221109T020548/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
@@ -72,7 +73,7 @@ models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_a
 models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
-models = ["ensemble_bq", "ensemble_ag_ftt_all_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
+models = ["ensemble_bq_m6i", "ensemble_ag_ftt_all_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
 
 
 s3_client = boto3.client('s3')
@@ -142,7 +143,7 @@ def rank_models(models, task="binary"):
             ranker[idx] += rank
 
     print("numer of tasks:", num_tasks)
-    return ranker/num_tasks
+    return ranker
 
 
 def model_speed(models, tasks, normalize_on=0):
@@ -180,14 +181,14 @@ def model_speed(models, tasks, normalize_on=0):
     return average_train_time, average_test_time
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
@@ -195,6 +196,10 @@ if __name__ == "__main__":
     print("multiclass:", rank_models(models, "multiclass"))
 
     model_speed(models, tasks=("regression", "binary", "multiclass"))
+
+    all = rank_models(models, "regression") + rank_models(models, "binary") + rank_models(models, "multiclass")
+
+    print(all / np.sum(all) * 3)
 
 
 
