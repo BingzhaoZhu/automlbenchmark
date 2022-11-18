@@ -105,10 +105,10 @@ download_files(
 )
 
 import os
-path = "../ckpts/cross_table_pretrain/raw/"
+path = "../ckpts/ec2/2022_09_14/cross_table_pretrain/raw/"
 dir_list = os.listdir(path)
 dir_list = [path + i for i in dir_list]
-checkpoint = average_checkpoints(dir_list)
+checkpoint = {"state_dict": average_checkpoints(dir_list)}
 torch.save(checkpoint, os.path.join("../ckpts/", "pretrained.ckpt"))
 s3 = boto3.resource('s3')
 s3.Bucket('automl-benchmark-bingzzhu').upload_file('../ckpts/pretrained.ckpt', 'ec2/2022_09_14/cross_table_pretrain/pretrained.ckpt')
