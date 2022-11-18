@@ -94,7 +94,7 @@ def download_files(s3_client, bucket_name, local_path, file_names, folders):
 
 s3_client = boto3.client('s3')
 BUCKET = 'automl-benchmark-bingzzhu'
-PREFIX = 'cross_table_pretrain/raw'
+PREFIX = 'ec2/2022_09_14/cross_table_pretrain/raw'
 file_names, folders = get_file_folders(s3_client, BUCKET, PREFIX)
 download_files(
     s3_client,
@@ -111,7 +111,7 @@ dir_list = [path + i for i in dir_list]
 checkpoint = average_checkpoints(dir_list)
 torch.save(checkpoint, os.path.join("../ckpts/", "pretrained.ckpt"))
 s3 = boto3.resource('s3')
-s3.Bucket('automl-benchmark-bingzzhu').upload_file('../ckpts/pretrained.ckpt', 'cross_table_pretrain/pretrained.ckpt')
+s3.Bucket('automl-benchmark-bingzzhu').upload_file('../ckpts/pretrained.ckpt', 'ec2/2022_09_14/cross_table_pretrain/pretrained.ckpt')
 
 for f in os.listdir(path):
     os.remove(os.path.join(path, f))
@@ -125,5 +125,5 @@ for object in response['Contents']:
     s3_client.delete_object(Bucket=BUCKET, Key=object['Key'])
 
 s3 = boto3.client('s3')
-directory_name = 'cross_table_pretrain/raw'
+directory_name = 'ec2/2022_09_14/cross_table_pretrain/raw'
 s3.put_object(Bucket=BUCKET, Key=(directory_name+'/'))
