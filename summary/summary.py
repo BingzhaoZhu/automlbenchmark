@@ -42,10 +42,10 @@ locations = {
             # "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest24h.aws.20221105T061959/", #"ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T174422/",
             # "ensemble_ag_ftt_all_bq_m6i": "ensemble_ag_ftt_all_bq_cpu.ag.mytest24h.aws.20221109T020548/",
 
-            "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
-            "ensemble_fastftt_bq": "ensemble_ag_fastftt_bq.ag.mytest4h.aws.20221110T232827/",
-            "ensemble_autoftt_bq": "ensemble_ag_autoftt_bq.ag.mytest4h.aws.20221110T232806/",
-            "ensemble_ftt_bq": "ensemble_ag_accurateftt_bq.ag.mytest4h.aws.20221110T232734/",
+            # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
+            # "ensemble_fastftt_bq": "ensemble_ag_fastftt_bq.ag.mytest4h.aws.20221110T232827/",
+            # "ensemble_autoftt_bq": "ensemble_ag_autoftt_bq.ag.mytest4h.aws.20221110T232806/",
+            # "ensemble_ftt_bq": "ensemble_ag_accurateftt_bq.ag.mytest4h.aws.20221110T232734/",
 
             # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
             # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
@@ -63,6 +63,9 @@ locations = {
             # "FTT_row_attention_last": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
             # "FTT_row_attention_alter": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T043406/",
             # "FTT_row_attention_cls": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
+
+    "N0": "ftt_ag.ag.mytest1h.aws.20221118T114025/",
+    "N1": "ftt_ag.ag.mytest1h.aws.20221118T175858/",
 }
 
 # models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
@@ -79,7 +82,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-
+models = ["N0", "N1"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -186,14 +189,14 @@ def model_speed(models, tasks, normalize_on=0):
     return average_train_time, average_test_time
 
 if __name__ == "__main__":
-    # summary = {}
-    # for model in locations:
-    #     print(f"collecting results for {model}...")
-    #     model_performance = collect_performance(model)
-    #     summary = separate(model, model_performance, summary)
-    #
-    # for task in summary:
-    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    summary = {}
+    for model in locations:
+        print(f"collecting results for {model}...")
+        model_performance = collect_performance(model)
+        summary = separate(model, model_performance, summary)
+
+    for task in summary:
+        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
