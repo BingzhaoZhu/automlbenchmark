@@ -35,6 +35,8 @@ log = logging.getLogger(__name__)
 
 def run(dataset, config):
     log.info(f"\n**** AutoGluon [v{__version__}] ****\n")
+    print("__dataset", dataset)
+    print("__config",  config)
 
     metrics_mapping = dict(
         acc=metrics.accuracy,
