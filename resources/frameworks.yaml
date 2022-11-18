@@ -395,15 +395,14 @@ HTT_AG:
 
 FTT_AG:
   extends: AutoGluon
-  version: "latest_gpu"
+  version: "cross_table"
   params:
     hyperparameters:
       FT_TRANSFORMER:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
         env.num_workers_evaluation: 0
-        # optimization.patience: 3
-    holdout_frac: 0.125
+    is_pretrain: true
 
 FastFTT_AG:
   extends: AutoGluon

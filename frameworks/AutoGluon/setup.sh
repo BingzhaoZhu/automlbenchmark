@@ -28,6 +28,8 @@ elif [[ "$VERSION" == "latest" ]]; then
     VERSION="refrac_cpu"
 elif [[ "$VERSION" == "pretrain" ]]; then
     VERSION="pretrain"
+elif [[ "$VERSION" == "cross_table" ]]; then
+    VERSION="cross_table_soup"
 fi
 
 if [[ "$VERSION" == "stable" ]]; then
