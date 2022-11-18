@@ -25,10 +25,10 @@ def average_checkpoints(
             state_dict = torch.load(per_path, map_location=torch.device("cpu"))["state_dict"]
             for k, v in state_dict.items():
                 if k not in avg_state_dict:
-                    avg_state_dict[k] = v.clone().to(dtype=torch.float64)
+                    avg_state_dict[k] = v.clone().to(dtype=torch.float32)
                     avg_counts[k] = 1
                 else:
-                    avg_state_dict[k] += v.to(dtype=torch.float64)
+                    avg_state_dict[k] += v.to(dtype=torch.float32)
                     avg_counts[k] += 1
             del state_dict
 
