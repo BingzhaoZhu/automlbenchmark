@@ -32,7 +32,6 @@ from frameworks.shared.utils import Timer, zip_path
 
 log = logging.getLogger(__name__)
 
-
 def run(dataset, config):
     log.info(f"\n**** AutoGluon [v{__version__}] ****\n")
     print("__dataset", dataset)
