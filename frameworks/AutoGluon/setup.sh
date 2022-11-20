@@ -25,7 +25,7 @@ elif [[ "$VERSION" == "latest_master" ]]; then
     PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
     VERSION="master"
 elif [[ "$VERSION" == "latest" ]]; then
-    VERSION="refrac_cpu"
+    VERSION="master"
 elif [[ "$VERSION" == "pretrain" ]]; then
     VERSION="pretrain"
 elif [[ "$VERSION" == "cross_table" ]]; then
