@@ -393,6 +393,16 @@ HTT_AG:
         # optimization.patience: 3
     holdout_frac: 0.125
 
+FTT_AG_master:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+
 FTT_AG:
   extends: AutoGluon
   version: "cross_table"
