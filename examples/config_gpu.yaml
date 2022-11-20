@@ -14,7 +14,7 @@ aws:
   ec2:
     regions:
       us-east-1:
-        ami: ami-0cd454db24da5cb9b
+        ami: ami-05bd86a47b3b8e24b # ami-0cd454db24da5cb9b
         description: Built with PyTorch conda environment, NVIDIA CUDA, cuDNN, NCCL, GPU Driver, Docker, NVIDIA-Docker and EFA support.
     volume_type: gp2  # standard is very slow, prefer gp2
     instance_type:
