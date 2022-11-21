@@ -483,7 +483,9 @@ class BenchmarkTask:
         :return: path to the dataset file
         """
         if hasattr(self._task_def, 'openml_task_id'):
+            print("---start loading data---")
             self._dataset = Benchmark.data_loader.load(DataSourceType.openml_task, task_id=self._task_def.openml_task_id, fold=self.fold)
+            print("---data loading done---")
             log.debug("Loaded OpenML dataset for task_id %s.", self._task_def.openml_task_id)
         elif hasattr(self._task_def, 'openml_dataset_id'):
             # TODO
