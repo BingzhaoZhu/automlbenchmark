@@ -64,8 +64,13 @@ locations = {
             # "FTT_row_attention_alter": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T043406/",
             # "FTT_row_attention_cls": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
 
-    "N0": "ftt_ag.ag.mytest1h.aws.20221118T114025/",
-    "N1": "ftt_ag.ag.mytest1h.aws.20221118T175858/",
+    "N0": "ftt_ag.ag.mytest1h.aws.20221121T220729/",
+    "N1": "ftt_ag.ag.mytest1h.aws.20221121T233555/",
+    "N2": "ftt_ag.ag.mytest1h.aws.20221122T060222/",
+    "N3": "ftt_ag.ag.mytest1h.aws.20221122T073032/",
+    "N4": "ftt_ag.ag.mytest1h.aws.20221122T085738/",
+    "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
+    "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 }
 
 # models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
@@ -82,7 +87,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N1"]
+models = ["N0", "N1", "N2", "N3", "N4", "N5", "N6"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -189,14 +194,14 @@ def model_speed(models, tasks, normalize_on=0):
     return average_train_time, average_test_time
 
 if __name__ == "__main__":
-    summary = {}
-    for model in locations:
-        print(f"collecting results for {model}...")
-        model_performance = collect_performance(model)
-        summary = separate(model, model_performance, summary)
-
-    for task in summary:
-        pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
+    # summary = {}
+    # for model in locations:
+    #     print(f"collecting results for {model}...")
+    #     model_performance = collect_performance(model)
+    #     summary = separate(model, model_performance, summary)
+    #
+    # for task in summary:
+    #     pd.DataFrame(summary[task]).to_csv("./" + task + ".csv")
 
     print("Comparing among models:", models)
     print("regression:", rank_models(models, "regression"))
