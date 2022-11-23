@@ -411,6 +411,28 @@ FTT_AG:
         env.num_workers_evaluation: 0
     is_pretrain: true
 
+FTT_AG_hog:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    is_pretrain: true
+
+FTT_AG_finetune:
+  extends: AutoGluon
+  version: "cross_table"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    is_pretrain: false
+
 FastFTT_AG:
   extends: AutoGluon
   version: "latest_gpu"

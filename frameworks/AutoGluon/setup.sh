@@ -31,6 +31,9 @@ elif [[ "$VERSION" == "pretrain" ]]; then
 elif [[ "$VERSION" == "cross_table" ]]; then
     # PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
     VERSION="cross_table_soup"
+elif [[ "$VERSION" == "hog" ]]; then
+    # PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
+    VERSION="cross_table_hogwild"
 fi
 
 if [[ "$VERSION" == "stable" ]]; then

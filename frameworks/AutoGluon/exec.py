@@ -63,7 +63,7 @@ def run(dataset, config):
 
     models_dir = tempfile.mkdtemp() + os.sep  # passed to AG
 
-    if "is_pretrain" in training_params:
+    if "is_pretrain" in training_params and training_params["is_pretrain"]:
         training_params["is_pretrain"] = config.name
 
     # if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
