@@ -19,7 +19,7 @@ from ..data import AM, DF, Dataset, DatasetType, Datasplit, Feature
 from ..resources import config as rconfig
 from ..utils import as_list, lazy_property, path_from_split, profile, split_path, unsparsify
 
-oml.datasets.functions._get_dataset_parquet = lambda x: None
+# oml.datasets.functions._get_dataset_parquet = lambda x: None
 log = logging.getLogger(__name__)
 
 # hack (only adding a ? to the regexp pattern) to ensure that '?' values remain quoted when we save dataplits in arff format.
