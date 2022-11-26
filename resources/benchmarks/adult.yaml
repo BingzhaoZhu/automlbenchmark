@@ -5,6 +5,9 @@
 - name: adult
   openml_task_id: 359983
 
+- name: churn
+  openml_task_id: 359968
+
 #- name: credit-g
 #  openml_task_id: 168757
 
