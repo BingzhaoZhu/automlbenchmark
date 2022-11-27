@@ -12,6 +12,12 @@ mytest1h:
   cores: 8
   min_vol_size_mb: 100000
 
+mytest2h:
+  folds: 5
+  max_runtime_seconds: 7200
+  cores: 8
+  min_vol_size_mb: 100000
+
 mytest8h:
   folds: 5
   max_runtime_seconds: 28800
