@@ -113,7 +113,7 @@ aws:                    # configuration namespace for AWS mode.
 
   iam:                                               # sub-namespace for AWS IAM service.
                                                      # Mainly used to allow secure communication between S3 storage and EC2 instances.
-    role_name: EC2AdminS3User #AutomlBenchmarkRole                   # must be unique per AWS account, max 40 chars.
+    role_name: AutomlBenchmarkRole                   # must be unique per AWS account, max 40 chars.
                                                      # if temporary is set to true, the generated role name will be `<role_name>-<now>`.
                                                      # cf. commplete restrictions: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
     s3_policy_name: AutomlBenchmarkS3Policy
