@@ -3,4 +3,8 @@
 rm -f ~/.config/automlbenchmark/config.yaml
 cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 
-python runbenchmark.py Ensemble_AG_FastFTT_bq ag mytest4h -m aws -p 180
+python runbenchmark.py FTT_AG_hog_ft0 ag mytest1h -m aws -p 180 -f 0
+python runbenchmark.py FTT_AG_hog_ft500 ag mytest1h -m aws -p 180 -f 0
+python runbenchmark.py FTT_AG_hog_ft1000 ag mytest1h -m aws -p 180 -f 0
+python runbenchmark.py FTT_AG_positional ag mytest1h -m aws -p 180 -f 0
+python runbenchmark.py FTT_AG ag mytest1h -m aws -p 180 -f 0
