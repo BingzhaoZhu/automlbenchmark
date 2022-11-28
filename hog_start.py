@@ -6,9 +6,12 @@ BUCKET = 'automl-benchmark-bingzzhu'
 
 PREFIX = 'ec2/2022_09_14/cross_table_pretrain/pretrained_hogwild.ckpt'
 response = s3_client.list_objects_v2(Bucket=BUCKET, Prefix=PREFIX)
-for object in response['Contents']:
-    print('Deleting', object['Key'])
-    s3_client.delete_object(Bucket=BUCKET, Key=object['Key'])
+try:
+    for object in response['Contents']:
+        print('Deleting', object['Key'])
+        s3_client.delete_object(Bucket=BUCKET, Key=object['Key'])
+except:
+    pass
 
 s3_client = boto3.client('s3')
 response = s3_client.list_objects_v2(Bucket='automl-benchmark-bingzzhu',

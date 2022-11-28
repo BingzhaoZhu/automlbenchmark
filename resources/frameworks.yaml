@@ -409,7 +409,6 @@ FTT_AG:
         env.per_gpu_batch_size: 128
         env.num_workers: 0
         env.num_workers_evaluation: 0
-    is_pretrain: true
 
 FTT_AG_positional:
   extends: AutoGluon
@@ -421,7 +420,6 @@ FTT_AG_positional:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         model.numerical_transformer.embedding_arch: ["positional"]
-    is_pretrain: true
 
 FTT_AG_hog:
   extends: AutoGluon
