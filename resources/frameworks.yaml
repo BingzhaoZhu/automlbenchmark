@@ -453,7 +453,7 @@ FTT_AG_hog_ft0:
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
     is_pretrain:
-      is_pretrain: true
+      is_pretrain: false
       finetune_on: "raw_hog/pretrained_0.ckpt"
 
 FTT_AG_hog_ft500:
@@ -467,7 +467,7 @@ FTT_AG_hog_ft500:
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
     is_pretrain:
-      is_pretrain: true
+      is_pretrain: false
       finetune_on: "raw_hog/pretrained_500.ckpt"
 
 FTT_AG_hog_ft1000:
@@ -481,7 +481,7 @@ FTT_AG_hog_ft1000:
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
     is_pretrain:
-      is_pretrain: true
+      is_pretrain: false
       finetune_on: "raw_hog/pretrained_1000.ckpt"
 
 
