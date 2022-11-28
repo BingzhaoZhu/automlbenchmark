@@ -72,8 +72,8 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "linear": "ftt_ag_hog_ft0.ag.mytest1h.aws.20221128T065929/",
-    "positional": "ftt_ag_hog_ft1000.ag.mytest1h.aws.20221128T155247/",
+    "linear": "ftt_ag.ag.mytest1h.aws.20221128T200827/",
+    "positional": "ftt_ag_positional.ag.mytest1h.aws.20221128T184509/",
 }
 
 # models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]

@@ -452,7 +452,7 @@ FTT_AG_hog_ft0:
         env.eval_batch_size_ratio: 1
     is_pretrain:
       is_pretrain: false
-      finetune_on: "raw_hog/pretrained_0.ckpt"
+      finetune_on: "iter_0/pretrained.ckpt"
 
 FTT_AG_hog_ft500:
   extends: AutoGluon
@@ -466,7 +466,7 @@ FTT_AG_hog_ft500:
         env.eval_batch_size_ratio: 1
     is_pretrain:
       is_pretrain: false
-      finetune_on: "raw_hog/pretrained_500.ckpt"
+      finetune_on: "iter_500/pretrained.ckpt"
 
 FTT_AG_hog_ft1000:
   extends: AutoGluon
