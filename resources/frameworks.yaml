@@ -421,6 +421,7 @@ FTT_AG_hog:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
+        optimization.patience: 100000
     is_pretrain:
       is_pretrain: true
       name: true
