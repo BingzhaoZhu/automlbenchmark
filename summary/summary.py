@@ -72,8 +72,10 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "linear": "ftt_ag.ag.mytest1h.aws.20221128T200827/",
-    "positional": "ftt_ag_hog_ft500.ag.mytest1h.aws.20221129T003958/",
+    "N0": "ftt_ag_hog_ft0_lowp.ag.mytest1h.aws.20221129T135948/",
+    "N500": "ftt_ag_hog_ft500_lowp.ag.mytest1h.aws.20221129T162024/",
+    "N1000": "ftt_ag_hog_ft1000_lowp.ag.mytest1h.aws.20221129T183951/",
+
 }
 
 # models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
@@ -90,7 +92,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["linear", "positional"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+models = ["N0", "N500", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -215,7 +217,7 @@ if __name__ == "__main__":
 
     all = rank_models(models, "regression") + rank_models(models, "binary") + rank_models(models, "multiclass")
 
-    print(all / np.sum(all) * 3)
+    print(all / np.sum(all) * 5)
 
 
 

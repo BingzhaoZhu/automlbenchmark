@@ -1,0 +1,159 @@
+---
+# Combines openml/s/269 and openml/s/271
+# Locally stored instead of fetched from openml to avoid server errors
+
+- name: dna
+  openml_task_id: 359964
+
+- name: elevators
+  openml_task_id: 359936
+
+- name: eucalyptus
+  openml_task_id: 359954
+
+- name: fabert
+  openml_task_id: 168910
+
+- name: first-order-theorem-proving
+  openml_task_id: 359969
+
+- name: gina
+  openml_task_id: 189922
+
+- name: guillermo
+  openml_task_id: 359988
+
+- name: helena
+  openml_task_id: 359984
+
+- name: house_16H
+  openml_task_id: 359952
+
+- name: house_prices_nominal
+  openml_task_id: 359951
+
+- name: house_sales
+  openml_task_id: 359949
+
+- name: jannis
+  openml_task_id: 211979
+
+- name: jasmine
+  openml_task_id: 168911
+
+- name: jungle_chess_2pcs_raw_endgame_complete
+  openml_task_id: 359981
+
+- name: kc1
+  openml_task_id: 359962
+
+- name: kick
+  openml_task_id: 359991
+
+- name: kr-vs-kp
+  openml_task_id: 359965
+
+- name: madeline
+  openml_task_id: 190392
+
+- name: mfeat-factors
+  openml_task_id: 359961
+
+- name: micro-mass
+  openml_task_id: 359953
+
+- name: nomao
+  openml_task_id: 359980
+
+- name: numerai28.6
+  openml_task_id: 167120
+
+- name: nyc-taxi-green-dec-2016
+  openml_task_id: 359943
+
+- name: okcupid-stem
+  openml_task_id: 359993
+
+- name: ozone-level-8hr
+  openml_task_id: 190137
+
+- name: pc4
+  openml_task_id: 359958
+
+- name: philippine
+  openml_task_id: 190410
+
+- name: phoneme
+  openml_task_id: 168350
+
+- name: pol
+  openml_task_id: 359946
+
+- name: porto-seguro
+  openml_task_id: 360113
+
+- name: qsar-biodeg
+  openml_task_id: 359956
+
+- name: quake
+  openml_task_id: 359930
+
+- name: riccardo
+  openml_task_id: 359989
+
+- name: robert
+  openml_task_id: 359986
+
+- name: segment
+  openml_task_id: 359963
+
+- name: sensory
+  openml_task_id: 359931
+
+- name: sf-police-incidents
+  openml_task_id: 359994
+
+- name: shuttle
+  openml_task_id: 359987
+
+- name: socmob
+  openml_task_id: 359932
+
+- name: space_ga
+  openml_task_id: 359933
+
+- name: steel-plates-fault
+  openml_task_id: 168784
+
+- name: sylvine
+  openml_task_id: 359972
+
+- name: tecator
+  openml_task_id: 359934
+
+- name: topo_2_1
+  openml_task_id: 359939
+
+- name: us_crime
+  openml_task_id: 359945
+
+- name: vehicle
+  openml_task_id: 190146
+
+- name: volkert
+  openml_task_id: 359985
+
+- name: wilt
+  openml_task_id: 146820
+
+- name: wine-quality-white
+  openml_task_id: 359974
+
+- name: wine_quality
+  openml_task_id: 359935
+
+- name: yeast
+  openml_task_id: 2073
+
+- name: yprop_4_1
+  openml_task_id: 359940
