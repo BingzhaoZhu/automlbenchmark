@@ -72,9 +72,9 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "N0": "ftt_ag_hog_ft0_lowp.ag.mytest1h.aws.20221129T135948/",
-    "N500": "ftt_ag_hog_ft500_lowp.ag.mytest1h.aws.20221129T162024/",
-    "N1000": "ftt_ag_hog_ft1000_lowp.ag.mytest1h.aws.20221129T183951/",
+    "N0": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221130T191507/",
+    "N500": "ftt_ag_hog_ft500_lowe.ag_finetune.mytest1h.aws.20221130T214340/",
+    "N1000": "ftt_ag_hog_ft1000_lowe.ag_finetune.mytest1h.aws.20221201T025438/",
 
 }
 
