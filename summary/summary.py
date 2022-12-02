@@ -72,9 +72,11 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "N0": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221130T191507/",
-    "N500": "ftt_ag_hog_ft500_lowe.ag_finetune.mytest1h.aws.20221130T214340/",
-    "N1000": "ftt_ag_hog_ft1000_lowe.ag_finetune.mytest1h.aws.20221201T025438/",
+    "N0": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221130T191501/",
+    "N250": "ftt_ag_hog_ft250.ag_finetune.mytest1h.aws.20221201T063934/",
+    "N500": "ftt_ag_hog_ft500.ag_finetune.mytest1h.aws.20221130T214332/",
+    "N750": "ftt_ag_hog_ft750.ag_finetune.mytest1h.aws.20221201T090743/",
+    "N1000": "ftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221201T001103/",
 
 }
 
@@ -92,7 +94,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N500", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+models = ["N0", "N250", "N500", "N750", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
@@ -163,6 +165,19 @@ def rank_models(models, task="binary"):
     print("numer of tasks:", num_tasks)
     return ranker
 
+def win_rate(models, tasks, normalize_on=0):
+    all_winrate = []
+    for i in range(len(models)):
+        if i == normalize_on:
+            continue
+        rk = [rank_models([models[normalize_on], models[i]], task) for task in tasks]
+        all_rk = 0
+        for rk_ in rk:
+            all_rk += rk_
+        winrate = all_rk / np.sum(all_rk) * 3
+        all_winrate.append(winrate[0]-1)
+
+    return all_winrate
 
 def model_speed(models, tasks, normalize_on=0):
     train_time, test_time = [], []
@@ -214,10 +229,11 @@ if __name__ == "__main__":
     print("multiclass:", rank_models(models, "multiclass"))
 
     model_speed(models, tasks=("regression", "binary", "multiclass"))
+    print("win_rate:", win_rate(models, tasks=("regression", "binary", "multiclass")))
 
     all = rank_models(models, "regression") + rank_models(models, "binary") + rank_models(models, "multiclass")
 
-    print(all / np.sum(all) * 5)
+    print(all / np.sum(all) * sum(range(1, 1+len(models))))
 
 
 
