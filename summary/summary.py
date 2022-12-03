@@ -72,11 +72,12 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "N0": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
-    "N250": "ftt_ag_hog_ft250.ag_finetune.mytest1h.aws.20221203T064600/",
-    "N500": "ftt_ag_hog_ft500.ag_finetune.mytest1h.aws.20221203T052314/",
-    "N750": "ftt_ag_hog_ft750.ag_finetune.mytest1h.aws.20221203T064609/",
-    "N1000": "ftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221203T052326/",
+    "N0": "ftt_ag_hog_ft0_lowi.ag_finetune.mytest1h.aws.20221203T011447/",
+    "N250": "ftt_ag_hog_ft250_lowi.ag_finetune.mytest1h.aws.20221203T035706/",
+    "N500": "ftt_ag_hog_ft500_lowi.ag_finetune.mytest1h.aws.20221203T011504/",
+    # "N750": "ftt_ag_hog_ft750_lowi.ag_finetune.mytest1h.aws.20221203T035723/",
+    "N1000": "ftt_ag_hog_ft1000_lowi.ag_finetune.mytest1h.aws.20221203T011519/",
+    "N2000": "ftt_ag_hog_ft2000_lowi.ag_finetune.mytest1h.aws.20221203T161252/",
 
 }
 
@@ -94,7 +95,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N250", "N500", "N750", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+models = ["N0", "N250", "N500", "N1000", "N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 
 s3_client = boto3.client('s3')
 bucket = 'automl-benchmark-bingzzhu'
