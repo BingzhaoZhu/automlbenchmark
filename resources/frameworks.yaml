@@ -537,6 +537,20 @@ FTT_AG_hog_ft1000:
       is_pretrain: false
       finetune_on: "iter_1000/pretrained.ckpt"
 
+FTT_AG_hog_ft2000:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_2000/pretrained.ckpt"
+
 FTT_AG_hog_ft0_lowi:
   extends: AutoGluon
   version: "hog"
@@ -616,6 +630,22 @@ FTT_AG_hog_ft1000_lowi:
     is_pretrain:
       is_pretrain: false
       finetune_on: "iter_1000/pretrained.ckpt"
+
+FTT_AG_hog_ft2000_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_2000/pretrained.ckpt"
 
 FTT_AG_hog_ft0_lowe:
   extends: AutoGluon
