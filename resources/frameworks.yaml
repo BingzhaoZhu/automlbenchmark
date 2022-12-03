@@ -510,7 +510,7 @@ FTT_AG_hog_ft1000:
       is_pretrain: false
       finetune_on: "iter_1000/pretrained.ckpt"
 
-FTT_AG_hog_ft0_lowp:
+FTT_AG_hog_ft0_lowi:
   extends: AutoGluon
   version: "hog"
   params:
@@ -520,12 +520,13 @@ FTT_AG_hog_ft0_lowp:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
-        optimization.patience: 3
+        "optimization.max_steps": 100
+        "optimization.val_check_interval": 100
     is_pretrain:
       is_pretrain: false
       finetune_on: "iter_0/pretrained.ckpt"
 
-FTT_AG_hog_ft500_lowp:
+FTT_AG_hog_ft250_lowi:
   extends: AutoGluon
   version: "hog"
   params:
@@ -535,12 +536,29 @@ FTT_AG_hog_ft500_lowp:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
-        optimization.patience: 3
+        "optimization.max_steps": 100
+        "optimization.val_check_interval": 100
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FTT_AG_hog_ft500_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 100
+        "optimization.val_check_interval": 100
     is_pretrain:
       is_pretrain: false
       finetune_on: "iter_500/pretrained.ckpt"
 
-FTT_AG_hog_ft1000_lowp:
+FTT_AG_hog_ft750_lowi:
   extends: AutoGluon
   version: "hog"
   params:
@@ -550,7 +568,24 @@ FTT_AG_hog_ft1000_lowp:
         env.num_workers: 0
         env.num_workers_evaluation: 0
         env.eval_batch_size_ratio: 1
-        optimization.patience: 3
+        "optimization.max_steps": 100
+        "optimization.val_check_interval": 100
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FTT_AG_hog_ft1000_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 100
+        "optimization.val_check_interval": 100
     is_pretrain:
       is_pretrain: false
       finetune_on: "iter_1000/pretrained.ckpt"
