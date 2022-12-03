@@ -445,7 +445,7 @@ FTT_AG_hog_pretrain:
       name: true
       num_tasks: 51
       iter_per_save: 5
-      max_iter: 1000
+      max_iter: 2000
       upload_per_n_iter: 5
 
 FTT_AG_hog:
@@ -464,7 +464,7 @@ FTT_AG_hog:
       name: true
       num_tasks: 51
       iter_per_save: 5
-      max_iter: 1000
+      max_iter: 2000
       upload_per_n_iter: 5
 
 FTT_AG_hog_ft0:
