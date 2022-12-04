@@ -467,6 +467,26 @@ FTT_AG_hog:
       max_iter: 1000
       upload_per_n_iter: 5
 
+FastFTT_AG_hog:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.patience: 100000
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 51
+      iter_per_save: 5
+      max_iter: 1000
+      upload_per_n_iter: 5
+
 FastFTT_AG_hog_ft0:
   extends: AutoGluon
   version: "hog"
