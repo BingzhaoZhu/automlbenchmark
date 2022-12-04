@@ -467,6 +467,81 @@ FTT_AG_hog:
       max_iter: 1000
       upload_per_n_iter: 5
 
+FastFTT_AG_hog_ft0:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FastFTT_AG_hog_ft250:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FastFTT_AG_hog_ft500:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FastFTT_AG_hog_ft750:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FastFTT_AG_hog_ft1000:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
 FTT_AG_hog_ft0:
   extends: AutoGluon
   version: "hog"

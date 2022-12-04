@@ -31,6 +31,7 @@ import os, torch, json
 
 with open("../backbones/FTTx3") as f:
     kwarg = json.loads(f.read())
+kwarg["additive_attention"] = True
 backbone = FT_Transformer(
     **kwarg
 )
