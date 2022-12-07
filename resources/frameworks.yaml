@@ -29,7 +29,7 @@ AutoGluon:
 #    _save_artifacts: ['leaderboard', 'models', 'info']
 
 
-FTT_AG_hog_pretrain:
+FTT_pretrain_reconstruction:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -56,5 +56,4 @@ FTT_AG_hog_pretrain:
       max_iter: 1000
       upload_per_n_iter: 5
       folder_name: "pretrain_reconstruction"
-    holdout_frac: 0.125
 
