@@ -1,0 +1,1448 @@
+---
+#for doc purpose using <placeholder:default_value> syntax when it applies.
+
+# FORMAT:
+__dummy_framework_with_defaults:
+  version: ''
+  module: # defaults to `frameworks.framework_name`
+  setup_args: ''
+  params: {}
+  project: http://url/to/project/repo
+  image: # will result in built image `author/image:tag`
+    author: automlbenchmark
+    image:  # defaults to `framework name to lowercase`
+    tag:  # defaults to `framework version`
+
+
+#########################
+### AutoML frameworks ###
+#########################
+
+AutoGluon:
+  version: "latest"
+  description: |
+    AutoGluon-Tabular: Unlike existing AutoML frameworks that primarily focus on model/hyperparameter selection,
+    AutoGluon-Tabular succeeds by ensembling multiple models and stacking them in multiple layers.
+  project: https://auto.gluon.ai
+  refs: [https://arxiv.org/abs/2003.06505]
+#  params:
+#    _save_artifacts: ['leaderboard', 'models', 'info']
+
+Defaults: &defaults
+  NN_TORCH: {}
+  GBM:
+    - extra_trees: true
+      ag_args:
+        name_suffix: 'XT'
+    - {}
+    - 'GBMLarge'
+  CAT: {}
+  XGB: {}
+  FASTAI: {}
+  RF:
+    - 'criterion': 'gini'
+      'ag_args':
+        'name_suffix': 'Gini'
+        'problem_types': ['binary', 'multiclass']
+    - 'criterion': 'entropy'
+      'ag_args':
+        'name_suffix': 'Entr'
+        'problem_types': [ 'binary', 'multiclass' ]
+    - 'criterion': 'squared_error'
+      'ag_args':
+        'name_suffix': 'MSE'
+        'problem_types': [ 'regression', 'quantile' ]
+  XT:
+    - 'criterion': 'gini'
+      'ag_args':
+        'name_suffix': 'Gini'
+        'problem_types': ['binary', 'multiclass']
+    - 'criterion': 'entropy'
+      'ag_args':
+        'name_suffix': 'Entr'
+        'problem_types': [ 'binary', 'multiclass' ]
+    - 'criterion': 'squared_error'
+      'ag_args':
+        'name_suffix': 'MSE'
+        'problem_types': [ 'regression', 'quantile' ]
+  KNN:
+    - 'weights': 'uniform'
+      'ag_args':
+        'name_suffix': 'Unif'
+    - 'weights': 'distance'
+      'ag_args':
+        'name_suffix': 'Dist'
+
+Ensemble_AG_bq:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      <<: *defaults
+    presets: best_quality
+
+Ensemble_AG_mq:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      <<: *defaults
+
+Ensemble_AG_FTT_bq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+    presets: best_quality
+
+Ensemble_AG_AccurateFTT_bq:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: False
+        model.fusion_transformer.share_qv_weights: False
+    presets: best_quality
+
+Ensemble_AG_AutoFTT_bq:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: "auto"
+        model.fusion_transformer.share_qv_weights: "auto"
+    presets: best_quality
+
+Ensemble_AG_FastFTT_bq:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: True
+        model.fusion_transformer.share_qv_weights: True
+    presets: best_quality
+
+Ensemble_AG_FTT_rowatt_bq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        model.fusion_transformer.row_attention: True
+    presets: best_quality
+
+Ensemble_AG_FTT_rowatt_mq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        model.fusion_transformer.row_attention: True
+
+Ensemble_AG_FTT_pretrain_bq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:h
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.8
+        pretrainer.objective: "reconstruction"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    presets: best_quality
+
+Ensemble_AG_FTT_pretrain_mq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.8
+        pretrainer.objective: "reconstruction"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+
+Ensemble_AG_FTT_all_bq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        - env.per_gpu_batch_size: 128
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "reconstruction"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.pretrain_epochs: 5
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
+
+          model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+          model.fusion_transformer.row_attention_layer: "last"
+          optimization.row_attention_weight_decay: 0.1
+          env.test_ensemble_rounds: 10
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "self_distill"
+          pretrainer.start_pretrain_coefficient: 0.3
+          pretrainer.end_pretrain_coefficient: 0.3
+          pretrainer.pretrain_epochs: 0
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
+    presets: best_quality
+
+Ensemble_AG_FTT_all_bq_cpu:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        - env.per_gpu_batch_size: 128
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "reconstruction"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.pretrain_epochs: 5
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
+
+          model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+          model.fusion_transformer.row_attention_layer: "last"
+          optimization.row_attention_weight_decay: 0.1
+          env.test_ensemble_rounds: 10
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "self_distill"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 1
+          pretrainer.pretrain_epochs: 0
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
+    presets: best_quality
+
+Ensemble_AG_FTT_mq_cpu:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "reconstruction"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.pretrain_epochs: 5
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.temperature: 1
+
+          model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+          model.fusion_transformer.row_attention_layer: "last"
+          optimization.row_attention_weight_decay: 0.1
+          env.test_ensemble_rounds: 10
+
+
+Ensemble_AG_FTT_all_mq:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      <<: *defaults
+      FT_TRANSFORMER:
+        - env.per_gpu_batch_size: 128
+
+        - env.per_gpu_batch_size: 128
+          env.test_ensemble_rounds: 10
+          optimization.row_attention_weight_decay: 0.1
+          model.fusion_transformer.row_attention: True
+          model.fusion_transformer.global_token: True
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "reconstruction"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.pretrain_epochs: 5
+
+        - env.per_gpu_batch_size: 128
+          pretrainer: true
+          pretrainer.augmentation_type: "permutation"
+          pretrainer.corruption_rate: 0.6
+          pretrainer.objective: "self_distill"
+          pretrainer.start_pretrain_coefficient: 1
+          pretrainer.end_pretrain_coefficient: 0.03
+          pretrainer.decay_pretrain_coefficient: 0.6
+          pretrainer.pretrain_epochs: 0
+
+RF_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      RF: {}
+    holdout_frac: 0.125
+
+
+GBM_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      GBM: {}
+    holdout_frac: 0.125
+
+CAT_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      CAT: {}
+    holdout_frac: 0.125
+
+CAT_AG_pretrain:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      CAT:
+        pretrainer: true
+    holdout_frac: 0.125
+
+XGB_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      XGB: {}
+    holdout_frac: 0.125
+
+
+NN_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      NN_TORCH: {}
+    holdout_frac: 0.125
+
+
+FASTAI_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      FASTAI: {}
+    holdout_frac: 0.125
+
+
+HTT_AG:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        model.names: ["categorical_transformer", "numerical_transformer", "fusion_hierarchical_transformer"]
+        model.fusion_hierarchical_transformer.tokens_per_level: 6400000
+        model.fusion_hierarchical_transformer.num_sweeps: 1
+        # optimization.patience: 3
+    holdout_frac: 0.125
+
+FTT_AG_master:
+  extends: AutoGluon
+  version: "latest_master"
+  params:
+    hyperparameters:
+      XGB: {}
+
+FTT_AG:
+  extends: AutoGluon
+  version: "latest"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+
+FTT_AG_positional:
+  extends: AutoGluon
+  version: "latest"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.numerical_transformer.embedding_arch: ["positional"]
+
+FTT_AG_hog_pretrain:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "reconstruction"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 1
+        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.pretrain_epochs: 100000
+        optimization.patience: 100000
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 51
+      iter_per_save: 5
+      max_iter: 1000
+      upload_per_n_iter: 5
+
+FTT_AG_hog:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.patience: 100000
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 51
+      iter_per_save: 5
+      max_iter: 1000
+      upload_per_n_iter: 5
+
+FastFTT_AG_hog:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.patience: 100000
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 51
+      iter_per_save: 5
+      max_iter: 1000
+      upload_per_n_iter: 5
+
+FastFTT_AG_hog_ft0_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FastFTT_AG_hog_ft250_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FastFTT_AG_hog_ft500_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FastFTT_AG_hog_ft750_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FastFTT_AG_hog_ft1000_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
+FastFTT_AG_hog_ft0:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FastFTT_AG_hog_ft250:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FastFTT_AG_hog_ft500:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FastFTT_AG_hog_ft750:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FastFTT_AG_hog_ft1000:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        model.fusion_transformer.additive_attention: true
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
+FTT_AG_hog_ft0:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FTT_AG_hog_ft250:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FTT_AG_hog_ft500:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FTT_AG_hog_ft750:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FTT_AG_hog_ft1000:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
+FTT_AG_hog_ft2000:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_2000/pretrained.ckpt"
+
+FTT_AG_hog_ft0_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FTT_AG_hog_ft250_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FTT_AG_hog_ft500_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FTT_AG_hog_ft750_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FTT_AG_hog_ft1000_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
+FTT_AG_hog_ft2000_lowi:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        "optimization.max_steps": 10
+        "optimization.val_check_interval": 10
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_2000/pretrained.ckpt"
+
+FTT_AG_hog_ft0_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_0/pretrained.ckpt"
+
+FTT_AG_hog_ft250_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_250/pretrained.ckpt"
+
+FTT_AG_hog_ft500_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_500/pretrained.ckpt"
+
+FTT_AG_hog_ft750_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_750/pretrained.ckpt"
+
+FTT_AG_hog_ft1000_lowe:
+  extends: AutoGluon
+  version: "hog"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        env.eval_batch_size_ratio: 1
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "iter_1000/pretrained.ckpt"
+
+FTT_AG_finetune:
+  extends: AutoGluon
+  version: "cross_table"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    is_pretrain: false
+
+FastFTT_AG:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: true
+        model.fusion_transformer.share_qv_weights: false
+        # optimization.patience: 1
+    holdout_frac: 0.125
+
+FTT_AG_64:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    holdout_frac: 0.125
+
+FTT_AG_32:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 32
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+    holdout_frac: 0.125
+
+FastFTT_AG_64:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 64
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: true
+        model.fusion_transformer.share_qv_weights: false
+        # optimization.patience: 1
+    holdout_frac: 0.125
+
+FastFTT_AG_32:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 32
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.additive_attention: true
+        model.fusion_transformer.share_qv_weights: false
+        # optimization.patience: 1
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_1:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: 1
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_10:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: 10
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_10_gt:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: 10
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_1_gt:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: 1
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_-1_gt:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: -1
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: True
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
+FTT_AG_row_attention_gt:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    _infer_rounds: 1
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.eval_batch_size_ratio: 1
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        model.fusion_transformer.row_attention: False
+        model.fusion_transformer.global_token: True
+    holdout_frac: 0.125
+
+FTT_AG_identical:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "contrastive"
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "contrastive"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_recon:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "reconstruction"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_both:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "both"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    holdout_frac: 0.125
+
+FTT_AG_pretrain_dist:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        env.num_workers: 0
+        env.num_workers_evaluation: 0
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "self_distill"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 0.03
+        pretrainer.pretrain_epochs: 5
+    holdout_frac: 0.125
+
+WideDeep:
+  version: "stable"
+
+WideDeep_pretrain:
+  extends: WideDeep
+  params:
+    _n_pretrain_epoch: 10
+
+
+FTTransformer:
+  version: "stable"
+
+FTTransformer_cpu:
+  extends: FTTransformer
+  params:
+    _device: cpu
+
+FTTransformer_gpu_1:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 1
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_3:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 3
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_5:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 0
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 5
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_pretrain_1:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 10
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 1
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_pretrain_3:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 10
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 3
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+FTTransformer_gpu_pretrain_5:
+  extends: FTTransformer
+  params:
+    _device: cuda
+    _n_pretrain_epoch: 10
+    _n_epoch: 50
+    _patience: 3
+    d_token: 192
+    n_blocks: 5
+    _batch_size: 64
+    _pretrain_batch_size: 64
+
+AutoGluon_bestquality:
+  extends: AutoGluon
+  description: |
+    AutoGluon with 'best_quality' preset provides the most accurate overall predictor.
+    Refer to https://auto.gluon.ai/stable/tutorials/tabular_prediction/tabular-quickstart.html#presets for a description of the presets.
+  params:
+    presets: best_quality
+
+AutoGluon_hq:
+  extends: AutoGluon
+  description: |
+    AutoGluon with 'high_quality' preset provides a very strong predictor with 8x+ faster inference speed than 'best_quality'.
+    Refer to https://auto.gluon.ai/stable/tutorials/tabular_prediction/tabular-quickstart.html#presets for a description of the presets.
+  params:
+    presets: high_quality
+
+AutoGluon_gq:
+  extends: AutoGluon
+  description: |
+    AutoGluon with 'good_quality' preset provides a strong predictor with 16x+ faster inference speed than 'best_quality'.
+    Refer to https://auto.gluon.ai/stable/tutorials/tabular_prediction/tabular-quickstart.html#presets for a description of the presets.
+  params:
+    presets: good_quality
+
+autosklearn:
+  version: 'stable'
+  description: |
+    auto-sklearn frees a machine learning user from algorithm selection and hyperparameter tuning.
+    It leverages recent advantages in Bayesian optimization, meta-learning and ensemble construction.
+  project: https://automl.github.io/auto-sklearn/
+  refs: [http://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf]
+#  params:
+#    _save_artifacts: ['models', 'debug_as_files']
+#    _n_jobs: 1
+
+autosklearn2:
+  extends: autosklearn
+  params:
+    _askl2: true
+
+AutoWEKA:
+  version: 'stable'
+  description: |
+    Auto-WEKA considers the problem of simultaneously selecting a learning algorithm and setting its hyperparameters, going beyond previous methods that address these issues in isolation.
+    Auto-WEKA does this using a fully automated approach, leveraging recent innovations in Bayesian optimization.
+  project: https://www.cs.ubc.ca/labs/beta/Projects/autoweka/
+  refs: [https://www.cs.ubc.ca/labs/beta/Projects/autoweka/papers/16-599.pdf]
+
+autoxgboost:
+  version: 'latest'
+  description: |
+    autoxgboost aims to find an optimal xgboost model automatically using the machine learning framework mlr and the bayesian optimization framework mlrMBO.
+  project: https://github.com/ja-thomas/autoxgboost
+  refs: [https://arxiv.org/abs/1807.03873v2]
+
+flaml:
+  version: 'stable'
+  description: |
+    FLAML is a lightweight Python library that finds accurate machine learning models 
+    automatically, efficiently and economically. It frees users from selecting learners 
+    and hyperparameters for each learner. It is fast and cheap. 
+  project: https://github.com/microsoft/FLAML
+  refs: [https://arxiv.org/pdf/1911.04706.pdf]
+
+GAMA:
+  version: 'stable'
+  description: |
+    GAMA tries to find a good machine learning pipeline.
+    For the machine learning pipeline GAMA considers data preprocessing steps, various machine learning algorithms, and their possible hyperparameters configurations.
+  project: https://github.com/PGijsbers/gama
+  refs: [https://joss.theoj.org/papers/10.21105/joss.01132]
+
+H2OAutoML:
+  version: 'stable'
+  description: |
+    H2O AutoML is a highly scalable, fully-automated, supervised learning algorithm
+    which automates the process of training a large selection of candidate models and stacked ensembles within a singlefunction.
+  project: http://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html
+  refs: [https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf]
+
+hyperoptsklearn:
+  version: 'latest'
+  description: |
+    hyperopt-sklearn uses Hyperopt to define a search space that encompasses many standard Scikit-Learn components and common patterns of composing them together.
+  project: http://hyperopt.github.io/hyperopt-sklearn/
+  refs: [http://conference.scipy.org/proceedings/scipy2014/pdfs/komer.pdf]
+#  params:
+#    max_evals: 1000
+#    algo: hyperopt.tpe.suggest
+#    verbose: true
+
+lightautoml:
+  project: https://github.com/sberbank-ai-lab/LightAutoML
+  version: 'stable'
+  description: |
+    LightAutoML (LAMA) project from Sberbank AI Lab AutoML group is the framework for automatic classification and regression model creation.
+
+mljarsupervised:
+  version: 'stable'
+  description: |
+    AutoML mljar-supervised abstracts the common way to preprocess the data, construct the machine learning models, and perform hyper-parameters tuning to find the best model.
+  project: https://supervised.mljar.com/
+#  params:
+#    algorithms: ["Baseline"]
+#    _save_artifacts: True
+
+mljarsupervised_compete:
+  extends: mljarsupervised
+  description: "MLJAR is using 'Compete' mode to provide the most accurate predictor"
+  params:
+    mode: Compete   # set mode for Compete, default mode is Explain
+    
+MLNet:
+  version: 'latest'
+  description: |
+    MLNET.CLI is a automated machine learning tool implemented by ml.net.
+    
+MLPlan:
+  version: 'stable'
+  abstract: true
+  description: |
+    ML-Plan is an approach to AutoML based on hierarchical task networks (HTNs).
+  project: http://mlplan.org
+  refs: [https://doi.org/10.1007/s10994-018-5735-z]
+
+MLPlanSKLearn:
+  extends: MLPlan
+  params:
+    _backend: sklearn
+
+MLPlanWEKA:
+  extends: MLPlan
+  params:
+    _backend: weka
+
+mlr3automl:
+  version: 'stable'
+  project: https://github.com/a-hanf/mlr3automl
+
+oboe:
+  version: 'latest'
+  description: |
+    oboe is an AutoML model selection system to select estimators or pipelines for a dataset.
+  project: https://github.com/udellgroup/oboe
+#  params:
+#    build_ensemble: false
+#    selection_method: random
+#    verbose: true
+
+TPOT:
+  version: 'stable'
+  description: |
+    TPOT is a Python Automated Machine Learning tool that optimizes machine learning pipelines using genetic programming.
+  project: https://github.com/EpistasisLab/tpot
+  refs:
+    - https://academic.oup.com/bioinformatics/article/36/1/250/5511404
+    - http://doi.acm.org/10.1145/2908812.2908918
+#  params:
+#    _save_artifacts: ['models']
+#    max_eval_time_mins: 2
+#    population_size: 25
+#    verbosity: 2
+
+
+
+#######################################
+### Non AutoML reference frameworks ###
+#######################################
+
+constantpredictor:
+  description: |
+    Fast dummy classifier mainly used to test the app and/or datasets: this doesn't encode data.
+  project: https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html
+
+DecisionTree:
+  version: 'stable'
+  description: |
+    A simple decision tree implementation (scikit-learn) used for testing or as a reference base.
+  project: https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+
+RandomForest:
+  version: 'stable'
+  description: |
+    A simple Random Forest implementation (scikit-learn) used for testing or as a reference base.
+  project: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+  params:
+    n_estimators: 2000
+#    _n_jobs: 1   # faster, fitter, happier (running OoM on some datasets when using multiprocessing)
+#    verbose: true
+
+ranger:
+  version: 'stable'
+  description: |
+    A Random Forest implementation on R, mainly used for testing and as an example of R integration.
+  project: https://github.com/imbs-hl/ranger
+
+TunedRandomForest:
+  version: 'stable'
+  description: |
+    A Tuned Random Forest implementation (scikit-learn) trying to optimize over max_features, and used as a reference base.
+  project: http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+  params:
+    n_estimators: 2000
+#    _n_jobs: 1  # cf. RandomForest
+#    _tuning:
+#      n_estimators: 500
+
