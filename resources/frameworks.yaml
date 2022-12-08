@@ -73,7 +73,7 @@ FTT_ft0:
       few_shot: 1.0
     holdout_frac: 0.125
 
-FTT_AG_hog_ft250:
+FTT_ft250:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -90,7 +90,7 @@ FTT_AG_hog_ft250:
       few_shot: 1.0
     holdout_frac: 0.125
 
-FTT_AG_hog_ft500:
+FTT_ft500:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -107,7 +107,7 @@ FTT_AG_hog_ft500:
       few_shot: 1.0
     holdout_frac: 0.125
 
-FTT_AG_hog_ft750:
+FTT_ft750:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -124,7 +124,7 @@ FTT_AG_hog_ft750:
       few_shot: 1.0
     holdout_frac: 0.125
 
-FTT_AG_hog_ft1000:
+FTT_ft1000:
   extends: AutoGluon
   version: "latest_gpu"
   params:
