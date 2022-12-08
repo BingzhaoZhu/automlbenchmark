@@ -70,7 +70,7 @@ FTT_ft0:
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_0/pretrained.ckpt"
-      few_shot: 1.0
+      few_shot: 0.1
     holdout_frac: 0.125
 
 FTT_ft250:
@@ -87,7 +87,7 @@ FTT_ft250:
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_250/pretrained.ckpt"
-      few_shot: 1.0
+      few_shot: 0.1
     holdout_frac: 0.125
 
 FTT_ft500:
@@ -104,7 +104,7 @@ FTT_ft500:
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_500/pretrained.ckpt"
-      few_shot: 1.0
+      few_shot: 0.1
     holdout_frac: 0.125
 
 FTT_ft750:
@@ -121,7 +121,7 @@ FTT_ft750:
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_750/pretrained.ckpt"
-      few_shot: 1.0
+      few_shot: 0.1
     holdout_frac: 0.125
 
 FTT_ft1000:
@@ -138,7 +138,7 @@ FTT_ft1000:
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_1000/pretrained.ckpt"
-      few_shot: 1.0
+      few_shot: 0.1
     holdout_frac: 0.125
 
 
