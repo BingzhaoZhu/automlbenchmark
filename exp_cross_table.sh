@@ -12,7 +12,7 @@ python runbenchmark.py FastFTT_AG_hog_ft750_lowe ag_finetune mytest1h -m aws -p 
 python runbenchmark.py FastFTT_AG_hog_ft750 ag_finetune mytest1h -m aws -p 520
 #python runbenchmark.py FastFTT_AG_hog_ft1000 ag_finetune mytest1h -m aws -p 520
 
-#python runbenchmark.py FTT_AG_hog_ft0_lowi ag_finetune mytest1h -m aws -p 520
+#python runbenchmark.py FTT_ft0 ag_finetune mytest1h -m aws -p 520
 #python runbenchmark.py FTT_AG_hog_ft250_lowi ag_finetune mytest1h -m aws -p 520
 #python runbenchmark.py FTT_AG_hog_ft500_lowi ag_finetune mytest1h -m aws -p 520
 #python runbenchmark.py FTT_AG_hog_ft750_lowi ag_finetune mytest1h -m aws -p 520
