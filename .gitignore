@@ -40,6 +40,7 @@ summary/
 *.gz
 *.bz2
 *.png
+*.ckpt
 
 # Singurality files
 Singularityfile
