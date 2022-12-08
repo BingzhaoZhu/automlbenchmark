@@ -72,23 +72,21 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    # "N0": "fastftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221204T074233/",
-    # "N250": "fastftt_ag_hog_ft250.ag_finetune.mytest1h.aws.20221204T131222/",
-    # "N500": "fastftt_ag_hog_ft500.ag_finetune.mytest1h.aws.20221204T153830/",
-    # "N750": "fastftt_ag_hog_ft750.ag_finetune.mytest1h.aws.20221204T123609/",
-    # "N1000": "fastftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221204T074203/",
+    "N0": "ftt_ft0.ag_finetune.mytest1h.aws.20221208T074812/",
+    "N500": "ftt_ft500.ag_finetune.mytest1h.aws.20221208T074838/",
+    "N1000": "ftt_ft1000.ag_finetune.mytest1h.aws.20221208T074852/",
 
-    "FTT_BL_lowe": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221202T211440/",
-    "FTT_BL": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
-    "FastFTT_BL_lowe": "fastftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221204T054019/",
-    "FastFTT_BL": "fastftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221204T074233/",
+    # "FTT_BL_lowe": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221202T211440/",
+    # "FTT_BL": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
+    # "FastFTT_BL_lowe": "fastftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221204T054019/",
+    # "FastFTT_BL": "fastftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221204T074233/",
 
-    "FTT_ft_lowe": "ftt_ag_hog_ft1000_lowe.ag_finetune.mytest1h.aws.20221202T211825/",
-    "FTT_ft": "ftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221203T052326/",
-    "FTT_pretrain": "ftt_ag_hog_ft500.ag_finetune.mytest1h.aws.20221203T212613/",
-    "FTT_pretrain_lowe": "ftt_ag_hog_ft750_lowe.ag_finetune.mytest1h.aws.20221204T004406/",
-    "FastFTT_ft_lowe": "fastftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221204T054053/",
-    "FastFTT_ft": "fastftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221204T074203/",
+    # "FTT_ft_lowe": "ftt_ag_hog_ft1000_lowe.ag_finetune.mytest1h.aws.20221202T211825/",
+    # "FTT_ft": "ftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221203T052326/",
+    # "FTT_pretrain": "ftt_ag_hog_ft500.ag_finetune.mytest1h.aws.20221203T212613/",
+    # "FTT_pretrain_lowe": "ftt_ag_hog_ft750_lowe.ag_finetune.mytest1h.aws.20221204T004406/",
+    # "FastFTT_ft_lowe": "fastftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221204T054053/",
+    # "FastFTT_ft": "fastftt_ag_hog_ft1000.ag_finetune.mytest1h.aws.20221204T074203/",
 
 }
 
@@ -106,9 +104,9 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N250", "N500", "N750", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
-models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",
-          "FTT_ft_lowe", "FTT_ft", "FTT_pretrain", "FTT_pretrain_lowe", "FastFTT_ft_lowe", "FastFTT_ft"]
+models = ["N0", "N500", "N1000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+# models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",
+#           "FTT_ft_lowe", "FTT_ft", "FTT_pretrain", "FTT_pretrain_lowe", "FastFTT_ft_lowe", "FastFTT_ft"]
 
 
 s3_client = boto3.client('s3')
