@@ -51,10 +51,10 @@ FTT_pretrain_reconstruction:
       is_pretrain: true
       name: true
       num_tasks: 52
-      iter_per_save: 30
-      max_iter: 60000
-      upload_per_n_iter: 30
-      folder_name: "pretrain_reconstruction"
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_reconstruction_sum"
 
 
 # heavy finetuning
