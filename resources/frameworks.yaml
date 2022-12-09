@@ -162,6 +162,28 @@ FTT_ft0_light:
       finetune_on: "pretrain_reconstruction/iter_0/pretrained.ckpt"
     holdout_frac: 0.125
 
+FTT_ft3k_light:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+
+        #optimization.patience: 20
+        #optimization.top_k: 3
+        #optimization.val_check_interval: 0.5
+
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+        optimization.max_epochs: 3
+    is_pretrain:
+      is_pretrain: false
+      finetune_on: "pretrain_reconstruction/iter_3000/pretrained.ckpt"
+    holdout_frac: 0.125
+
 FTT_ft15k_light:
   extends: AutoGluon
   version: "latest_gpu"
