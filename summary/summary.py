@@ -72,10 +72,10 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "N0": "ftt_ft0_light.ag_finetune.mytest1h.aws.20221209T184035/",
-    "N15k": "ftt_ft15k_light.ag_finetune.mytest1h.aws.20221209T184112/",
-    "N30k": "ftt_ft30k_light.ag_finetune.mytest1h.aws.20221209T184211/",
-    "N45k": "ftt_ft3k_light.ag_finetune.mytest1h.aws.20221209T193410/",
+    "N0": "ftt_ft0.ag_finetune.mytest1h.aws.20221209T220505/",
+    "N15k": "ftt_ft15k.ag_finetune.mytest1h.aws.20221209T220529/",
+    "N30k": "ftt_ft30k.ag_finetune.mytest1h.aws.20221209T220550/",
+    # "N45k": "ftt_ft3k_light.ag_finetune.mytest1h.aws.20221209T193410/",
 
     # "FTT_BL_lowe": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221202T211440/",
     # "FTT_BL": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
@@ -105,7 +105,7 @@ models = ["FTT", "FTT_recon"]
 models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
 models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
 models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N15k", "N30k", "N45k"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+models = ["N0", "N15k", "N30k"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 # models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",
 #           "FTT_ft_lowe", "FTT_ft", "FTT_pretrain", "FTT_pretrain_lowe", "FastFTT_ft_lowe", "FastFTT_ft"]
 
