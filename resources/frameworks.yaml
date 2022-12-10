@@ -70,7 +70,7 @@ FTT_ft0:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 6
+        optimization.patience: 3
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_0/pretrained.ckpt"
@@ -93,7 +93,7 @@ FTT_ft15k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 6
+        optimization.patience: 3
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_15000/pretrained.ckpt"
@@ -111,7 +111,7 @@ FTT_ft30k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 6
+        optimization.patience: 3
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_30000/pretrained.ckpt"
@@ -129,7 +129,7 @@ FTT_ft45k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 6
+        optimization.patience: 3
     is_pretrain:
       is_pretrain: false
       finetune_on: "pretrain_reconstruction/iter_45000/pretrained.ckpt"
