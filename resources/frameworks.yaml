@@ -56,6 +56,83 @@ FTT_pretrain_reconstruction:
       upload_per_n_iter: 5
       folder_name: "pretrain_reconstruction_sum"
 
+FTT_pretrain_supervised:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.max_epochs: 100000
+
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+        optimization.patience: 100000
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 52
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_supervised_sum"
+
+FTT_pretrain_contrastive:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.max_epochs: 100000
+
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "contrastive"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 1
+        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.pretrain_epochs: 100000
+        optimization.patience: 100000
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 52
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_contrastive_sum"
+
+FTT_pretrain_all:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.max_epochs: 100000
+
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "both"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 1
+        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.pretrain_epochs: 0
+        optimization.patience: 100000
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 52
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_all_sum"
+
 
 ##### heavy finetuning #####
 FTT_ft0:
