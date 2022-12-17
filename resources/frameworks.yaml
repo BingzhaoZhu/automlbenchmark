@@ -66,6 +66,7 @@ FTT_pretrain_supervised:
         optimization.max_epochs: 100000
 
         pretrainer: true
+        pretrainer.objective: None
         pretrainer.start_pretrain_coefficient: 0
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
