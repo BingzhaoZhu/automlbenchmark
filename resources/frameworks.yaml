@@ -160,7 +160,7 @@ FTT_ft0:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_0/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -182,7 +182,7 @@ FTT_ft250:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_250/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -203,7 +203,7 @@ FTT_ft500:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -224,7 +224,7 @@ FTT_ft1000:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_1000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -246,7 +246,7 @@ FTT_ft1500:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_1500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -268,7 +268,7 @@ FTT_ft2000:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_sum/iter_2000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_sum/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -537,4 +537,135 @@ FTT_ft2000_fewshot:
     is_pretrain:
       is_pretrain: false
       few_shot: 1000
+    holdout_frac: 0.125
+
+
+##### heavy finetuning contrastive #####
+FTT_ft0_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_0/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
+    holdout_frac: 0.125
+
+FTT_ft250_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_250/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
+    holdout_frac: 0.125
+
+FTT_ft500_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_500/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
+    holdout_frac: 0.125
+
+FTT_ft1000_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_1000/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
+    holdout_frac: 0.125
+
+
+FTT_ft1500_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_1500/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
+    holdout_frac: 0.125
+
+
+FTT_ft2000_cont:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        pretrainer: true
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+
+        optimization.patience: 3
+        optimization.top_k: 1
+        optimization.val_check_interval: 1.0
+
+        finetune_on: "pretrain_contrastive_sum/iter_2000/pretrained.ckpt"
+    is_pretrain:
+      is_pretrain: false
     holdout_frac: 0.125
