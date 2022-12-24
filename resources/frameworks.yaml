@@ -511,7 +511,7 @@ FTT_ft0_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -534,7 +534,7 @@ FTT_ft250_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -556,7 +556,7 @@ FTT_ft500_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -578,7 +578,7 @@ FTT_ft1000_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -600,7 +600,7 @@ FTT_ft1500_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -622,7 +622,7 @@ FTT_ft2000_fewshot:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -646,7 +646,7 @@ FTT_ft0_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -669,7 +669,7 @@ FTT_ft250_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -691,7 +691,7 @@ FTT_ft500_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -713,7 +713,7 @@ FTT_ft1000_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -735,7 +735,7 @@ FTT_ft1500_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -757,7 +757,7 @@ FTT_ft2000_fewshot_1k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -780,7 +780,7 @@ FTT_ft0_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -803,7 +803,7 @@ FTT_ft250_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -825,7 +825,7 @@ FTT_ft500_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -847,7 +847,7 @@ FTT_ft1000_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -869,7 +869,7 @@ FTT_ft1500_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
@@ -891,7 +891,7 @@ FTT_ft2000_fewshot_2k:
         pretrainer.end_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
-        optimization.patience: 3
+        optimization.max_epochs: 3
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
