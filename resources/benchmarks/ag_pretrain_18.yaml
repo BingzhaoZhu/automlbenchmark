@@ -1,0 +1,57 @@
+---
+# Combines openml/s/269 and openml/s/271
+# Locally stored instead of fetched from openml to avoid server errors
+
+- name: APSFailure
+  openml_task_id: 168868
+
+- name: Airlines_DepDelay_10M
+  openml_task_id: 359929
+
+- name: Allstate_Claims_Severity
+  openml_task_id: 233212
+
+- name: Amazon_employee_access
+  openml_task_id: 359979
+
+- name: Australian
+  openml_task_id: 146818
+
+- name: Bioresponse
+  openml_task_id: 359967
+
+- name: Brazilian_houses
+  openml_task_id: 359938
+
+- name: Buzzinsocialmedia_Twitter
+  openml_task_id: 233213
+
+- name: Click_prediction_small
+  openml_task_id: 359992
+
+- name: Diabetes130US
+  openml_task_id: 211986
+
+- name: Fashion-MNIST
+  openml_task_id: 359976
+
+- name: GesturePhaseSegmentationProcessed
+  openml_task_id: 359970
+
+- name: Higgs
+  openml_task_id: 360114
+
+- name: Internet-Advertisements
+  openml_task_id: 359966
+
+- name: KDDCup09-Upselling
+  openml_task_id: 360115
+
+- name: KDDCup09_appetency
+  openml_task_id: 3945
+
+- name: KDDCup99
+  openml_task_id: 360112
+
+- name: MIP-2016-regression
+  openml_task_id: 359947
