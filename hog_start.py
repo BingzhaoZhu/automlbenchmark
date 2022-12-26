@@ -5,7 +5,7 @@ import boto3
 #     try:
 #         s3_client = boto3.client('s3')
 #         response = s3_client.list_objects_v2(Bucket='automl-benchmark-bingzzhu',
-#                                              Prefix='ec2/2022_09_14/cross_table_pretrain/pretrain_supervised_sum'
+#                                              Prefix='ec2/2022_09_14/cross_table_pretrain/pretrain_reconstruction_saint'
 #                                              )
 #         for object in response['Contents']:
 #             print('Deleting', object['Key'])

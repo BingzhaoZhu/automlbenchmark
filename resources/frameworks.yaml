@@ -1093,3 +1093,37 @@ FTT_ft2000_cont:
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
+
+
+
+
+
+#
+FTT_pretrain_test:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.max_epochs: 100000
+
+        pretrainer: true
+        pretrainer.augmentation_type: "permutation"
+        pretrainer.corruption_rate: 0.6
+        pretrainer.objective: "reconstruction"
+        pretrainer.start_pretrain_coefficient: 1
+        pretrainer.end_pretrain_coefficient: 1
+        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.pretrain_epochs: 100000
+        optimization.patience: 100000
+
+        finetune_on: "pretrained_hogwild.ckpt"
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 1
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_test"
