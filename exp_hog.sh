@@ -9,5 +9,5 @@ python runbenchmark.py FTT_pretrain_reconstruction_10 ag_pretrain mytest8h -m aw
 python runbenchmark.py FTT_pretrain_reconstruction_5 ag_pretrain mytest8h -m aws -p 180 -f 0
 python runbenchmark.py FTT_pretrain_reconstruction_1 ag_pretrain mytest8h -m aws -p 180 -f 0
 
-python runbenchmark.py Saint_pretrain_reconstruction ag_pretrain mytest8h -m aws -p 180 -f 0
+# python runbenchmark.py Saint_pretrain_reconstruction ag_pretrain mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py Fastformer_pretrain_reconstruction ag_pretrain mytest8h -m aws -p 180 -f 0

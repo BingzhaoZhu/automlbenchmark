@@ -1207,8 +1207,8 @@ FTT_ft2000_cont:
 
 
 
-## Fastformer
-Fastformer_ft0:
+## Saint
+Saint_ft0:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1224,13 +1224,14 @@ Fastformer_ft0:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_0/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft250:
+Saint_ft250:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1246,13 +1247,14 @@ Fastformer_ft250:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_250/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft500:
+Saint_ft500:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1268,13 +1270,14 @@ Fastformer_ft500:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_500/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft1000:
+Saint_ft1000:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1290,13 +1293,14 @@ Fastformer_ft1000:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_1000/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft1500:
+Saint_ft1500:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1312,13 +1316,14 @@ Fastformer_ft1500:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_1500/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft2000:
+Saint_ft2000:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1334,14 +1339,15 @@ Fastformer_ft2000:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_2000/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
 ##### light finetuning  #####
-Fastformer_ft0_light:
+Saint_ft0_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1357,13 +1363,14 @@ Fastformer_ft0_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_0/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft250_light:
+Saint_ft250_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1379,13 +1386,14 @@ Fastformer_ft250_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_250/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft500_light:
+Saint_ft500_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1401,13 +1409,14 @@ Fastformer_ft500_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_500/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft1000_light:
+Saint_ft1000_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1423,13 +1432,14 @@ Fastformer_ft1000_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_1000/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft1500_light:
+Saint_ft1500_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1445,13 +1455,14 @@ Fastformer_ft1500_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_1500/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
 
-Fastformer_ft2000_light:
+Saint_ft2000_light:
   extends: AutoGluon
   version: "latest_gpu"
   params:
@@ -1467,8 +1478,9 @@ Fastformer_ft2000_light:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        model.fusion_transformer.additive_attention: true
-        finetune_on: "pretrain_reconstruction_fastformer/iter_2000/pretrained.ckpt"
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125

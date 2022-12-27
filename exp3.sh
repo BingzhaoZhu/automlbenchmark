@@ -10,9 +10,9 @@
 # python runbenchmark.py FTT_ft1500_light ag_finetune mytest1h -m aws -p 520
 # python runbenchmark.py FTT_ft2000_light ag_finetune mytest1h -m aws -p 520
 
-python runbenchmark.py Fastformer_ft0_light ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py Fastformer_ft250_light ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py Fastformer_ft500_light ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py Fastformer_ft1000_light ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py Fastformer_ft1500_light ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py Fastformer_ft2000_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft0_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft250_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft500_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft1000_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft1500_light ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py Saint_ft2000_light ag_finetune mytest1h -m aws -p 520
