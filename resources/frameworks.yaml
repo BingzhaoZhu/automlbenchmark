@@ -393,6 +393,7 @@ Saint_pretrain_reconstruction:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
+        optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrained_hogwild_Saint.ckpt"
     is_pretrain:
       is_pretrain: true
