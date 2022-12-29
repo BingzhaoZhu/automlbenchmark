@@ -1527,7 +1527,7 @@ FTT_pretrain_reconstruction_18_task:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_sum_18_task"
+      folder_name: "pretrain_reconstruction_sum_18_tasks"
 
 FTT_pretrain_reconstruction_36_task:
   extends: AutoGluon
@@ -1585,4 +1585,4 @@ FTT_pretrain_reconstruction_52_task:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_sum_36_tasks"
+      folder_name: "pretrain_reconstruction_sum_52_tasks"
