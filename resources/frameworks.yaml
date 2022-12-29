@@ -398,6 +398,34 @@ Fastformer_pretrain_reconstruction:
       upload_per_n_iter: 5
       folder_name: "pretrain_reconstruction_fastformer"
 
+Saint_pretrain_supervised:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    hyperparameters:
+      FT_TRANSFORMER:
+        env.per_gpu_batch_size: 128
+        optimization.max_epochs: 100000
+
+        pretrainer: true
+        pretrainer.objective: None
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.pretrain_epochs: 0
+        optimization.patience: 100000
+
+        model.fusion_transformer.row_attention: true
+        model.fusion_transformer.row_attention_layer: "shared"
+        optimization.row_attention_weight_decay: 0.1
+        finetune_on: "pretrained_hogwild_Saint.ckpt"
+    is_pretrain:
+      is_pretrain: true
+      name: true
+      num_tasks: 52
+      iter_per_save: 5
+      max_iter: 2000
+      upload_per_n_iter: 5
+      folder_name: "pretrain_supervised_saint"
 
 Saint_pretrain_reconstruction:
   extends: AutoGluon
@@ -1255,7 +1283,7 @@ Saint_ft0:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1279,7 +1307,7 @@ Saint_ft250:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1303,7 +1331,7 @@ Saint_ft500:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1327,7 +1355,7 @@ Saint_ft1000:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1351,7 +1379,7 @@ Saint_ft1500:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1375,7 +1403,7 @@ Saint_ft2000:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1400,7 +1428,7 @@ Saint_ft0_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1424,7 +1452,7 @@ Saint_ft250_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1448,7 +1476,7 @@ Saint_ft500_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1472,7 +1500,7 @@ Saint_ft1000_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1496,7 +1524,7 @@ Saint_ft1500_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
@@ -1520,7 +1548,7 @@ Saint_ft2000_light:
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
         optimization.row_attention_weight_decay: 0.1
-        finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
+        finetune_on: "pretrain_supervised_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
