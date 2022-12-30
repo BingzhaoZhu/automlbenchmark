@@ -1282,7 +1282,7 @@ Saint_ft0:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1306,7 +1306,7 @@ Saint_ft250:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1330,7 +1330,7 @@ Saint_ft500:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1354,7 +1354,7 @@ Saint_ft1000:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1378,7 +1378,7 @@ Saint_ft1500:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1402,7 +1402,7 @@ Saint_ft2000:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1427,7 +1427,7 @@ Saint_ft0_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_0/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1451,7 +1451,7 @@ Saint_ft250_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_250/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1475,7 +1475,7 @@ Saint_ft500_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1499,7 +1499,7 @@ Saint_ft1000_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_1000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1523,7 +1523,7 @@ Saint_ft1500_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_1500/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
@@ -1547,7 +1547,7 @@ Saint_ft2000_light:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrain_reconstruction_saint/iter_2000/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
