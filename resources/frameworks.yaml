@@ -416,7 +416,7 @@ Saint_pretrain_supervised:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrained_hogwild_Saint.ckpt"
     is_pretrain:
       is_pretrain: true
@@ -448,7 +448,7 @@ Saint_pretrain_reconstruction:
 
         model.fusion_transformer.row_attention: true
         model.fusion_transformer.row_attention_layer: "shared"
-        optimization.row_attention_weight_decay: 0.1
+        # optimization.row_attention_weight_decay: 0.1
         finetune_on: "pretrained_hogwild_Saint.ckpt"
     is_pretrain:
       is_pretrain: true
@@ -1582,7 +1582,8 @@ FTT_pretrain_reconstruction_18_task:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_sum_18_tasks"
+      folder_name: "pretrain_reconstruction_mean_18_tasks"
+      aggregation: "mean"
 
 FTT_pretrain_reconstruction_36_task:
   extends: AutoGluon
@@ -1611,7 +1612,8 @@ FTT_pretrain_reconstruction_36_task:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_sum_36_tasks"
+      folder_name: "pretrain_reconstruction_mean_36_tasks"
+      aggregation: "mean"
 
 FTT_pretrain_reconstruction_52_task:
   extends: AutoGluon
@@ -1640,4 +1642,5 @@ FTT_pretrain_reconstruction_52_task:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_sum_52_tasks"
+      folder_name: "pretrain_reconstruction_mean_52_tasks"
+      aggregation: "mean"
