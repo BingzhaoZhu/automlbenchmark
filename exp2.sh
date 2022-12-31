@@ -19,3 +19,5 @@ python runbenchmark.py Saint_ft2000 ag_finetune mytest1h -m aws -p 520
 
 python runbenchmark.py FTT_ft0 ag_finetune mytest1h -m aws -p 520
 python runbenchmark.py FTT_ft250 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_ft0_fewshot ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_ft250_fewshot ag_finetune mytest1h -m aws -p 520
