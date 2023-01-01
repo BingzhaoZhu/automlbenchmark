@@ -16,6 +16,7 @@
 # python runbenchmark.py FTT_pretrain_reconstruction_18_task ag_pretrain_18 mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py FTT_pretrain_reconstruction_36_task ag_pretrain_36 mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py FTT_pretrain_reconstruction_52_task ag_pretrain mytest8h -m aws -p 180 -f 0
+# python runbenchmark.py FTT_pretrain_reconstruction_1_task adult mytest8h -m aws -p 180 -f 0
 
 # python runbenchmark.py FTT_pretrain_supervised_blk_1 ag_pretrain mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py FTT_pretrain_supervised_blk_2 ag_pretrain mytest8h -m aws -p 180 -f 0

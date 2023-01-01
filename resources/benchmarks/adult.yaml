@@ -2,8 +2,11 @@
 # Combines openml/s/269 and openml/s/271
 # Locally stored instead of fetched from openml to avoid server errors
 
-- name: connect-4
-  openml_task_id: 359977
+- name: adult
+  openml_task_id: 359983
+
+# - name: connect-4
+#   openml_task_id: 359977
 
 #- name: credit-g
 #  openml_task_id: 168757
