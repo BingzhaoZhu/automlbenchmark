@@ -85,7 +85,7 @@ FTT_pretrain_reconstruction_1:
       iter_per_save: 1
       max_iter: 2000
       upload_per_n_iter: 1
-      folder_name: "pretrain_reconstruction_1_sum"
+      folder_name: "pretrain_reconstruction_1_sum_fold_2"
 
 FTT_pretrain_reconstruction_5:
   extends: AutoGluon
@@ -114,7 +114,7 @@ FTT_pretrain_reconstruction_5:
       iter_per_save: 5
       max_iter: 2000
       upload_per_n_iter: 5
-      folder_name: "pretrain_reconstruction_5_sum"
+      folder_name: "pretrain_reconstruction_5_sum_fold_2"
 
 FTT_pretrain_reconstruction_10:
   extends: AutoGluon
@@ -1714,3 +1714,47 @@ FTT_pretrain_reconstruction_52_task:
       upload_per_n_iter: 5
       folder_name: "pretrain_reconstruction_mean_52_tasks"
       aggregation: "mean"
+
+
+RF_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      RF: {}
+    holdout_frac: 0.125
+
+
+GBM_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      GBM: {}
+    holdout_frac: 0.125
+
+CAT_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      CAT: {}
+    holdout_frac: 0.125
+
+XGB_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      XGB: {}
+    holdout_frac: 0.125
+
+NN_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      NN_TORCH: {}
+    holdout_frac: 0.125
+
+FASTAI_AG:
+  extends: AutoGluon
+  params:
+    hyperparameters:
+      FASTAI: {}
+    holdout_frac: 0.125

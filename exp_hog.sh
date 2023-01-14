@@ -22,5 +22,7 @@
 # python runbenchmark.py FTT_pretrain_supervised_blk_2 ag_pretrain mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py FTT_pretrain_supervised_blk_3 ag_pretrain mytest8h -m aws -p 180 -f 0
 # python runbenchmark.py FTT_pretrain_supervised_with_cls ag_pretrain mytest8h -m aws -p 180 -f 0
-python runbenchmark.py FTT_pretrain_supervised_only_cls ag_pretrain mytest8h -m aws -p 180 -f 0
+# python runbenchmark.py FTT_pretrain_supervised_only_cls ag_pretrain mytest8h -m aws -p 180 -f 0
 
+python runbenchmark.py FTT_pretrain_reconstruction_1 ag_finetune mytest8h -m aws -p 180 -f 0
+python runbenchmark.py FTT_pretrain_reconstruction_5 ag_finetune mytest8h -m aws -p 180 -f 0

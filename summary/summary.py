@@ -72,12 +72,12 @@ locations = {
     # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
     # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
 
-    "N0":       "ftt_ft0_with_cls.ag_finetune.mytest1h.aws.20230101T053757/",
-    "N250":   "ftt_ft250_with_cls.ag_finetune.mytest1h.aws.20230101T063454/",
-    "N500":   "ftt_ft500_with_cls.ag_finetune.mytest1h.aws.20230101T073419/",
-    "N1000": "ftt_ft1000_with_cls.ag_finetune.mytest1h.aws.20230101T083242/",
-    "N1500": "ftt_ft1500_with_cls.ag_finetune.mytest1h.aws.20230101T093022/",
-    "N2000": "ftt_ft2000_with_cls.ag_finetune.mytest1h.aws.20230101T102728/",
+  "N0":       "ftt_ft0.ag_finetune.mytest1h.aws.20221228T063055/",
+  "N250":   "ftt_ft250.ag_finetune.mytest1h.aws.20221228T115504/",
+  "N500":   "ftt_ft500.ag_finetune.mytest1h.aws.20221228T125642/",
+  "N1000": "ftt_ft1000.ag_finetune.mytest1h.aws.20221228T135423/",
+  "N1500": "ftt_ft1500.ag_finetune.mytest1h.aws.20221228T145435/",
+  "N2000": "ftt_ft2000.ag_finetune.mytest1h.aws.20221228T155807/",
 
     # "FTT_BL_lowe": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221202T211440/",
     # "FTT_BL": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
@@ -248,6 +248,7 @@ if __name__ == "__main__":
     print("win_rate:", win_rate(models, tasks=("regression", "binary", "multiclass")))
 
     all = rank_models(models, "regression") + rank_models(models, "binary") + rank_models(models, "multiclass")
+    # all = rank_models(models, "multiclass")
 
     print(all / np.sum(all) * sum(range(1, 1+len(models))))
 
