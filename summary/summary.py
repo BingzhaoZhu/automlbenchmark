@@ -4,80 +4,23 @@ from scipy.stats import rankdata
 import boto3
 
 locations = {
-            # "FTTrans_pretrain": "fttransformer_gpu_pretrain_3.ag.mytest.aws.20220921T144652/",
-            # "FTTrans": "fttransformer_gpu_3.ag.mytest.aws.20220921T122437/",
-            # "WideDeep": "widedeep.ag.mytest.aws.20220921T180925/",
-            # "WideDeep_pretrain": "widedeep_pretrain.ag.mytest.aws.20220921T172633/",
-            # "CAT": "cat_ag.ag.mytest.aws.20220927T070920/",
-            # # "CAT_pretrain": "cat_ag_pretrain.ag.mytest.aws.20220927T230900/",
-            # "LGBM": "gbm_ag.ag.mytest.aws.20220917T173005/",
-            # "RF": "rf_ag.ag.mytest.aws.20220917T181110/",
-            # "XGB": "xgb_ag.ag.mytest.aws.20220917T202434/",
-            # "NN": "nn_ag.ag.mytest.aws.20220920T174058/",
-            # "FASTAI": "fastai_ag.ag.mytest.aws.20220920T185736/",
+            # "FTT_light_0": "ftt_ft0_fold_2_light.ag_pretrain.mytest1h.aws.20230116T032244/",
+            # "FTT_light_2000": "ftt_ft2000_fold_2_light.ag_pretrain.mytest1h.aws.20230116T084225/",
+            # "FTT_heavy_0": "ftt_ft0_fold_2_heavy.ag_pretrain.mytest1h.aws.20230116T032303/",
+            # "FTT_heavy_2000": "ftt_ft2000_fold_2_heavy.ag_pretrain.mytest1h.aws.20230116T045631/",
+            # "CAT": "cat_ag.ag.mytest1h.aws.20230114T215102/",
+            # "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
+            # "RF": "rf_ag.ag.mytest1h.aws.20230114T152933/",
+            # "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
+            # "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
+            # "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
 
-            # "FTT": "ftt_ag_identical.ag.mytest.aws.20221018T065139/",
-            # "FastFTT": "fastftt_ag.ag.mytest.aws.20221012T060457/",
-            # "FTT_batchsize_32": "ftt_ag_32.ag.mytest.aws.20221011T080250/",
-            # "FastFTT_batchsize_32": "fastftt_ag_32.ag.mytest.aws.20221012T181213/",
-            # "HTT": "htt_ag.ag.mytest.aws.20221006T045542/",
-
-            # "FTT": "ftt_ag.ag.mytest.aws.20221020T235009/",
-            # "FTT_pretrain_pretrain_fine": "ftt_ag_pretrain_cont.ag.mytest.aws.20221021T050134/",
-            # "FTT_pretrain_softpretrain_end0": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T020151/",
-            # "FTT_pretrain_softpretrain_end01": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T075728/",
-            # "FTT_pretrain_mix_loss": "ftt_ag_pretrain_cont.ag.mytest.aws.20221022T230745/",
-
-            # "ensemble": "ensemble_ag.ag.mytest4h.aws.20221027T233620/",
-            # "ensemble_FTT": "ensemble_ag_ftt.ag.mytest4h.aws.20221027T233709/",
-            # "ensemble_FastFTT": "ensemble_ag_fastftt.ag.mytest4h.aws.20221031T044235/",
-            # "ensemble_FTT_row": "ensemble_ag_ftt_rowatt.ag.mytest4h.aws.20221027T233735/",
-            # "ensemble_FTT_pretrain": "ensemble_ag_ftt_pretrain.ag.mytest4h.aws.20221027T233830/",
-            # "ensemble_ag_ftt_all": "ensemble_ag_ftt_all.ag.mytest4h.aws.20221031T211433/",
-
-            # "ensemble_bq": "ensemble_ag_bq.ag.mytest24h.aws.20221105T052819/",
-            # "ensemble_bq_m6i": "ensemble_ag_bq.ag.mytest24h.aws.20221109T020748/",
-            # # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
-            # # "ensemble_FTT_pretrain_bq": "ensemble_ag_ftt_pretrain_bq.ag.mytest4h.aws.20221103T051502/",
-            # "ensemble_ag_ftt_all_bq": "ensemble_ag_ftt_all_bq.ag.mytest24h.aws.20221105T061959/", #"ensemble_ag_ftt_all_mq.ag.mytest4h.aws.20221104T174422/",
-            # "ensemble_ag_ftt_all_bq_m6i": "ensemble_ag_ftt_all_bq_cpu.ag.mytest24h.aws.20221109T020548/",
-
-            # "ensemble_bq": "ensemble_ag_bq.ag.mytest4h.aws.20221102T230938/",
-            # "ensemble_fastftt_bq": "ensemble_ag_fastftt_bq.ag.mytest4h.aws.20221110T232827/",
-            # "ensemble_autoftt_bq": "ensemble_ag_autoftt_bq.ag.mytest4h.aws.20221110T232806/",
-            # "ensemble_ftt_bq": "ensemble_ag_accurateftt_bq.ag.mytest4h.aws.20221110T232734/",
-
-            # "FTT_dist": "ftt_ag_pretrain_dist.ag.mytest.aws.20221027T170021/",
-            # "FTT_cont": "ftt_ag_pretrain_cont.ag.mytest.aws.20221027T035040/",
-            # "FTT_recon": "ftt_ag_pretrain_recon.ag.mytest.aws.20221026T004154/",
-            # "FTT_both": "ftt_ag_pretrain_both.ag.mytest.aws.20221027T035048/",
-            # "FTT": "ftt_ag.ag.mytest.aws.20221025T020434/",
-            # "FTT_nodecay": "ftt_ag_pretrain_dist.ag.mytest.aws.20221026T004113/",
-            # "FTT_row_attention_1_gt": "ftt_ag_row_attention_1_gt.ag.mytest.aws.20221024T074835/",
-            # # "FTT_row_attention_10": "ftt_ag_row_attention_10.ag.mytest.aws.20221022T020145/",
-            # "FTT_row_attention_10_gt": "ftt_ag_row_attention_10_gt.ag.mytest.aws.20221024T174142/",
-            # # "FTT_row_attention_gt": "ftt_ag_row_attention_gt.ag.mytest.aws.20221020T234929/",
-            # "FTT_row_attention_20_gt": "ftt_ag_row_attention_-1_gt.ag.mytest.aws.20221024T074900/",
-
-            # "FTT_row_attention_first": "ftt_ag_row_attention.ag.mytest.aws.20221001T180711/",
-            # "FTT_row_attention_last": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
-            # "FTT_row_attention_alter": "ftt_ag_row_attention_10.ag.mytest.aws.20221020T043406/",
-            # "FTT_row_attention_cls": "ftt_ag_row_attention_10.ag.mytest.aws.20221019T215218/",
-
-    # "N0": "ftt_ag.ag.mytest1h.aws.20221121T220729/",
-    # "N1": "ftt_ag.ag.mytest1h.aws.20221121T233555/",
-    # "N2": "ftt_ag.ag.mytest1h.aws.20221122T060222/",
-    # "N3": "ftt_ag.ag.mytest1h.aws.20221122T073032/",
-    # "N4": "ftt_ag.ag.mytest1h.aws.20221122T085738/",
-    # "N5": "ftt_ag.ag.mytest1h.aws.20221122T102505/",
-    # "N6": "ftt_ag.ag.mytest1h.aws.20221122T115204/",
-
-  "N0":       "ftt_ft0.ag_finetune.mytest1h.aws.20221228T063055/",
-  "N250":   "ftt_ft250.ag_finetune.mytest1h.aws.20221228T115504/",
-  "N500":   "ftt_ft500.ag_finetune.mytest1h.aws.20221228T125642/",
-  "N1000": "ftt_ft1000.ag_finetune.mytest1h.aws.20221228T135423/",
-  "N1500": "ftt_ft1500.ag_finetune.mytest1h.aws.20221228T145435/",
-  "N2000": "ftt_ft2000.ag_finetune.mytest1h.aws.20221228T155807/",
+#   "N0":       "ftt_ft0.ag_finetune.mytest1h.aws.20221228T063055/",
+#   "N250":   "ftt_ft250.ag_finetune.mytest1h.aws.20221228T115504/",
+#   "N500":   "ftt_ft500.ag_finetune.mytest1h.aws.20221228T125642/",
+#   "N1000": "ftt_ft1000.ag_finetune.mytest1h.aws.20221228T135423/",
+#   "N1500": "ftt_ft1500.ag_finetune.mytest1h.aws.20221228T145435/",
+#   "N2000": "ftt_ft2000.ag_finetune.mytest1h.aws.20221228T155807/",
 
     # "FTT_BL_lowe": "ftt_ag_hog_ft0_lowe.ag_finetune.mytest1h.aws.20221202T211440/",
     # "FTT_BL": "ftt_ag_hog_ft0.ag_finetune.mytest1h.aws.20221203T035746/",
@@ -93,21 +36,9 @@ locations = {
 
 }
 
-# models = ['FASTAI', 'NN', 'FTT_row_attention_20_gt', "CAT", "LGBM", "RF", "XGB"]
-# models = ["FTT", "FTT_pretrain_identical",
-#           "FTT_pretrain_randperm_03", "FTT_pretrain_randperm_06", "FTT_pretrain_randperm_09",
-#           "FTT_pretrain_randblk_03",  "FTT_pretrain_randblk_06",  "FTT_pretrain_randblk_09"]
-# models = ["FTT", "FTT_pretrain_randperm_06"]
-# models = ["FTT", "FTT_batchsize_32", "FastFTT", "FastFTT_batchsize_32"]
-# models = ["FTT_row_attention_first", "FTT_row_attention_last", "FTT_row_attention_alter", "FTT_row_attention_cls"]
-models = ["FTT", "FTT_row_attention_1_gt", "FTT_row_attention_10_gt", "FTT_row_attention_20_gt"]
-# models = ["FTT_row_attention_last", "FTT_row_attention_alter"]
-# models = ["FTT", "FTT_pretrain_pretrain_fine", "FTT_pretrain_softpretrain_end0", "FTT_pretrain_softpretrain_end01", "FTT_pretrain_mix_loss"]
-models = ["FTT", "FTT_recon"]
-models = ["FTT", "FTT_cont", "FTT_recon", "FTT_both", "FTT_dist"]
-models = ["ensemble", "ensemble_FTT", "ensemble_FastFTT", "ensemble_FTT_row", "ensemble_FTT_pretrain", "ensemble_ag_ftt_all"]
-models = ["ensemble_autoftt_bq", "ensemble_ftt_bq"] #, "ensemble_autoftt_bq", "ensemble_ftt_bq"] #, ensemble_bq, ensemble_FTT_pretrain_bq, ensemble_ag_ftt_all_bq]
-models = ["N0", "N250", "N500","N1000","N1500","N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
+models = ["FTT_heavy_0", "FTT_heavy_2000"] #, 'FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
+
+# models = ["N0", "N250", "N500","N1000","N1500","N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 # models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",
 #           "FTT_ft_lowe", "FTT_ft", "FTT_pretrain", "FTT_pretrain_lowe", "FastFTT_ft_lowe", "FastFTT_ft"]
 
