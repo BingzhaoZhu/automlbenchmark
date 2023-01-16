@@ -22,5 +22,5 @@
 # python runbenchmark.py FTT_ft1500_fewshot ag_finetune mytest1h -m aws -p 520
 # python runbenchmark.py FTT_ft2000_fewshot ag_finetune mytest1h -m aws -p 520
 
-python runbenchmark.py FTT_ft1500 ag_finetune mytest1h -m aws -p 520
-python runbenchmark.py FTT_ft2000 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_ft0_fold_2_light ag_pretrain mytest1h -m aws -p 520
+python runbenchmark.py FTT_ft2000_fold_2_light ag_pretrain mytest1h -m aws -p 520
