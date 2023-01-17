@@ -591,7 +591,7 @@ FTT_ft2000:
         optimization.top_k: 1
         optimization.val_check_interval: 1.0
 
-        finetune_on: "pretrain_reconstruction_1_sum_fold_2/iter_2000/pretrained.ckpt"
+        finetune_on: "pretrain_reconstruction_1_sum_fold_2/iter_1990/pretrained.ckpt"
     is_pretrain:
       is_pretrain: false
     holdout_frac: 0.125
