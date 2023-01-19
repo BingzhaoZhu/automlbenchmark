@@ -74,19 +74,19 @@ def hyperparameter_search_space(training_params):
                     'leaf_estimation_iterations': Int(lower=1, upper=20, default=31),
                     'iterations': Int(lower=100, upper=4000),
                 }
-                training_params["hyperparameters"]["GBM"] = search_space
+                training_params["hyperparameters"]["CAT"] = search_space
 
             if "RF" in training_params["hyperparameters"]:
-                    search_space = {
-                        # 'n_estimators': Int(lower=10, upper=1000, default=300),
-                        'max_features': Categorical('auto', 0.5, 0.25),
-                        'criterion': Categorical('gini', 'entropy'),
-                    }
-                    hyperparameters["RF"] = search_space
+                search_space = {
+                    # 'n_estimators': Int(lower=10, upper=1000, default=300),
+                    'max_features': Categorical('auto', 0.5, 0.25),
+                    'criterion': Categorical('gini', 'entropy'),
+                }
+                training_params["hyperparameters"]["RF"] = search_space
 
-            training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"},
-            training_params["keep_only_best"] = True,
-            training_params["fit_weighted_ensemble"] = False,
+            training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"}
+            training_params["keep_only_best"] = True
+            training_params["fit_weighted_ensemble"] = False
 
     return training_params
 
