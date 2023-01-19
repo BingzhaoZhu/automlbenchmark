@@ -1866,6 +1866,7 @@ RF_AG:
 
 GBM_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       GBM: {}
@@ -1873,6 +1874,7 @@ GBM_AG:
 
 CAT_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       CAT: {}
@@ -1880,6 +1882,7 @@ CAT_AG:
 
 XGB_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       XGB: {}
@@ -1887,6 +1890,7 @@ XGB_AG:
 
 NN_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       NN_TORCH: {}
@@ -1894,6 +1898,7 @@ NN_AG:
 
 FASTAI_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       FASTAI: {}
@@ -1902,6 +1907,7 @@ FASTAI_AG:
 
 RF_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
@@ -1910,6 +1916,7 @@ RF_HPO:
 
 GBM_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
@@ -1918,6 +1925,7 @@ GBM_HPO:
 
 CAT_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
@@ -1926,6 +1934,7 @@ CAT_HPO:
 
 XGB_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
@@ -1934,6 +1943,7 @@ XGB_HPO:
 
 NN_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
@@ -1942,6 +1952,7 @@ NN_HPO:
 
 FASTAI_HPO:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     HPO: true
     hyperparameters:
