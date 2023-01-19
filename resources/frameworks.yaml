@@ -1900,6 +1900,56 @@ FASTAI_AG:
     holdout_frac: 0.125
 
 
+RF_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      RF: {}
+    holdout_frac: 0.125
+
+
+GBM_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      GBM: {}
+    holdout_frac: 0.125
+
+CAT_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      CAT: {}
+    holdout_frac: 0.125
+
+XGB_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      XGB: {}
+    holdout_frac: 0.125
+
+NN_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      NN_TORCH: {}
+    holdout_frac: 0.125
+
+FASTAI_HPO:
+  extends: AutoGluon
+  params:
+    HPO: true
+    hyperparameters:
+      FASTAI: {}
+    holdout_frac: 0.125
+
+
 FTT_ft0_fold_2_light:
   extends: AutoGluon
   version: "latest_gpu"

@@ -21,6 +21,8 @@ from autogluon.tabular import TabularPredictor, TabularDataset
 from autogluon.core.utils.savers import save_pd, save_pkl
 import autogluon.core.metrics as metrics
 from autogluon.tabular.version import __version__
+from autogluon.core.space import Categorical, Int, Real
+import math
 
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer, zip_path
@@ -31,6 +33,64 @@ from frameworks.shared.utils import Timer, zip_path
 # torch.multiprocessing.set_sharing_strategy('file_system')
 
 log = logging.getLogger(__name__)
+
+def hyperparameter_search_space(training_params):
+    if "HPO" in training_params:
+        if training_params.pop("HPO"):
+            if "XGB" in training_params["hyperparameters"]:
+                search_space = {
+                    'learning_rate': Real(lower=math.exp(-7), upper=1, default=0.1, log=True),
+                    'max_depth': Int(lower=1, upper=10, default=6),
+                    'subsample': Real(lower=0.2, upper=1.0, default=1.0),
+                    'colsample_bytree': Real(lower=0.2, upper=1.0, default=1.0),
+                    'colsample_bylevel': Real(lower=0.2, upper=1.0, default=1.0),
+                    'min_child_weight': Real(lower=math.exp(-16), upper=math.exp(5), default=1, log=True),
+                    'reg_alpha': Real(lower=math.exp(-16), upper=math.exp(2), default=1, log=True),
+                    'reg_lambda': Real(lower=math.exp(-16), upper=math.exp(2), default=1, log=True),
+                    'gamma': Real(lower=math.exp(-16), upper=math.exp(2), default=1, log=True),
+                    'n_estimators': Int(lower=100, upper=4000, default=600),
+                }
+                training_params["hyperparameters"]["XGB"] = search_space
+            
+            if "GBM" in training_params["hyperparameters"]:
+                search_space = {
+                    'num_leaves': Int(lower=5, upper=50, default=31),
+                    'max_depth': Int(lower=3, upper=20),
+                    'learning_rate': Real(lower=math.exp(-3), upper=1, log=True),
+                    'n_estimators': Int(lower=50, upper=2000),
+                    'min_child_weight': Real(lower=math.exp(-5), upper=math.exp(4), log=True),
+                    'reg_alpha': Categorical(0, 0.1, 1, 2, 5, 7, 10, 50 , 100),
+                    'reg_lambda': Categorical(0, 0.1, 1, 5, 10, 20, 50, 100),
+                    'subsample': Real(lower=0.2, upper=0.8),
+                }
+                training_params["hyperparameters"]["GBM"] = search_space
+            
+            if "CAT" in training_params["hyperparameters"]:
+                search_space = {
+                    'learning_rate': Real(lower=math.exp(-5), upper=1, log=True),
+                    'random_strength': Int(lower=1, upper=20, default=31),
+                    'l2_leaf_reg': Real(lower=1, upper=10, log=True),
+                    'bagging_temperature': Real(lower=0, upper=1),
+                    'leaf_estimation_iterations': Int(lower=1, upper=20, default=31),
+                    'iterations': Int(lower=100, upper=4000),
+                }
+                training_params["hyperparameters"]["GBM"] = search_space
+
+            if "RF" in training_params["hyperparameters"]:
+                    search_space = {
+                        # 'n_estimators': Int(lower=10, upper=1000, default=300),
+                        'max_features': Categorical('auto', 0.5, 0.25),
+                        'criterion': Categorical('gini', 'entropy'),
+                    }
+                    hyperparameters["RF"] = search_space
+
+            training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"},
+            training_params["keep_only_best"] = True,
+            training_params["fit_weighted_ensemble"] = False,
+
+    return training_params
+
+
 
 def run(dataset, config):
     log.info(f"\n**** AutoGluon [v{__version__}] ****\n")
@@ -66,9 +126,7 @@ def run(dataset, config):
     if "is_pretrain" in training_params and "name" in training_params["is_pretrain"]:
         training_params["is_pretrain"]["name"] = config.name
 
-    # if "hyperparameters" in training_params and "FT_TRANSFORMER" in training_params["hyperparameters"] and "model.fusion_transformer.row_attention" in training_params["hyperparameters"]["FT_TRANSFORMER"]:
-    #     if config.type_ == "multiclass":
-    #     training_params["hyperparameters"]["FT_TRANSFORMER"]["model.fusion_transformer.row_attention"] = False
+    training_params = hyperparameter_search_space(training_params)
 
     with Timer() as training:
         predictor = TabularPredictor(
