@@ -1858,11 +1858,11 @@ FTT_pretrain_reconstruction_52_task:
 
 RF_AG:
   extends: AutoGluon
+  version: "latest_gpu"
   params:
     hyperparameters:
       RF: {}
     holdout_frac: 0.125
-
 
 GBM_AG:
   extends: AutoGluon
@@ -1907,7 +1907,6 @@ RF_HPO:
     hyperparameters:
       RF: {}
     holdout_frac: 0.125
-
 
 GBM_HPO:
   extends: AutoGluon

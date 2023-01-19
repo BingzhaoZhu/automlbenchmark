@@ -30,7 +30,6 @@
 # python runbenchmark.py FTT_ft500_fold_1 ag_finetune mytest1h -m aws -p 520
 # python runbenchmark.py FTT_ft1000_fold_1 ag_finetune mytest1h -m aws -p 520
 
-
 rm -f ~/.config/automlbenchmark/config.yaml
 cp ./examples/config_m6i.yaml ~/.config/automlbenchmark/config.yaml
 python runbenchmark.py RF_HPO ag mytest1h -m aws -p 1040

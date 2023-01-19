@@ -90,8 +90,6 @@ def hyperparameter_search_space(training_params):
 
     return training_params
 
-
-
 def run(dataset, config):
     log.info(f"\n**** AutoGluon [v{__version__}] ****\n")
     print("__dataset", dataset)
