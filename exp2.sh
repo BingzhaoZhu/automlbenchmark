@@ -36,6 +36,5 @@
 # python runbenchmark.py FTT_ft2000 ag_pretrain mytest1h -m aws -p 520
 
 rm -f ~/.config/automlbenchmark/config.yaml
-cp ./examples/config_m6i.yaml ~/.config/automlbenchmark/config.yaml
-python runbenchmark.py CAT_HPO ag mytest1h -m aws -p 1040
-python runbenchmark.py XGB_HPO ag mytest1h -m aws -p 1040
+cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
+python runbenchmark.py NN_HPO ag mytest1h -m aws -p 270

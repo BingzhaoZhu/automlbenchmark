@@ -25,12 +25,19 @@ locations = {
             "FTT_intense_2000_fold_1": "ftt_ft2000_intense.ag_finetune.mytest1h.aws.20230118T073213/",
             "FTT_intense_2000_fold_2": "ftt_ft2000_intense.ag_pretrain.mytest1h.aws.20230117T173928/",
 
-            "CAT": "cat_ag.ag.mytest1h.aws.20230114T215102/",
-            "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
-            "RF": "rf_ag.ag.mytest1h.aws.20230114T152933/",
-            "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
+            # "CAT": "cat_ag.ag.mytest1h.aws.20230114T215102/",
+            # "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
+            # "RF": "rf_ag.ag.mytest1h.aws.20230114T152933/",
+            # "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
             "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
             "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
+
+            "CAT": "cat_hpo.ag.mytest1h.aws.20230119T154044/",
+            "LGBM": "gbm_hpo.ag.mytest1h.aws.20230119T180251/",
+            "RF": "rf_hpo.ag.mytest1h.aws.20230119T154025/",
+            "XGB": "xgb_hpo.ag.mytest1h.aws.20230119T221737/",
+            # "NN": "",
+            # "FASTAI": "",
 
 #   "N0":       "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
 #   "N250":   "ftt_ft250.ag_pretrain.mytest1h.aws.20230116T155804/",

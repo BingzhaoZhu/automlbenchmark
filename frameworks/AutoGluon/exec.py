@@ -84,7 +84,63 @@ def hyperparameter_search_space(training_params):
                 }
                 training_params["hyperparameters"]["RF"] = search_space
 
-            training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"}
+            if "FTT" in training_params["hyperparameters"]:
+                training_params["hyperparameters"].pop("FTT")
+                training_params["hyperparameters"]['FT_TRANSFORMER'] = {
+                    "env.per_gpu_batch_size": 128,
+                    "pretrainer": True,
+                    "pretrainer.start_pretrain_coefficient": 0,
+                    "pretrainer.end_pretrain_coefficient": 0,
+                    "pretrainer.pretrain_epochs": 0,
+
+                    "optimization.patience": 20,
+                    "optimization.top_k": Categorical(3, 5, 1),
+                    "optimization.val_check_interval": Categorical(0.5, 1.0),
+                    "finetune_on": "pretrain_reconstruction_1_sum/iter_0/pretrained.ckpt",
+                }
+
+            if "FTT_fold1_pretrained" in training_params["hyperparameters"]:
+                training_params["hyperparameters"].pop("FTT_fold1_pretrained")
+                training_params["hyperparameters"]['FT_TRANSFORMER'] = {
+                    "env.per_gpu_batch_size": 128,
+                    "pretrainer": True,
+                    "pretrainer.start_pretrain_coefficient": 0,
+                    "pretrainer.end_pretrain_coefficient": 0,
+                    "pretrainer.pretrain_epochs": 0,
+
+                    "optimization.patience": 20,
+                    "optimization.top_k": Categorical(3, 5, 1),
+                    "optimization.val_check_interval": Categorical(0.5, 1.0),
+                    "finetune_on": Categorical(
+                        "pretrain_reconstruction_1_sum/iter_2000/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum/iter_0/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum/iter_250/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum/iter_1000/pretrained.ckpt"),
+                }
+
+            if "FTT_fold2_pretrained" in training_params["hyperparameters"]:
+                training_params["hyperparameters"].pop("FTT_fold2_pretrained")
+                training_params["hyperparameters"]['FT_TRANSFORMER'] = {
+                    "env.per_gpu_batch_size": 128,
+                    "pretrainer": True,
+                    "pretrainer.start_pretrain_coefficient": 0,
+                    "pretrainer.end_pretrain_coefficient": 0,
+                    "pretrainer.pretrain_epochs": 0,
+
+                    "optimization.patience": 20,
+                    "optimization.top_k": Categorical(3, 5, 1),
+                    "optimization.val_check_interval": Categorical(0.5, 1.0),
+                    "finetune_on": Categorical(
+                        "pretrain_reconstruction_1_sum_fold_2/iter_2000/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum_fold_2/iter_0/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum_fold_2/iter_250/pretrained.ckpt", 
+                        "pretrain_reconstruction_1_sum_fold_2/iter_1000/pretrained.ckpt"),
+                }
+
+            if "RF" in training_params["hyperparameters"] or "XGB" in training_params["hyperparameters"] or "GBM" in training_params["hyperparameters"] or "CAT" in training_params["hyperparameters"]:
+                training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"}
+            else:
+                training_params["hyperparameter_tune_kwargs"] = {'num_trials': 10,  'searcher': 'random', "scheduler": "local"}
             training_params["keep_only_best"] = True
             training_params["fit_weighted_ensemble"] = False
 

@@ -1959,6 +1959,33 @@ FASTAI_HPO:
       FASTAI: {}
     holdout_frac: 0.125
 
+FTT_HPO:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    HPO: true
+    hyperparameters:
+      FTT: {}
+    holdout_frac: 0.125
+
+FTT_fold1_pretrained:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    HPO: true
+    hyperparameters:
+      FTT_fold1_pretrained: {}
+    holdout_frac: 0.125
+
+FTT_fold2_pretrained:
+  extends: AutoGluon
+  version: "latest_gpu"
+  params:
+    HPO: true
+    hyperparameters:
+      FTT_fold2_pretrained: {}
+    holdout_frac: 0.125
+
 
 FTT_ft0_fold_2_light:
   extends: AutoGluon
