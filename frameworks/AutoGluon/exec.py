@@ -94,6 +94,7 @@ def hyperparameter_search_space(training_params):
                     "pretrainer.pretrain_epochs": 0,
 
                     "optimization.patience": 20,
+                    "env.batch_size": Categorical(128, 32, 8, 1),
                     "optimization.top_k": Categorical(3, 5, 1),
                     "optimization.val_check_interval": Categorical(0.5, 1.0),
                     "finetune_on": "pretrain_reconstruction_1_sum/iter_0/pretrained.ckpt",
@@ -109,6 +110,7 @@ def hyperparameter_search_space(training_params):
                     "pretrainer.pretrain_epochs": 0,
 
                     "optimization.patience": 20,
+                    "env.batch_size": Categorical(128, 32, 8, 1),
                     "optimization.top_k": Categorical(3, 5, 1),
                     "optimization.val_check_interval": Categorical(0.5, 1.0),
                     "finetune_on": Categorical(
@@ -128,6 +130,7 @@ def hyperparameter_search_space(training_params):
                     "pretrainer.pretrain_epochs": 0,
 
                     "optimization.patience": 20,
+                    "env.batch_size": Categorical(128, 32, 8, 1),
                     "optimization.top_k": Categorical(3, 5, 1),
                     "optimization.val_check_interval": Categorical(0.5, 1.0),
                     "finetune_on": Categorical(
@@ -140,7 +143,7 @@ def hyperparameter_search_space(training_params):
             if "RF" in training_params["hyperparameters"] or "XGB" in training_params["hyperparameters"] or "GBM" in training_params["hyperparameters"] or "CAT" in training_params["hyperparameters"]:
                 training_params["hyperparameter_tune_kwargs"] = {'num_trials': 100,  'searcher': 'random', "scheduler": "local"}
             else:
-                training_params["hyperparameter_tune_kwargs"] = {'num_trials': 10,  'searcher': 'random', "scheduler": "local"}
+                training_params["hyperparameter_tune_kwargs"] = {'num_trials': 30,  'searcher': 'random', "scheduler": "local"}
             training_params["keep_only_best"] = True
             training_params["fit_weighted_ensemble"] = False
 

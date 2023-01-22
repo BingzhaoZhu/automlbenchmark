@@ -6,38 +6,45 @@ import boto3
 locations = {
             # "FTT_light_0": "ftt_ft0_fold_2_light.ag_pretrain.mytest1h.aws.20230116T032244/",
             # "FTT_light_2000": "ftt_ft2000_fold_2_light.ag_pretrain.mytest1h.aws.20230116T084225/",
-            "FTT_heavy_0_fold_1": "ftt_ft0_fold_1.ag_finetune.mytest1h.aws.20230118T090255/",
-            "FTT_heavy_0_fold_2": "ftt_ft0.ag_pretrain.mytest1h.aws.20230118T090250/",
-
-            "FTT_heavy_2000_fold_1": "ftt_ft2000_fold_1.ag_finetune.mytest1h.aws.20230118T142647/",
-            "FTT_heavy_2000_fold_2": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230118T172423/",
 
 
-            "FTT_light_0_fold_1": "ftt_ft0.ag_finetune.mytest1h.aws.20221228T063055/",
-            "FTT_light_0_fold_2": "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
+            # "FTT_heavy_0_fold_1": "ftt_ft0_fold_1.ag_finetune.mytest1h.aws.20230118T090255/",
+            # "FTT_heavy_0_fold_2": "ftt_ft0.ag_pretrain.mytest1h.aws.20230118T090250/",
 
-            "FTT_light_2000_fold_1": "ftt_ft2000.ag_finetune.mytest1h.aws.20221228T155807/",
-            "FTT_light_2000_fold_2": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230117T004156/",
+            # "FTT_heavy_2000_fold_1": "ftt_ft2000_fold_1.ag_finetune.mytest1h.aws.20230118T142647/",
+            # "FTT_heavy_2000_fold_2": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230118T172423/",
 
-            "FTT_intense_0_fold_1": "ftt_ft0_intense.ag_finetune.mytest1h.aws.20230118T055947/",
-            "FTT_intense_0_fold_2": "ftt_ft0_intense.ag_pretrain.mytest1h.aws.20230117T160037/",
 
-            "FTT_intense_2000_fold_1": "ftt_ft2000_intense.ag_finetune.mytest1h.aws.20230118T073213/",
-            "FTT_intense_2000_fold_2": "ftt_ft2000_intense.ag_pretrain.mytest1h.aws.20230117T173928/",
+            # "FTT_light_0_fold_1": "ftt_ft0.ag_finetune.mytest1h.aws.20221228T063055/",
+            # "FTT_light_0_fold_2": "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
+
+            # "FTT_light_2000_fold_1": "ftt_ft2000.ag_finetune.mytest1h.aws.20221228T155807/",
+            # "FTT_light_2000_fold_2": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230117T004156/",
+
+            # "FTT_intense_0_fold_1": "ftt_ft0_intense.ag_finetune.mytest1h.aws.20230118T055947/",
+            # "FTT_intense_0_fold_2": "ftt_ft0_intense.ag_pretrain.mytest1h.aws.20230117T160037/",
+
+            # "FTT_intense_2000_fold_1": "ftt_ft2000_intense.ag_finetune.mytest1h.aws.20230118T073213/",
+            # "FTT_intense_2000_fold_2": "ftt_ft2000_intense.ag_pretrain.mytest1h.aws.20230117T173928/",
+
+            "FTT_HPO": "ftt_hpo.ag.mytest1h.aws.20230121T034411/",
+            "FTT_HPO_fold_1": "ftt_fold1_pretrained.ag_finetune.mytest1h.aws.20230121T053229/",
+            "FTT_HPO_fold_2": "ftt_fold2_pretrained.ag_pretrain.mytest1h.aws.20230121T065827/",
+
 
             # "CAT": "cat_ag.ag.mytest1h.aws.20230114T215102/",
             # "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
             # "RF": "rf_ag.ag.mytest1h.aws.20230114T152933/",
             # "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
-            "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
-            "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
+            # "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
+            # "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
 
             "CAT": "cat_hpo.ag.mytest1h.aws.20230119T154044/",
             "LGBM": "gbm_hpo.ag.mytest1h.aws.20230119T180251/",
             "RF": "rf_hpo.ag.mytest1h.aws.20230119T154025/",
             "XGB": "xgb_hpo.ag.mytest1h.aws.20230119T221737/",
-            # "NN": "",
-            # "FASTAI": "",
+            "NN": "nn_hpo.ag.mytest1h.aws.20230121T034451/",
+            "FASTAI": "fastai_hpo.ag.mytest1h.aws.20230121T034537/",
 
 #   "N0":       "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
 #   "N250":   "ftt_ft250.ag_pretrain.mytest1h.aws.20230116T155804/",
@@ -48,9 +55,12 @@ locations = {
 
 }
 
-models = ["FTT_heavy_0_fold_1", "FTT_heavy_0_fold_2", "FTT_heavy_2000_fold_1", "FTT_heavy_2000_fold_2", 
-"FTT_light_0_fold_1", "FTT_light_0_fold_2", "FTT_light_2000_fold_1", "FTT_light_2000_fold_2", 
-"FTT_intense_0_fold_1", "FTT_intense_0_fold_2", "FTT_intense_2000_fold_1", "FTT_intense_2000_fold_2",
+# models = ["FTT_heavy_0_fold_1", "FTT_heavy_0_fold_2", "FTT_heavy_2000_fold_1", "FTT_heavy_2000_fold_2", 
+# "FTT_light_0_fold_1", "FTT_light_0_fold_2", "FTT_light_2000_fold_1", "FTT_light_2000_fold_2", 
+# "FTT_intense_0_fold_1", "FTT_intense_0_fold_2", "FTT_intense_2000_fold_1", "FTT_intense_2000_fold_2",
+# 'FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
+
+models = ["FTT_HPO", "FTT_HPO_fold_1", "FTT_HPO_fold_2",
 'FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
 
 # models = ["N0", "N250", "N500", "N1000", "N1500", "N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
