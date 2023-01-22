@@ -78,9 +78,9 @@ def hyperparameter_search_space(training_params):
 
             if "RF" in training_params["hyperparameters"]:
                 search_space = {
-                    # 'n_estimators': Int(lower=10, upper=1000, default=300),
+                    'n_estimators': Int(lower=10, upper=1000, default=300),
                     'max_features': Categorical('auto', 0.5, 0.25),
-                    'criterion': Categorical('gini', 'entropy'),
+                    'max_leaf_nodes': Int(lower=100, upper=4000),
                 }
                 training_params["hyperparameters"]["RF"] = search_space
 
