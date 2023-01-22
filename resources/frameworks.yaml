@@ -28,6 +28,12 @@ AutoGluon:
 #  params:
 #    _save_artifacts: ['leaderboard', 'models', 'info']
 
+TransTab:
+  version: "latest"
+
+RandomForest:
+  version: "latest"
+
 ##### pretraining framework #####
 FTT_pretrain_reconstruction:
   extends: AutoGluon

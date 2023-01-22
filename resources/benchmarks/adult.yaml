@@ -2,8 +2,8 @@
 # Combines openml/s/269 and openml/s/271
 # Locally stored instead of fetched from openml to avoid server errors
 
-- name: adult
-  openml_task_id: 359983
+# - name: adult
+#   openml_task_id: 359983
 
 # - name: connect-4
 #   openml_task_id: 359977
@@ -32,5 +32,5 @@
 #- name: Mercedes_Benz_Greener_Manufacturing
 #  openml_task_id: 233215
 
-#- name: car
-#  openml_task_id: 359960
+- name: car
+  openml_task_id: 359960

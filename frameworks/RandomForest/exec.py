@@ -85,6 +85,7 @@ def run(dataset, config):
     with Timer() as predict:
         predictions = rf.predict(X_test)
     probabilities = rf.predict_proba(X_test) if is_classification else None
+    print(probabilities)
 
     return result(output_file=config.output_predictions_file,
                   predictions=predictions,
