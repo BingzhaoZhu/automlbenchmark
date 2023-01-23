@@ -38,7 +38,7 @@ locations = {
             # "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
             # "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
             # "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
-            "TransTab": "transtab.ag.mytest1h.aws.20230122T211006/",
+            "TransTab": "transtab.ag.mytest1h.aws.20230123T055954/",
 
             # "CAT": "cat_hpo.ag.mytest1h.aws.20230119T154044/",
             # "LGBM": "gbm_hpo.ag.mytest1h.aws.20230119T180251/",

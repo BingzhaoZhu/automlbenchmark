@@ -12,6 +12,7 @@ if sys.platform == 'darwin':
 
 import pandas as pd
 import transtab
+from torch import nn
 from sklearn.preprocessing import LabelEncoder
 import openml
 
@@ -69,8 +70,6 @@ def run(dataset, config):
     trainset, _, _, _, cat_cols, num_cols, bin_cols = transtab.load_data('./train', dataset_config)
     testset, _, _, _, _, _, _ = transtab.load_data('./test', dataset_config)
 
-    print(cat_cols)
-
     training_arguments = {
         'num_epoch':50,
         'batch_size':128,
@@ -79,7 +78,7 @@ def run(dataset, config):
         'eval_less_is_better':True,
         'output_dir':'./checkpoint'
     }
-    
+     
     is_classification = config.type == 'classification'
 
     X, y = trainset
@@ -98,8 +97,34 @@ def run(dataset, config):
     y = pd.Series(y,index=X.index)
     testset = (X, y)
 
-    # build classifier
-    model = transtab.build_classifier(cat_cols, num_cols, bin_cols, num_class=num_classes)
+    # contrastive pretraining
+    # allset_, trainset_, valset_, testset_, cat_cols_, num_cols_, bin_cols_ = transtab.load_data(['credit-g','credit-approval'])
+    # model, collate_fn = transtab.build_contrastive_learner(
+    #     cat_cols_, num_cols_, bin_cols_, 
+    #     supervised=True, # if take supervised CL
+    #     num_partition=4, # num of column partitions for pos/neg sampling
+    #     overlap_ratio=0.5, # specify the overlap ratio of column partitions during the CL
+    # )
+    # transtab.train(model, trainset_, valset_, collate_fn=collate_fn, **training_arguments)
+
+    model, collate_fn = transtab.build_contrastive_learner(
+        cat_cols, num_cols, bin_cols, 
+        supervised=True, # if take supervised CL
+        num_partition=4, # num of column partitions for pos/neg sampling
+        overlap_ratio=0.5, # specify the overlap ratio of column partitions during the CL
+    )
+    transtab.train(model, trainset, valset, collate_fn=collate_fn, **training_arguments)
+    model = transtab.build_classifier(checkpoint='./checkpoint')
+    model.update({'cat':cat_cols,'num':num_cols,'bin':bin_cols, 'num_class':num_classes})
+
+    model.num_class = num_classes
+    if model.num_class > 2:
+        model.loss_fn = nn.CrossEntropyLoss(reduction='none')
+    else:
+        model.loss_fn = nn.BCEWithLogitsLoss(reduction='none')
+
+    ## regular training
+    # model = transtab.build_classifier(cat_cols, num_cols, bin_cols, num_class=num_classes)
 
     # n_epoch = config.framework_params.get('_n_epoch', 100)
     # n_pretrain_epoch = config.framework_params.get('_n_pretrain_epoch', 0)
@@ -115,7 +140,7 @@ def run(dataset, config):
     with Timer() as predict:
         x_test, y_test = testset
         probabilities = transtab.predict(model, x_test)
-        print(probabilities)
+        # print(probabilities)
         if len(probabilities.shape) == 1:
             probabilities = np.concatenate((1-probabilities[:, None], probabilities[:, None]), axis=1)
 
