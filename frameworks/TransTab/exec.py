@@ -33,7 +33,7 @@ def gen_config(df):
     config = {}
     X = df.drop(['target_label'],axis=1)
     drop_cols = [col for col in X if X[col].nunique()<=1]
-    all_cols = np.array([col for col in X])
+    all_cols = np.array([col.lower() for col in X.columns.tolist()])
 
     categorical_indicator = np.array(is_categorical(X))
     cat_cols = [col for col in all_cols[categorical_indicator] if col not in drop_cols]

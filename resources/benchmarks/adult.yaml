@@ -32,5 +32,8 @@
 #- name: Mercedes_Benz_Greener_Manufacturing
 #  openml_task_id: 233215
 
-- name: car
-  openml_task_id: 359960
+# - name: car
+#   openml_task_id: 359960
+
+- name: wine-quality-white
+  openml_task_id: 359974
