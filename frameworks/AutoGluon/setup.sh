@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 HERE=$(dirname "$0")
 VERSION=${1:-"stable"}
-REPO=${2:-"https://github.com/BingzhaoZhu/autogluon.git"}
+REPO=${2:-"the-autogluon-github-repo"}
 PKG=${3:-"autogluon"}
 
 # creating local venv
@@ -18,22 +18,9 @@ PIP install --upgrade setuptools wheel
 PIP install mmcv
 PIP install pulp
 
-if [[ "$VERSION" == "latest_gpu" ]]; then
-    VERSION="refrac"
-elif [[ "$VERSION" == "latest_master" ]]; then
-    PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
-    VERSION="master"
-elif [[ "$VERSION" == "latest" ]]; then
-    VERSION="master"
-elif [[ "$VERSION" == "pretrain" ]]; then
-    VERSION="pretrain"
-elif [[ "$VERSION" == "cross_table" ]]; then
-    # PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
-    VERSION="cross_table_soup"
-elif [[ "$VERSION" == "hog" ]]; then
-    # PIP install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchtext==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu113
-    VERSION="cross_table_hogwild"
-fi
+
+VERSION="your-branch-name-of-autogluon-repo"
+
 
 if [[ "$VERSION" == "stable" ]]; then
     PIP install --no-cache-dir -U "${PKG}"

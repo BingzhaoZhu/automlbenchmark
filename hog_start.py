@@ -1,15 +1,20 @@
+# use this file to initialize a shared backbone
+# upload the shared backbone to s3 so that all instances can access
 import boto3
+
+bucket = "your-s3-bucket-name"
+folder = "the-folder-in-s3-bucket"
 
 ## delete the pretrained
 while True:
     try:
         s3_client = boto3.client('s3')
-        response = s3_client.list_objects_v2(Bucket='automl-benchmark-bingzzhu',
-                                             Prefix='ec2/2022_09_14/cross_table_pretrain/pretrain_supervised_saint/'
+        response = s3_client.list_objects_v2(Bucket=bucket,
+                                             Prefix=folder
                                              )
         for object in response['Contents']:
             print('Deleting', object['Key'])
-            s3_client.delete_object(Bucket='automl-benchmark-bingzzhu', Key=object['Key'])
+            s3_client.delete_object(Bucket=bucket, Key=object['Key'])
     except:
         break
 
@@ -19,23 +24,10 @@ from autogluon.multimodal.models.ft_transformer import FT_Transformer, CLSToken
 import os, torch, json
 from torch import nn
 
-# s3_client = boto3.client('s3')
 
-# BUCKET = 'automl-benchmark-bingzzhu'
-
-# PREFIX = 'ec2/2022_09_14/cross_table_pretrain/pretrained_hogwild.ckpt'
-# response = s3_client.list_objects_v2(Bucket=BUCKET, Prefix=PREFIX)
-# try:
-#     for object in response['Contents']:
-#         print('Deleting', object['Key'])
-#         s3_client.delete_object(Bucket=BUCKET, Key=object['Key'])
-# except:
-#     pass
-
-
-## save new
-# with open("../backbones/FTTx3") as f:
-#     kwarg = json.loads(f.read())
+# save new
+with open("./FTTx3") as f:
+    kwarg = json.loads(f.read())
 
 # # FastFormer
 # # kwarg["additive_attention"] = True
@@ -48,9 +40,9 @@ from torch import nn
 # # kwarg["n_blocks"] = 0
 
 
-# backbone = FT_Transformer(
-#     **kwarg
-# )
+backbone = FT_Transformer(
+    **kwarg
+)
 
 # # with CLS tokens
 # # kwarg["share_qv_weights"] = True
@@ -66,11 +58,10 @@ from torch import nn
 # #                 }
 # #             )
 
-# checkpoint = {
-#     "state_dict": {name: param for name, param in
-#                    backbone.state_dict().items()}
-# }
-# torch.save(checkpoint, os.path.join("./", "pretrained.ckpt"))
-# s3 = boto3.resource('s3')
-# s3.Bucket('automl-benchmark-bingzzhu').upload_file('./pretrained.ckpt',
-#                                                    'ec2/2022_09_14/cross_table_pretrain/pretrained_hogwild_Saint.ckpt')
+checkpoint = {
+    "state_dict": {name: param for name, param in
+                   backbone.state_dict().items()}
+}
+torch.save(checkpoint, os.path.join("./", "pretrained.ckpt"))
+s3 = boto3.resource('s3')
+s3.Bucket(bucket).upload_file('./pretrained.ckpt', 'name-of-the-inilizated-checkpoint')

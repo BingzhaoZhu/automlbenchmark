@@ -1,15 +1,15 @@
 # put this file in your ~/.config/automlbenchmark directory
 # to override default configs
 ---
-project_repository: https://github.com/BingzhaoZhu/automlbenchmark
+project_repository: your-automlbenchmark-github-directory
 max_parallel_jobs: 2000  # 2000 so we effectively don't have a limit on parallel EC2 instances
 benchmarks:
   overhead_time_seconds: 72000  # 72000 so we don't randomly stop instances if they take a bit longer than specified
 aws:
   region: 'us-east-1'  # us-east-1 or whatever region you plan to launch instances
   s3:
-    bucket: automl-benchmark-bingzzhu  # make the bucket in S3 first, specify a new one to isolate runs from other users (requires creation)
-    root_key: ec2/2022_09_14/  # subdirectory in bucket where results are saved, try to keep in sync with what you are testing
+    bucket: your-bucket-name # make the bucket in S3 first, specify a new one to isolate runs from other users (requires creation)
+    root_key: your-bucket-directory  # subdirectory in bucket where results are saved, try to keep in sync with what you are testing
                                # avoid re-using between multiple runs as it is easy to confuse which results are from what experiment
   ec2:
     volume_type: gp2  # standard is very slow, prefer gp2

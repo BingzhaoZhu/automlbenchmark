@@ -33,12 +33,12 @@ locations = {
 
 
             # "CAT": "cat_ag.ag.mytest1h.aws.20230114T215102/",
-            # "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
+            "LGBM": "gbm_ag.ag.mytest1h.aws.20230114T204503/",
             # "RF": "rf_ag.ag.mytest1h.aws.20230114T152933/",
             # "XGB": "xgb_ag.ag.mytest1h.aws.20230114T233850/",
             # "NN": "nn_ag.ag.mytest1h.aws.20230115T012407/",
             # "FASTAI": "fastai_ag.ag.mytest1h.aws.20230115T070511/",
-            "TransTab": "transtab.ag.mytest1h.aws.20230123T055954/",
+            # "TransTab": "transtab.ag.mytest1h.aws.20230123T173100/",
 
             # "CAT": "cat_hpo.ag.mytest1h.aws.20230119T154044/",
             # "LGBM": "gbm_hpo.ag.mytest1h.aws.20230119T180251/",
@@ -64,7 +64,7 @@ locations = {
 models = ["FTT_HPO", "FTT_HPO_fold_1", "FTT_HPO_fold_2",
 'FASTAI', 'NN', "CAT", "LGBM", "RF", "XGB"]
 
-models = ["TransTab"]
+models = ["LGBM"]
 
 # models = ["N0", "N250", "N500", "N1000", "N1500", "N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 # models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",
