@@ -48,7 +48,7 @@ XTab_pretrain:
         pretrainer.pretrain_epochs: 100000 # never early stop until pretrain_kwargs.max_iter is reached
         optimization.patience: 100000  # never early stop until pretrain_kwargs.max_iter is reached
 
-        finetune_on: "location-of-the-starting-checkpoint-on-s3"
+        finetune_on: "location-of-the-starting-checkpoint-on-s3" # to establish such a ckeckpoint, refer to ../hog_start.py
     pretrain_kwargs:
       is_pretrain: true # pretraining phase
       name: true # automatically assign name to checkpoints
