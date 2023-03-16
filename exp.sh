@@ -36,5 +36,5 @@ cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 # python runbenchmark.py FTT_fold1_pretrained ag_finetune mytest1h -m aws -p 520
 # python runbenchmark.py FTT_fold2_pretrained ag_pretrain mytest1h -m aws -p 520
 
-python runbenchmark.py TransTab ag mytest1h -m aws -p 520
-
+# python runbenchmark.py TransTab ag mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal ag mytest1h -m aws -p 520
