@@ -54,9 +54,9 @@ locations = {
 #   "N1500": "ftt_ft1500.ag_pretrain.mytest1h.aws.20230116T233702/",
 #   "N2000": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230117T004156/",
 
-"N0": "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
-"self": "ftt_rebuttal_comp.ag.mytest1h.aws.20230317T020155/",
-"N2000": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230117T004156/",
+"N0": "ftt_ft0_fold_1.ag_finetune.mytest1h.aws.20230118T090255/",
+"self": "ftt_rebuttal_heavy.ag.mytest1h.aws.20230317T031832/",
+"N2000": "ftt_ft2000_fold_1.ag_finetune.mytest1h.aws.20230118T142647/",
 
 }
 
