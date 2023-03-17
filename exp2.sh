@@ -37,4 +37,5 @@
 
 rm -f ~/.config/automlbenchmark/config.yaml
 cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
-python runbenchmark.py NN_HPO ag mytest1h -m aws -p 270
+# python runbenchmark.py NN_HPO ag mytest1h -m aws -p 270
+python runbenchmark.py FTT_rebuttal ag mytest1h -m aws -p 520
