@@ -54,9 +54,13 @@ locations = {
 #   "N1500": "ftt_ft1500.ag_pretrain.mytest1h.aws.20230116T233702/",
 #   "N2000": "ftt_ft2000.ag_pretrain.mytest1h.aws.20230117T004156/",
 
-"N0": "ftt_ft0_fold_1.ag_finetune.mytest1h.aws.20230118T090255/",
-"self": "ftt_rebuttal_heavy.ag.mytest1h.aws.20230317T031832/",
-"N2000": "ftt_ft2000_fold_1.ag_finetune.mytest1h.aws.20230118T142647/",
+# "base": "ftt_ft0.ag_pretrain.mytest1h.aws.20230116T155747/",
+# "N0": "ftt_rebuttal.ag.mytest1h.aws.20230317T044916/",
+# "N2000": "ftt_rebuttal_2000.ag.mytest1h.aws.20230317T064127/",
+
+"base": "ftt_ft0.ag_pretrain.mytest1h.aws.20230117T054745/",
+"N0": "ftt_rebuttal_heavy.ag.mytest1h.aws.20230317T045028/",
+"N2000": "ftt_rebuttal_heavy_2000.ag.mytest1h.aws.20230317T064205/",
 
 }
 
@@ -70,7 +74,7 @@ models = ["FTT_HPO", "FTT_HPO_fold_1", "FTT_HPO_fold_2",
 
 models = ["TransTab"]
 
-models = ["N0", "self", "N2000"]
+models = ["N0", "base", "N2000"]
 
 # models = ["N0", "N250", "N500", "N1000", "N1500", "N2000"] # "N1", "N2", "N3", "N4", "N5", "N6"]
 # models = ["FTT_BL_lowe", "FTT_BL", "FastFTT_BL_lowe", "FastFTT_BL",

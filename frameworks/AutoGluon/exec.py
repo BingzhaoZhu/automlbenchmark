@@ -184,6 +184,10 @@ def run(dataset, config):
         training_params["is_pretrain"]["name"] = config.name
 
     training_params = hyperparameter_search_space(training_params)
+    test_data = TabularDataset(test_path)
+    train_data = TabularDataset(train_path)
+    train_data = train_data.sample(frac=1.0, axis=1)
+    test_data = test_data.reindex(columns = train_data.columns)
 
     with Timer() as training:
         predictor = TabularPredictor(
@@ -192,13 +196,11 @@ def run(dataset, config):
             path=models_dir,
             problem_type=problem_type,
         ).fit(
-            train_data=train_path,
+            train_data=train_data,
             time_limit=config.max_runtime_seconds,
             **training_params
         )
 
-    test_data = TabularDataset(test_path)
-    train_data = TabularDataset(train_path)
     # Persist model in memory that is going to be predicting to get correct inference latency
     predictor.persist_models('best')
 
