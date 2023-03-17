@@ -38,5 +38,7 @@
 rm -f ~/.config/automlbenchmark/config.yaml
 cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 # python runbenchmark.py NN_HPO ag mytest1h -m aws -p 270
-python runbenchmark.py FTT_rebuttal_heavy ag mytest1h -m aws -p 520
-python runbenchmark.py FTT_rebuttal_heavy_2000 ag mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_seed_2 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_2000_seed_2 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_seed_3 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_2000_seed_3 ag_finetune mytest1h -m aws -p 520

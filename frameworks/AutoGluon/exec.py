@@ -186,7 +186,11 @@ def run(dataset, config):
     training_params = hyperparameter_search_space(training_params)
     test_data = TabularDataset(test_path)
     train_data = TabularDataset(train_path)
-    train_data = train_data.sample(frac=1.0, axis=1)
+    if "is_pretrain" in training_params and "seed" in training_params["is_pretrain"]:
+        seed = training_params["is_pretrain"]["seed"]
+    else:
+        seed = 0
+    train_data = train_data.sample(frac=1.0, axis=1, random_state=seed)
     test_data = test_data.reindex(columns = train_data.columns)
 
     with Timer() as training:

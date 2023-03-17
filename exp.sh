@@ -40,4 +40,7 @@ cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 # python runbenchmark.py FTT_rebuttal ag mytest1h -m aws -p 520
 # python runbenchmark.py FTT_rebuttal_2000 ag mytest1h -m aws -p 520
 
-python runbenchmark.py FTT_rebuttal adult mytest1h
+python runbenchmark.py FTT_rebuttal_seed_0 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_2000_seed_0 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_seed_1 ag_finetune mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_2000_seed_1 ag_finetune mytest1h -m aws -p 520
