@@ -38,3 +38,4 @@ cp ./examples/config_gpu.yaml ~/.config/automlbenchmark/config.yaml
 
 # python runbenchmark.py TransTab ag mytest1h -m aws -p 520
 python runbenchmark.py FTT_rebuttal ag mytest1h -m aws -p 520
+python runbenchmark.py FTT_rebuttal_2000 ag mytest1h -m aws -p 520
