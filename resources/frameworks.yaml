@@ -2094,9 +2094,9 @@ FTT_rebuttal:
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
         pretrainer.objective: "reconstruction"
-        pretrainer.start_pretrain_coefficient: 1
-        pretrainer.end_pretrain_coefficient: 1
-        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.decay_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 3
 
         # optimization.patience: 3
@@ -2121,9 +2121,9 @@ FTT_rebuttal_heavy:
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
         pretrainer.objective: "reconstruction"
-        pretrainer.start_pretrain_coefficient: 1
-        pretrainer.end_pretrain_coefficient: 1
-        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.decay_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 3
 
         optimization.patience: 3
@@ -2149,9 +2149,9 @@ FTT_rebuttal_comp:
         pretrainer.augmentation_type: "permutation"
         pretrainer.corruption_rate: 0.6
         pretrainer.objective: "reconstruction"
-        pretrainer.start_pretrain_coefficient: 1
-        pretrainer.end_pretrain_coefficient: 1
-        pretrainer.decay_pretrain_coefficient: 1
+        pretrainer.start_pretrain_coefficient: 0
+        pretrainer.end_pretrain_coefficient: 0
+        pretrainer.decay_pretrain_coefficient: 0
         pretrainer.pretrain_epochs: 0
 
         # optimization.patience: 3
